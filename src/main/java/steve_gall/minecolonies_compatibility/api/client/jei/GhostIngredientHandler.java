@@ -1,12 +1,15 @@
 package steve_gall.minecolonies_compatibility.api.client.jei;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import mezz.jei.api.gui.handlers.IGhostIngredientHandler;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+import steve_gall.minecolonies_compatibility.api.client.IFluidGhostScreen;
+import steve_gall.minecolonies_compatibility.api.client.IItemGhostScreen;
 import steve_gall.minecolonies_compatibility.api.common.inventory.IItemGhostSlot;
 
 public class GhostIngredientHandler<SCREEN extends AbstractContainerScreen<?>> implements IGhostIngredientHandler<SCREEN>
@@ -15,9 +18,10 @@ public class GhostIngredientHandler<SCREEN extends AbstractContainerScreen<?>> i
 	@Override
 	public <I> List<Target<I>> getTargets(SCREEN screen, I ingredient, boolean doStart)
 	{
+		var targets = new ArrayList<Target<I>>();
+
 		if (ingredient instanceof ItemStack)
 		{
-			var targets = new ArrayList<Target<I>>();
 			var slots = screen.getMenu().slots;
 
 			for (var i = 0; i < slots.size(); i++)
@@ -26,15 +30,54 @@ public class GhostIngredientHandler<SCREEN extends AbstractContainerScreen<?>> i
 
 				if (slot instanceof IItemGhostSlot)
 				{
-					targets.add((Target<I>) new ItemGhostTarget(screen, slot, i));
+					targets.add((Target<I>) this.createTarget(screen, new ItemGhostSlotTarget(slot, i)));
 				}
 
 			}
 
-			return targets;
+			if (screen instanceof IItemGhostScreen ghostScreen)
+			{
+				for (var target : ghostScreen.getItemGhostSlots())
+				{
+					targets.add((Target<I>) this.createTarget(screen, target));
+				}
+
+			}
+
+		}
+		else if (ingredient instanceof FluidStack)
+		{
+			if (screen instanceof IFluidGhostScreen ghostScreen)
+			{
+				for (var target : ghostScreen.getFluidGhostSlots())
+				{
+					targets.add((Target<I>) this.createTarget(screen, target));
+				}
+
+			}
+
 		}
 
-		return Collections.emptyList();
+		return targets;
+	}
+
+	private <I> Target<I> createTarget(SCREEN screen, GhostTarget<I> target)
+	{
+		return new Target<>()
+		{
+			@Override
+			public Rect2i getArea()
+			{
+				var area = target.getArea();
+				return new Rect2i(screen.getGuiLeft() + area.getX(), screen.getGuiTop() + area.getY(), area.getWidth(), area.getHeight());
+			}
+
+			@Override
+			public void accept(I ingredient)
+			{
+				target.accept(ingredient);
+			}
+		};
 	}
 
 	@Override

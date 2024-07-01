@@ -90,12 +90,18 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	}
 
 	@Override
-	public void onGhostAccept(Slot slot, ItemStack stack)
+	public void onGhostAcceptItem(int slotNumber, ItemStack stack, boolean isVirtual)
 	{
-		if (this.craftSlots.contains(slot))
+		if (!isVirtual)
 		{
-			slot.set(stack);
-			this.slotsChanged(this.craftMatrix);
+			var slot = this.slots.get(slotNumber);
+
+			if (this.craftSlots.contains(slot))
+			{
+				slot.set(stack);
+				this.slotsChanged(this.craftMatrix);
+			}
+
 		}
 
 	}
@@ -109,11 +115,6 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 			{
 				var recipe = this.getRecipeValidator().find(player, container);
 				this.setRecipe(recipe);
-			}
-			else if (container == this.resultContainer)
-			{
-				var tag = this.recipe != null ? this.getRecipeValidator().serialize(this.recipe) : null;
-				MineColoniesCompatibility.network().sendToPlayer(new TeachRecipeMenuNewResultMessage(tag), player);
 			}
 
 		}
@@ -129,7 +130,12 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 
 		if (prev != next)
 		{
-			this.slotsChanged(this.resultContainer);
+			if (this.inventory.player instanceof ServerPlayer player)
+			{
+				var tag = recipe != null ? this.getRecipeValidator().serialize(recipe) : null;
+				MineColoniesCompatibility.network().sendToPlayer(new TeachRecipeMenuNewResultMessage(tag), player);
+			}
+
 		}
 
 	}
