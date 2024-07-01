@@ -12,7 +12,8 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.network.message.FarmersTeachCookingOpenMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.FarmersTeachCuttingOpenMessage;
-import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhostAcceptMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhostAcceptFluidMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhostAcceptItemMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.JEIRecipeTransferMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.NetworkStorageRefreshMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.PolymorphTeachResultItemMessage;
@@ -31,7 +32,8 @@ public class NetworkChannel
 
 		this.registerMessage(TeachRecipeMenuNewResultMessage.class, TeachRecipeMenuNewResultMessage::new);
 		this.registerMessage(PolymorphTeachResultItemMessage.class, PolymorphTeachResultItemMessage::new);
-		this.registerMessage(JEIGhostAcceptMessage.class, JEIGhostAcceptMessage::new);
+		this.registerMessage(JEIGhostAcceptItemMessage.class, JEIGhostAcceptItemMessage::new);
+		this.registerMessage(JEIGhostAcceptFluidMessage.class, JEIGhostAcceptFluidMessage::new);
 		this.registerMessage(JEIRecipeTransferMessage.class, JEIRecipeTransferMessage::new);
 		this.registerMessage(NetworkStorageRefreshMessage.class, NetworkStorageRefreshMessage::new);
 		this.registerMessage(FarmersTeachCuttingOpenMessage.class, FarmersTeachCuttingOpenMessage::new);

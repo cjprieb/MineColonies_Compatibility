@@ -1,24 +1,22 @@
 package steve_gall.minecolonies_compatibility.api.client.jei;
 
-import org.jetbrains.annotations.NotNull;
-
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
-import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhostAcceptMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhostAcceptItemMessage;
 
-public class ItemGhostTarget extends GhostTarget<ItemStack>
+public abstract class ItemGhostTarget extends GhostTarget<ItemStack>
 {
-	public ItemGhostTarget(@NotNull AbstractContainerScreen<?> screen, @NotNull Slot slot, int slotNumber)
+	public ItemGhostTarget(int x, int y, int slotNumber)
 	{
-		super(screen, slot, slotNumber);
+		super(x, y, slotNumber);
 	}
+
+	public abstract boolean isVirtual();
 
 	@Override
 	public void accept(ItemStack ingredient)
 	{
-		MineColoniesCompatibility.network().sendToServer(new JEIGhostAcceptMessage(this.getSlotNumber(), ingredient));
+		MineColoniesCompatibility.network().sendToServer(new JEIGhostAcceptItemMessage(this.getSlotNumber(), ingredient, this.isVirtual()));
 	}
 
 }

@@ -1,50 +1,30 @@
 package steve_gall.minecolonies_compatibility.api.client.jei;
 
-import org.jetbrains.annotations.NotNull;
-
-import mezz.jei.api.gui.handlers.IGhostIngredientHandler.Target;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.world.inventory.Slot;
 
-public abstract class GhostTarget<I> implements Target<I>
+public abstract class GhostTarget<I>
 {
-	@NotNull
-	private AbstractContainerScreen<?> screen;
-	@NotNull
-	private final Slot slot;
+	private final int x;
+	private final int y;
 	private final int slotNumber;
 
-	public GhostTarget(@NotNull AbstractContainerScreen<?> screen, @NotNull Slot slot, int slotNumber)
+	public GhostTarget(int x, int y, int slotNumber)
 	{
-		this.screen = screen;
-		this.slot = slot;
+		this.x = x;
+		this.y = y;
 		this.slotNumber = slotNumber;
 	}
 
-	@NotNull
-	public AbstractContainerScreen<?> getScreen()
-	{
-		return this.screen;
-	}
-
-	@NotNull
-	public Slot getSlot()
-	{
-		return this.slot;
-	}
+	public abstract void accept(I ingredient);
 
 	public int getSlotNumber()
 	{
 		return this.slotNumber;
 	}
 
-	@Override
 	public Rect2i getArea()
 	{
-		var screen = this.getScreen();
-		var slot = this.getSlot();
-		return new Rect2i(screen.getGuiLeft() + slot.x, screen.getGuiTop() + slot.y, 16, 16);
+		return new Rect2i(this.x, this.y, 16, 16);
 	}
 
 }
