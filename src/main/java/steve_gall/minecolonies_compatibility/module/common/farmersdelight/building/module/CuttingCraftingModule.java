@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import com.google.common.collect.ImmutableSet;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.crafting.IGenericRecipe;
+import com.minecolonies.api.crafting.IRecipeStorage;
 import com.minecolonies.api.crafting.registry.CraftingType;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.util.constant.IToolType;
@@ -16,7 +17,8 @@ import com.minecolonies.api.util.constant.IToolType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
 import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractCraftingModuleWithExternalWorkingBlocks;
 import steve_gall.minecolonies_compatibility.api.common.entity.pathfinding.PathJobFindWorkingBlocks;
 import steve_gall.minecolonies_compatibility.api.common.entity.pathfinding.WorkingBlocksPathResult;
@@ -43,9 +45,15 @@ public class CuttingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	}
 
 	@Override
-	public boolean isIntermediate(@NotNull Block intermediateBlock)
+	public boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state)
 	{
-		return intermediateBlock == ModBlocks.CUTTING_BOARD.get();
+		return state.getBlock() == ModBlocks.CUTTING_BOARD.get();
+	}
+
+	@Override
+	public boolean needWorkingBlock(@NotNull IRecipeStorage recipeStorage)
+	{
+		return true;
 	}
 
 	@Override

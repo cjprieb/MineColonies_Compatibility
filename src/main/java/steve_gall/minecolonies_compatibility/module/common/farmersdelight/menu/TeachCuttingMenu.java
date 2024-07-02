@@ -16,7 +16,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -27,6 +26,7 @@ import steve_gall.minecolonies_compatibility.api.common.inventory.IMenuRecipeVal
 import steve_gall.minecolonies_compatibility.api.common.inventory.MenuRecipeValidatorRecipe;
 import steve_gall.minecolonies_compatibility.core.common.crafting.IngredientHelper;
 import steve_gall.minecolonies_compatibility.core.common.inventory.ReadOnlySlotsContainer;
+import steve_gall.minecolonies_compatibility.core.common.inventory.TeachInputContainer;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachRecipeMenu;
 import steve_gall.minecolonies_compatibility.core.common.item.ItemStackHelper;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.ModuleCraftingTypes;
@@ -71,13 +71,13 @@ public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 	{
 		this.addInventorySlots(INVENTORY_X, INVENTORY_Y);
 
-		this.craftMatrix = new CraftingContainer(this, 1, 1);
+		this.inputContainer = new TeachInputContainer(this, 1);
 
 		for (var i = 0; i < CRAFTING_SLOTS; i++)
 		{
 			var col = i % CRAFTING_COLS;
 			var row = i / CRAFTING_COLS;
-			this.craftSlots.add(this.addSlot(new GhostSlot(this.craftMatrix, i, CRAFTING_X + col * SLOT_OFFSET, CRAFTING_Y + row * SLOT_OFFSET)
+			this.inputSlots.add(this.addSlot(new GhostSlot(this.inputContainer, i, CRAFTING_X + col * SLOT_OFFSET, CRAFTING_Y + row * SLOT_OFFSET)
 			{
 				@Override
 				public boolean mayPlace(ItemStack stack)
@@ -121,23 +121,18 @@ public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 	{
 		super.onRecipeTransfer(recipe, payload);
 
-		this.craftSlots.get(0).set(ItemStack.of(payload));
+		this.inputSlots.get(0).set(ItemStack.of(payload));
 	}
 
 	@Override
-	protected void onSetRecipe(CuttingBoardRecipe recipe)
+	protected void onRecipeChanged()
 	{
 		var prevSlots = this.resultSlots.size();
 		this.results.clear();
 
-		if (recipe != null && this.testRecipe(recipe))
+		if (this.recipe != null)
 		{
-			this.recipe = recipe;
 			this.results.addAll(this.recipe.getRollableResults());
-		}
-		else
-		{
-			this.recipe = null;
 		}
 
 		var addingSlots = this.results.size() - prevSlots;
@@ -169,6 +164,7 @@ public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 
 	}
 
+	@Override
 	public boolean testRecipe(CuttingBoardRecipe recipe)
 	{
 		return ItemStackHelper.isTool(IngredientHelper.getStacks(recipe.getTool()), this.getToolType());
