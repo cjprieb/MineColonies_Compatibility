@@ -2,8 +2,6 @@ package steve_gall.minecolonies_compatibility.core.client.gui;
 
 import java.util.List;
 
-import com.minecolonies.api.IMinecoloniesAPI;
-import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.util.constant.TranslationConstants;
 import com.minecolonies.api.util.constant.translation.BaseGameTranslationConstants;
@@ -26,7 +24,6 @@ import steve_gall.minecolonies_tweaks.core.common.config.MineColoniesTweaksConfi
 
 public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RECIPE> extends AbstractContainerScreen<MENU> implements CloseableWindowExtension
 {
-	protected final IBuildingView building;
 	protected final CraftingModuleView module;
 
 	private Button doneButton;
@@ -37,8 +34,7 @@ public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RE
 	{
 		super(menu, inventory, title);
 
-		this.building = IMinecoloniesAPI.getInstance().getColonyManager().getBuildingView(inventory.player.level().dimension(), menu.getBuildingId());
-		this.module = (CraftingModuleView) this.building.getModuleView(menu.getModuleId());
+		this.module = (CraftingModuleView) menu.getModuleView();
 	}
 
 	@Override
@@ -77,9 +73,9 @@ public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RE
 
 		if (recipe != null)
 		{
-			var input = ItemHandlerHelper2.unwrap(new InvWrapper(this.menu.getCraftMatrix()), false).stream().map(ItemStorage::new).toList();
+			var input = ItemHandlerHelper2.unwrap(new InvWrapper(this.menu.getInputContainer()), false).stream().map(ItemStorage::new).toList();
 			var storage = this.createRecipeStorage(recipe, input).wrap();
-			Network.getNetwork().sendToServer(new AddRemoveRecipeMessage(this.building, false, storage, this.module.getProducer().getRuntimeID()));
+			Network.getNetwork().sendToServer(new AddRemoveRecipeMessage(this.module.getBuildingView(), false, storage, this.module.getProducer().getRuntimeID()));
 		}
 
 	}
@@ -101,11 +97,6 @@ public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RE
 	public Screen minecolonies_tweaks$getParent()
 	{
 		return this.parent;
-	}
-
-	public IBuildingView getBuilding()
-	{
-		return this.building;
 	}
 
 	public CraftingModuleView getModule()

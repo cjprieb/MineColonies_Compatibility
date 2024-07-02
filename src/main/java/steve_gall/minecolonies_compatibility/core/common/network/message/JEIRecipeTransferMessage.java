@@ -13,6 +13,11 @@ public class JEIRecipeTransferMessage<RECIPE> extends AbstractMessage
 
 	private final CompoundTag tag;
 
+	public JEIRecipeTransferMessage(IRecipeTransferableMenu<RECIPE> menu, RECIPE recipe)
+	{
+		this(menu, recipe, new CompoundTag());
+	}
+
 	public JEIRecipeTransferMessage(IRecipeTransferableMenu<RECIPE> menu, RECIPE recipe, CompoundTag payload)
 	{
 		this.tag = new CompoundTag();

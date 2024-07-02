@@ -20,7 +20,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import steve_gall.minecolonies_compatibility.api.common.entity.pathfinding.WorkingBlocksPathResult;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
@@ -106,13 +105,7 @@ public abstract class AbstractCraftingModuleWithExternalWorkingBlocks extends Ab
 	}
 
 	@Override
-	public boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state)
-	{
-		return this.isIntermediate(state.getBlock());
-	}
-
-	@Override
-	public abstract boolean isIntermediate(@NotNull Block intermediateBlock);
+	public abstract boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state);
 
 	@Override
 	public void onBlockPlacedInBuilding(@NotNull BlockState blockState, @NotNull BlockPos pos, @NotNull Level level)

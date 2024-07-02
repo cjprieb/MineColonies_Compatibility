@@ -3,6 +3,7 @@ package steve_gall.minecolonies_compatibility.core.common.inventory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +17,6 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -28,8 +28,8 @@ import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRe
 
 public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IItemGhostMenu, IRecipeTransferableMenu<RECIPE>
 {
-	protected CraftingContainer craftMatrix;
-	protected List<Slot> craftSlots;
+	protected TeachInputContainer inputContainer;
+	protected List<Slot> inputSlots;
 
 	protected Container resultContainer;
 	protected List<Slot> resultSlots;
@@ -51,10 +51,10 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 
 	private void setup()
 	{
-		this.craftSlots = new ArrayList<>();
+		this.inputSlots = new ArrayList<>();
 		this.resultSlots = new ArrayList<>();
 
-		this.craftMatrix = null;
+		this.inputContainer = null;
 		this.resultContainer = null;
 
 		this.recipeValidator = null;
@@ -65,7 +65,7 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 
 	protected abstract IMenuRecipeValidator<RECIPE> createRecipeValidator();
 
-	protected abstract void onSetRecipe(RECIPE recipe);
+	protected abstract void onRecipeChanged();
 
 	@Override
 	public IMenuRecipeValidator<RECIPE> getRecipeValidator()
@@ -81,7 +81,7 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	@Override
 	public void onRecipeTransfer(@NotNull RECIPE recipe, @NotNull CompoundTag payload)
 	{
-		for (var slot : this.craftSlots)
+		for (var slot : this.inputSlots)
 		{
 			slot.set(ItemStack.EMPTY);
 		}
@@ -95,13 +95,7 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		if (!isVirtual)
 		{
 			var slot = this.slots.get(slotNumber);
-
-			if (this.craftSlots.contains(slot))
-			{
-				slot.set(stack);
-				this.slotsChanged(this.craftMatrix);
-			}
-
+			this.handleSlotClick(slot, stack);
 		}
 
 	}
@@ -111,7 +105,7 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	{
 		if (this.inventory.player instanceof ServerPlayer player)
 		{
-			if (container == this.craftMatrix)
+			if (container == this.inputContainer)
 			{
 				var recipe = this.getRecipeValidator().find(player, container);
 				this.setRecipe(recipe);
@@ -125,19 +119,35 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	public void setRecipe(RECIPE recipe)
 	{
 		var prev = this.recipe;
-		this.onSetRecipe(recipe);
+
+		if (this.testRecipe(recipe))
+		{
+			this.recipe = recipe;
+		}
+		else
+		{
+			this.recipe = null;
+		}
+
 		var next = this.recipe;
 
-		if (prev != next)
+		if (!Objects.equals(prev, next))
 		{
+			this.onRecipeChanged();
+
 			if (this.inventory.player instanceof ServerPlayer player)
 			{
-				var tag = recipe != null ? this.getRecipeValidator().serialize(recipe) : null;
+				var tag = next != null ? this.getRecipeValidator().serialize(next) : null;
 				MineColoniesCompatibility.network().sendToPlayer(new TeachRecipeMenuNewResultMessage(tag), player);
 			}
 
 		}
 
+	}
+
+	public boolean testRecipe(RECIPE recipe)
+	{
+		return true;
 	}
 
 	@Override
@@ -147,18 +157,13 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		{
 			var slot = this.slots.get(slotNumber);
 
-			if (this.craftSlots.contains(slot))
+			if (slot.container == this.inputContainer || slot.container == this.resultContainer)
 			{
-				// 1 is shift-click
 				if (mode == ClickType.PICKUP || mode == ClickType.PICKUP_ALL || mode == ClickType.SWAP)
 				{
 					this.handleSlotClick(slot, this.getCarried());
 				}
 
-				return;
-			}
-			else if (this.resultSlots.contains((slot)))
-			{
 				return;
 			}
 
@@ -172,7 +177,16 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		super.clicked(slotNumber, clickedButton, mode, player);
 	}
 
-	public ItemStack handleSlotClick(final Slot slot, final ItemStack stack)
+	public void handleSlotClick(Slot slot, ItemStack stack)
+	{
+		if (slot.container == this.inputContainer)
+		{
+			this.setSlot(slot, stack);
+		}
+
+	}
+
+	protected void setSlot(Slot slot, ItemStack stack)
 	{
 		if (stack.getCount() > 0)
 		{
@@ -185,7 +199,6 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 			slot.set(ItemStack.EMPTY);
 		}
 
-		return slot.getItem().copy();
 	}
 
 	@Override
@@ -206,14 +219,14 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		return true;
 	}
 
-	public CraftingContainer getCraftMatrix()
+	public TeachInputContainer getInputContainer()
 	{
-		return this.craftMatrix;
+		return this.inputContainer;
 	}
 
 	public List<Slot> getCraftSlots()
 	{
-		return Collections.unmodifiableList(this.craftSlots);
+		return Collections.unmodifiableList(this.inputSlots);
 	}
 
 	public Container getResultContainer()

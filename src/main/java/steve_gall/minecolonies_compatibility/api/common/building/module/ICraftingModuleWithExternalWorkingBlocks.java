@@ -10,17 +10,11 @@ import com.minecolonies.api.crafting.IRecipeStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public interface ICraftingModuleWithExternalWorkingBlocks extends ICraftingBuildingModule, IModuleWithExternalWorkingBlocks
 {
-	boolean isIntermediate(@NotNull Block intermediateBlock);
-
-	default boolean hasWorkingBlock(@NotNull IRecipeStorage recipeStorage)
-	{
-		return this.isIntermediate(recipeStorage.getIntermediate());
-	}
+	boolean needWorkingBlock(@NotNull IRecipeStorage recipeStorage);
 
 	@NotNull
 	Component getWorkingBlockNotFoundMessage();

@@ -11,7 +11,6 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.items.wrapper.InvWrapper;
@@ -20,6 +19,7 @@ import steve_gall.minecolonies_compatibility.api.common.inventory.GhostSlot;
 import steve_gall.minecolonies_compatibility.api.common.inventory.IMenuRecipeValidator;
 import steve_gall.minecolonies_compatibility.api.common.inventory.MenuRecipeValidatorRecipe;
 import steve_gall.minecolonies_compatibility.core.common.inventory.ReadOnlySlotsContainer;
+import steve_gall.minecolonies_compatibility.core.common.inventory.TeachInputContainer;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachRecipeMenu;
 import steve_gall.minecolonies_compatibility.core.common.util.NBTUtils2;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.ModuleCraftingTypes;
@@ -60,13 +60,13 @@ public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
 	{
 		this.addInventorySlots(INVENTORY_X, INVENTORY_Y);
 
-		this.craftMatrix = new TransientCraftingContainer(this, CRAFTING_COLUMNS, CRAFTING_ROW);
+		this.inputContainer = new TeachInputContainer(this, CRAFTING_COLUMNS * CRAFTING_ROW);
 
 		for (var i = 0; i < CRAFTING_SLOTS; i++)
 		{
 			var col = i % CRAFTING_COLS;
 			var row = i / CRAFTING_COLS;
-			this.craftSlots.add(this.addSlot(new GhostSlot(this.craftMatrix, i, CRAFTING_X + col * SLOT_OFFSET, CRAFTING_Y + row * SLOT_OFFSET)
+			this.inputSlots.add(this.addSlot(new GhostSlot(this.inputContainer, i, CRAFTING_X + col * SLOT_OFFSET, CRAFTING_Y + row * SLOT_OFFSET)
 			{
 				@Override
 				public boolean mayPlace(ItemStack stack)
@@ -131,16 +131,15 @@ public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
 
 		for (var i = 0; i < CRAFTING_SLOTS; i++)
 		{
-			this.craftSlots.get(i).set(i < input.size() ? input.get(i) : ItemStack.EMPTY);
+			this.inputSlots.get(i).set(i < input.size() ? input.get(i) : ItemStack.EMPTY);
 		}
 
 	}
 
 	@Override
-	protected void onSetRecipe(CookingPotRecipe recipe)
+	protected void onRecipeChanged()
 	{
-		this.recipe = recipe;
-		this.resultSlots.get(0).set(recipe != null ? recipe.getResultItem(this.inventory.player.level().registryAccess()) : ItemStack.EMPTY);
+		this.resultSlots.get(0).set(this.recipe != null ? this.recipe.getResultItem(this.inventory.player.level().registryAccess()) : ItemStack.EMPTY);
 	}
 
 	@Override
