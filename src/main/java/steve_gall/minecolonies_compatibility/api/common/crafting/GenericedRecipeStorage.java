@@ -18,7 +18,7 @@ import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizedRecipeStora
 public abstract class GenericedRecipeStorage<GENERIC extends IGenericRecipe> implements ICustomizedRecipeStorage
 {
 	@NotNull
-	protected abstract GENERIC getGenericRecipe();
+	public abstract GENERIC getGenericRecipe();
 
 	@Override
 	public int getGridSize()
