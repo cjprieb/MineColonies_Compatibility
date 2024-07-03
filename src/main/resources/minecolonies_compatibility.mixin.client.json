@@ -9,8 +9,7 @@
 		"minecolonies.WindowListRecipes1Mixin",
 		"minecolonies.WindowListRecipesAcccessor",
 		
-		"blockui.ItemIconMixin",
-		"blockui.ViewMixin"
+		"blockui.ItemIconMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
