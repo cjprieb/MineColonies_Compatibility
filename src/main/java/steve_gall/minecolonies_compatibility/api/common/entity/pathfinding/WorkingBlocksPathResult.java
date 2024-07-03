@@ -11,7 +11,7 @@ import net.minecraft.core.BlockPos;
 import steve_gall.minecolonies_compatibility.api.common.building.module.IModuleWithExternalWorkingBlocks;
 
 @SuppressWarnings("rawtypes")
-public abstract class WorkingBlocksPathResult extends PathResult
+public class WorkingBlocksPathResult extends PathResult
 {
 	public final Set<BlockPos> positions = new HashSet<>();
 
