@@ -123,7 +123,7 @@ public class CuttingRecipeStorage extends GenericedRecipeStorage<CuttingGenericR
 	}
 
 	@Override
-	protected @NotNull CuttingGenericRecipe getGenericRecipe()
+	public @NotNull CuttingGenericRecipe getGenericRecipe()
 	{
 		return this.genericRecipe;
 	}

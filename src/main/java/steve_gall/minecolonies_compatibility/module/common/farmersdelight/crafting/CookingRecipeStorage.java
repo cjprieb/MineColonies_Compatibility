@@ -104,7 +104,7 @@ public class CookingRecipeStorage extends GenericedRecipeStorage<CookingGenericR
 	}
 
 	@Override
-	protected @NotNull CookingGenericRecipe getGenericRecipe()
+	public @NotNull CookingGenericRecipe getGenericRecipe()
 	{
 		return this.genericRecipe;
 	}
