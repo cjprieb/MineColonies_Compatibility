@@ -17,7 +17,10 @@ public interface ICraftingModuleWithExternalWorkingBlocks extends ICraftingBuild
 	boolean needWorkingBlock(@NotNull IRecipeStorage recipeStorage);
 
 	@NotNull
-	Component getWorkingBlockNotFoundMessage();
+	default Component getWorkingBlockNotFoundMessage()
+	{
+		return Component.translatable("minecolonies_compatibility.interaction.no_working_block");
+	}
 
 	@NotNull
 	default Component getWorkingBlockNotFoundMessage(@NotNull IRecipeStorage recipeStorage)
