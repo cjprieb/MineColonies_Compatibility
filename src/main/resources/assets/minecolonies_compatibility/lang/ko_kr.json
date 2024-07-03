@@ -1,41 +1,65 @@
 {
+	"_comment_tools": "도구",
 	"minecolonies_tweaks.custom_tooltype.crossbow": "석궁",
 	"minecolonies_tweaks.custom_tooltype.gun": "총",
 	"minecolonies_tweaks.custom_tooltype.knife": "식칼",
 	"minecolonies_tweaks.custom_tooltype.ranger_weapon": "원거리 무기",
 	"minecolonies_tweaks.custom_tooltype.knight_weapon": "근거리 무기",
 	
+	"_comment_jobs": "직업",
 	"minecolonies_compatibility.job.gunner": "거너",
 	"minecolonies_compatibility:gunner.job.desc": "강력한 원거리 공격이 가능하지만, 근접전은 약합니다.",
 	"minecolonies_compatibility:gunner.skills.desc": "skills.desc",
-	
 	"minecolonies_compatibility.job.orchardist": "과수재배꾼",
 	"minecolonies_compatibility:orchardist.job.desc": "과일, 나무에 열린 작물을 수확합니다.",
 	"minecolonies_compatibility:orchardist.skills.desc": "수확 속도와 걷는 속도에 영향을 미칩니다.",
-	
 	"minecolonies_compatibility.job.farmers_cook": "파머스 요리사",
 	"minecolonies_compatibility:farmers_cook.job.desc": "Farmer's Delight 모드의 조리용 냄비를 사용한 요리를 하며, 시민들에게 음식을 나눠줍니다.",
 	"minecolonies_compatibility:farmers_cook.skills.desc": "요리 속도에 영향을 줍니다.",
 	
+	"_comment_jobs_jei_descs": "JEI 직업 설명",
+	"com.minecolonies.coremod.jei.farmers_cook": "Farmer's Delight 모드의 조리용 냄비를 사용한 요리를 하며, 시민들에게 음식을 나눠줍니다.",
+	"com.minecolonies.coremod.jei.orchardist": "과일, 나무에 열린 작물을 수확합니다.",
+	
+	"_comment_requests": "요청",
 	"minecolonies_compatibility.ie_bullet": "총알",
 	"minecolonies_compatibility.ie_bullet.desc": "Immersive Engineering 모드 총알",
 	"minecolonies_compatibility.reliquary_magazine": "Magazines",
 	"minecolonies_compatibility.reliquary_magazine.desc": "Reliquary's Magazines",
 	
+	"_comment_blocks": "블록",
+	"block.minecolonies_compatibility.citizen_grid": "시민용 그리드",
+	"block.minecolonies_compatibility.citizen_inventory": "시민용 Storage Inventory",
+	"block.minecolonies_compatibility.citizen_inventory.tooltip": "'Simple Storage Network'와 'Minecolonies 창고'를 연결합니다",
+	
+	"_comment_items": "아이템",
+	"item.minecolonies_compatibility.citizen_terminal": "시민용 ME 터미널",
+	
+	"_comment_texts": "텍스트",
+	"minecolonies_compatibility.gui.refresh": "새로고침",
+	"minecolonies_compatibility.gui.refreshing": "새로고침중",
+	"minecolonies_compatibility.gui.pos": "위치: %1$s, %2$s, %3$s",
+	"minecolonies_compatibility.gui.linked_pos": "연결됨: : %1$s, %2$s, %3$s",
+	"minecolonies_compatibility.gui.not_linked": "연결 안됨",
+	"minecolonies_compatibility.jei.unsupported_tool": "지원되지 않는 도구",
+	"minecolonies_compatibility.gui.farmers_cutting_knife": "식칼로 써는 제작법",
+	"minecolonies_compatibility.gui.farmers_cooking": "냄비로 조리하는 제작법",
+	
+	"_comment_modules": "모듈",
+	"com.minecolonies.coremod.gui.workerhuts.fruitlist_blacklist": "과일 블랙리스트",
+	"com.minecolonies.coremod.gui.workerhuts.network_storage": "네트워크 저장소",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "식칼로 써는 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "냄비로 조리하는 제작법",
+	
+	"_comment_module_settings": "모듈 설정",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "폭죽 로켓 요청",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:need_max_harvest": "최대 성장만 수확",
 	
-	"minecolonies_compatibility.jei.unsupported_tool": "지원되지 않는 도구",
-	
-	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "식칼로 써는 제작법",
-	"minecolonies_compatibility.gui.farmers_cutting_knife": "식칼로 써는 제작법",
-	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "냄비로 조리하는 제작법",
-	"minecolonies_compatibility.gui.farmers_cooking": "냄비로 조리하는 제작법",
-	
+	"_comment_interaction": "상호작용 메시지",
+	"minecolonies_compatibility.interaction.no_working_block": "제 건물에 작업에 필요한 블록이 없어요! 사용할 수 있도록 설치해주세요!",
 	"minecolonies_compatibility.interaction.no_farmers_cooking_recipe": "제 건물에 냄비로 조리하는 제작법이 등록되어있지 않아요! 일할 수 있도록 등록해주세요!",
 	"minecolonies_compatibility.interaction.no_cutting_board": "제 건물에 도마가 없어요! 사용할 수 있도록 설치해주세요!",
 	"minecolonies_compatibility.interaction.no_heated_cooking_pot": "제 건물에 달궈진 조리용 냄비가 없어요! 조리용 냄비와 그 아래에 열원을 설치해주세요!",
 	
-	"com.minecolonies.coremod.jei.farmers_cook": "Farmer's Delight 모드의 조리용 냄비를 사용한 요리를 하며, 시민들에게 음식을 나눠줍니다.",
-	"com.minecolonies.coremod.jei.orchardist": "과일, 나무에 열린 작물을 수확합니다."
+	"_eof": "EOF"
 }

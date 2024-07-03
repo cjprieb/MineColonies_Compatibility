@@ -1,57 +1,65 @@
 {
+	"_comment_tools": "Tools",
 	"minecolonies_tweaks.custom_tooltype.crossbow": "Crossbow",
 	"minecolonies_tweaks.custom_tooltype.gun": "Gun",
 	"minecolonies_tweaks.custom_tooltype.knife": "Knife",
 	"minecolonies_tweaks.custom_tooltype.ranger_weapon": "Ranged Weapon",
 	"minecolonies_tweaks.custom_tooltype.knight_weapon": "Melee Weapon",
 	
+	"_comment_jobs": "Jobs",
 	"minecolonies_compatibility.job.gunner": "Gunner",
 	"minecolonies_compatibility:gunner.job.desc": "Distance fighter, deals high damage, but has low survival chance in close combat.",
 	"minecolonies_compatibility:gunner.skills.desc": "Affects speed, accuracy, range, and damage output.",
-	
 	"minecolonies_compatibility.job.orchardist": "Orchardist",
-	"minecolonies_compatibility:orchardist.job.desc": "Harvests fruits, leaf crops hanging at tree.",
 	"minecolonies_compatibility:orchardist.skills.desc": "Affects harvesting and walking speed.",
-	
+	"minecolonies_compatibility:orchardist.job.desc": "Harvests fruits, leaf crops hanging at tree.",
 	"minecolonies_compatibility.job.farmers_cook": "Farmer's Cook",
 	"minecolonies_compatibility:farmers_cook.job.desc": "Cooks using Farmer's Delight mod's Cooking Pot and hands out food to colonists.",
 	"minecolonies_compatibility:farmers_cook.skills.desc": "Affects cooking speed.",
 	
+	"_comment_jobs_jei_descs": "JEI Jobs",
+	"com.minecolonies.coremod.jei.farmers_cook": "Cooks using Farmer's Delight mod's Cooking Pot and hands out food to colonists.",
+	"com.minecolonies.coremod.jei.orchardist": "Harvests fruits, leaf crops hanging at tree.",
+	
+	"_comment_requests": "Requests",
 	"minecolonies_compatibility.ie_bullet": "Bullets",
 	"minecolonies_compatibility.ie_bullet.desc": "Immersive Engineering's Bullets",
 	"minecolonies_compatibility.reliquary_magazine": "Magazines",
 	"minecolonies_compatibility.reliquary_magazine.desc": "Reliquary's Magazines",
 	
+	"_comment_blocks": "Blocks",
 	"block.minecolonies_compatibility.citizen_grid": "Grid for Colonist",
+	"block.minecolonies_compatibility.citizen_inventory": "Storage Inventory for Colonist",
+	"block.minecolonies_compatibility.citizen_inventory.tooltip": "Link 'Simple Storage Network' and 'Minecolonies Warehouse'",
 	
+	"_comment_items": "Items",
 	"item.minecolonies_compatibility.citizen_terminal": "ME Terminal for Colonist",
 	
-	"block.minecolonies_compatibility.citizen_inventory": "Storage Inventory for Colonist",
-	"block.minecolonies_compatibility.citizen_inventory.tooltip": "Link 'Storage Network' and 'Minecolonies Warehouse'",
-	
-	"com.minecolonies.coremod.gui.workerhuts.fruitlist_blacklist": "Fruit Blacklist",
-	"com.minecolonies.coremod.gui.workerhuts.network_storage": "Network Storage",
-	
+	"_comment_texts": "Texts",
 	"minecolonies_compatibility.gui.refresh": "Refresh",
 	"minecolonies_compatibility.gui.refreshing": "Refreshing",
 	"minecolonies_compatibility.gui.pos": "Pos: %1$s, %2$s, %3$s",
 	"minecolonies_compatibility.gui.linked_pos": "Linked with: %1$s, %2$s, %3$s",
 	"minecolonies_compatibility.gui.not_linked": "Not linked",
+	"minecolonies_compatibility.jei.unsupported_tool": "Unsupported Tool",
+	"minecolonies_compatibility.gui.farmers_cutting_knife": "Cutting Recipes with Knife",
+	"minecolonies_compatibility.gui.farmers_cooking": "Cooking Recipes with Pot",
 	
+	"_comment_modules": "Modules",
+	"com.minecolonies.coremod.gui.workerhuts.fruitlist_blacklist": "Fruit Blacklist",
+	"com.minecolonies.coremod.gui.workerhuts.network_storage": "Network Storage",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "Cutting Recipes with Knife",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "Cooking Recipes with Cooking Pot",
+	
+	"_comment_module_settings": "Module Settings",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "Request Firework Rocket",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:need_max_harvest": "Harvest Only Max Age",
 	
-	"minecolonies_compatibility.jei.unsupported_tool": "Unsupported Tool",
-	
-	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "Cutting Recipes with Knife",
-	"minecolonies_compatibility.gui.farmers_cutting_knife": "Cutting Recipes with Knife",
-	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "Cooking Recipes with Cooking Pot",
-	"minecolonies_compatibility.gui.farmers_cooking": "Cooking Recipes with Pot",
-	
+	"_comment_interaction": "Interaction Messages",
+	"minecolonies_compatibility.interaction.no_working_block": "My work hut doesn't have any Working Block! Please place it so I have some I can use!",
 	"minecolonies_compatibility.interaction.no_farmers_cooking_recipe": "My work hut doesn't register any Cooking Recipe! Please register it so I have some I can work!",
 	"minecolonies_compatibility.interaction.no_cutting_board": "My work hut doesn't have any Cutting Board! Please place it so I have some I can use!",
 	"minecolonies_compatibility.interaction.no_heated_cooking_pot": "My work hut doesn't have any heated Cooking Pot! Please place Cooking Pot and place heat source under it!",
 	
-	"com.minecolonies.coremod.jei.farmers_cook": "Cooks using Farmer's Delight mod's Cooking Pot and hands out food to colonists.",
-	"com.minecolonies.coremod.jei.orchardist": "Harvests fruits, leaf crops hanging at tree."
+	"_eof": "EOF"
 }
