@@ -48,7 +48,10 @@ public interface IModuleWithExternalWorkingBlocks extends IModuleWithExternalBlo
 	}
 
 	@NotNull
-	WorkingBlocksPathResult createPathResult(@Nullable AbstractEntityCitizen citizen);
+	default WorkingBlocksPathResult createPathResult(@Nullable AbstractEntityCitizen citizen)
+	{
+		return new WorkingBlocksPathResult(this);
+	}
 
 	/**
 	 *
