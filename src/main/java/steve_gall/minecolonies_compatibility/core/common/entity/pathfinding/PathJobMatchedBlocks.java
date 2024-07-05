@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -12,8 +13,6 @@ import steve_gall.minecolonies_tweaks.api.common.pathfinding.SimplePathJob;
 
 public class PathJobMatchedBlocks extends SimplePathJob<MatchBlocksPathResult>
 {
-	@NotNull
-	private final BlockPos.MutableBlockPos tempPos = new BlockPos.MutableBlockPos();
 	@NotNull
 	private final MatchPredicate predicate;
 
@@ -30,11 +29,11 @@ public class PathJobMatchedBlocks extends SimplePathJob<MatchBlocksPathResult>
 	}
 
 	@Override
-	protected boolean testTarget(int x, int y, int z)
+	protected boolean testPos(@NotNull MutableBlockPos pos)
 	{
-		if (this.predicate.match(this.world, this.tempPos.set(x, y, z)))
+		if (this.predicate.match(this.world, pos))
 		{
-			this.getResult().positions.add(this.tempPos.immutable());
+			this.getResult().positions.add(pos.immutable());
 			return true;
 		}
 		else

@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
@@ -33,11 +34,13 @@ public class PathJobFindFruit extends SimplePathJob<FruitPathResult>
 	}
 
 	@Override
-	protected boolean testTarget(int x, int y, int z)
+	protected boolean isTarget(@NotNull MutableBlockPos pos)
 	{
+		var y = pos.getY();
+
 		for (var i = 0; i <= this.vertialRange; i++)
 		{
-			if (this.findFruitAt(x, y + i, z))
+			if (super.isTarget(pos.setY(y + i)))
 			{
 				return true;
 			}
@@ -47,11 +50,12 @@ public class PathJobFindFruit extends SimplePathJob<FruitPathResult>
 		return false;
 	}
 
-	private boolean findFruitAt(int x, int y, int z)
+	@Override
+	protected boolean testPos(@NotNull MutableBlockPos pos)
 	{
-		var fruit = new Fruit(new BlockPos(x, y, z));
+		var fruit = new Fruit(pos.immutable());
 
-		if (this.test(fruit))
+		if (this.testFruit(fruit))
 		{
 			this.getResult().fruit = fruit;
 			return true;
@@ -60,7 +64,7 @@ public class PathJobFindFruit extends SimplePathJob<FruitPathResult>
 		return false;
 	}
 
-	private boolean test(Fruit fruit)
+	private boolean testFruit(Fruit fruit)
 	{
 		if (!fruit.updateAndIsValid(this.world))
 		{
