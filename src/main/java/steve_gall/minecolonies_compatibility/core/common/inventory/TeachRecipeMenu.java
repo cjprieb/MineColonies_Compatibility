@@ -120,7 +120,7 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	{
 		var prev = this.recipe;
 
-		if (this.testRecipe(recipe))
+		if (recipe != null && this.testRecipe(recipe))
 		{
 			this.recipe = recipe;
 		}
