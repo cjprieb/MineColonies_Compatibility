@@ -7,9 +7,9 @@ import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.crafting.registry.CraftingType;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,9 +37,9 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	private IMenuRecipeValidator<RECIPE> recipeValidator;
 	protected RECIPE recipe;
 
-	public TeachRecipeMenu(MenuType<?> menuType, int windowId, Inventory inventory, BlockPos buildingId, int moduleId)
+	public TeachRecipeMenu(MenuType<?> menuType, int windowId, Inventory inventory, IBuildingModule module)
 	{
-		super(menuType, windowId, inventory, buildingId, moduleId);
+		super(menuType, windowId, inventory, module);
 		this.setup();
 	}
 
