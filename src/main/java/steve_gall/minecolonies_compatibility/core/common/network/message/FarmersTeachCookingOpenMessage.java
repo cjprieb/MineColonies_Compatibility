@@ -2,6 +2,7 @@ package steve_gall.minecolonies_compatibility.core.common.network.message;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.colony.buildings.modules.IBuildingModuleView;
 
 import net.minecraft.network.FriendlyByteBuf;
@@ -31,7 +32,7 @@ public class FarmersTeachCookingOpenMessage extends ModuleMenuOpenMessage
 	}
 
 	@Override
-	protected MenuProvider createMenuProvider()
+	protected MenuProvider createMenuProvider(IBuildingModule module)
 	{
 		return new MenuProvider()
 		{
@@ -46,7 +47,7 @@ public class FarmersTeachCookingOpenMessage extends ModuleMenuOpenMessage
 			@Override
 			public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player player)
 			{
-				return new TeachCookingMenu(id, inv, getBuildingId(), getModuleId());
+				return new TeachCookingMenu(id, inv, module);
 			}
 		};
 	}

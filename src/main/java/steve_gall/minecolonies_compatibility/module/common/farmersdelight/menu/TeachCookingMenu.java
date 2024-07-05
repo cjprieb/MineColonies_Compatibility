@@ -2,9 +2,9 @@ package steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.crafting.registry.CraftingType;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -44,9 +44,9 @@ public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
 	public static final int CONTAINER_X = 88;
 	public static final int CONTAINER_Y = 45;
 
-	public TeachCookingMenu(int windowId, Inventory inventory, BlockPos buildingId, int moduleId)
+	public TeachCookingMenu(int windowId, Inventory inventory, IBuildingModule module)
 	{
-		super(ModuleMenuTypes.TEACH_COOKING.get(), windowId, inventory, buildingId, moduleId);
+		super(ModuleMenuTypes.TEACH_COOKING.get(), windowId, inventory, module);
 		this.setup();
 	}
 

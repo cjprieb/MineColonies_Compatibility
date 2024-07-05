@@ -1,5 +1,6 @@
 package steve_gall.minecolonies_compatibility.core.common.network.message;
 
+import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.colony.buildings.modules.IBuildingModuleView;
 
 import net.minecraft.network.FriendlyByteBuf;
@@ -37,15 +38,21 @@ public abstract class ModuleMenuOpenMessage extends BuildingModuleMessage
 			return;
 		}
 
-		NetworkHooks.openScreen(player, this.createMenuProvider(), this::toBuffer);
+		var module = this.getModule();
+
+		if (module == null)
+		{
+			return;
+		}
+
+		NetworkHooks.openScreen(player, this.createMenuProvider(module), this::toBuffer);
 	}
 
-	protected abstract MenuProvider createMenuProvider();
+	protected abstract MenuProvider createMenuProvider(IBuildingModule module);
 
 	protected void toBuffer(FriendlyByteBuf buffer)
 	{
-		buffer.writeBlockPos(this.getBuildingId());
-		buffer.writeInt(this.getModuleId());
+		this.getModulePos().serializeBuffer(buffer);
 	}
 
 }

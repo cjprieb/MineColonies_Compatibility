@@ -2,6 +2,7 @@ package steve_gall.minecolonies_compatibility.core.common.network.message;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.colony.buildings.modules.IBuildingModuleView;
 import com.minecolonies.api.util.constant.IToolType;
 import com.minecolonies.api.util.constant.ToolType;
@@ -41,7 +42,7 @@ public class FarmersTeachCuttingOpenMessage extends ModuleMenuOpenMessage
 	}
 
 	@Override
-	protected MenuProvider createMenuProvider()
+	protected MenuProvider createMenuProvider(IBuildingModule module)
 	{
 		var toolType = this.getToolType();
 		return new MenuProvider()
@@ -57,7 +58,7 @@ public class FarmersTeachCuttingOpenMessage extends ModuleMenuOpenMessage
 			@Override
 			public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player player)
 			{
-				return new TeachCuttingMenu(id, inv, getBuildingId(), getModuleId(), toolType);
+				return new TeachCuttingMenu(id, inv, module, toolType);
 			}
 		};
 	}

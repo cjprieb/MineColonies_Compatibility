@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.crafting.registry.CraftingType;
 import com.minecolonies.api.util.constant.IToolType;
 import com.minecolonies.api.util.constant.ToolType;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -53,9 +53,9 @@ public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 
 	private List<ChanceResult> results;
 
-	public TeachCuttingMenu(int windowId, Inventory inventory, BlockPos buildingId, int moduleId, IToolType toolType)
+	public TeachCuttingMenu(int windowId, Inventory inventory, IBuildingModule module, IToolType toolType)
 	{
-		super(ModuleMenuTypes.TEACH_CUTTING.get(), windowId, inventory, buildingId, moduleId);
+		super(ModuleMenuTypes.TEACH_CUTTING.get(), windowId, inventory, module);
 		this.toolType = toolType;
 		this.setup();
 	}

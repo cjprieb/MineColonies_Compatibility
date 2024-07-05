@@ -34,7 +34,7 @@ public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RE
 	{
 		super(menu, inventory, title);
 
-		this.module = (CraftingModuleView) menu.getModuleView();
+		this.module = (CraftingModuleView) menu.getModulePos().getModuleView();
 	}
 
 	@Override
