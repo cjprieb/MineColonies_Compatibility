@@ -1,0 +1,22 @@
+<window size="190 244" pause="false" lightbox="false">
+	<image
+		source="minecolonies:textures/gui/builderhut/builder_paper.png"
+		size="190 244" />
+	<label id="desc" size="130 11" pos="30 14" color="black"
+		textalign="MIDDLE" />
+
+	<box id="box" size="164 45" pos="13 40" linewidth="1">
+		<text id="id" size="0 0" pos="0 0" visible="false" />
+		<text id="desc" size="100% 15" pos="5 5" color="black"
+			label="$(minecolonies_compatibility.gui.restrict)"
+			textalign="vertical left" wrap="true" />
+
+		<buttonimage id="trigger" pos="5 25" size="30 17"
+			source="minecolonies:textures/gui/builderhut/builder_button_very_small.png"
+			textcolor="black" />
+		<buttonimage id="giveTool" pos="40 25" size="119 17"
+			source="minecolonies:textures/gui/builderhut/builder_button_medium_large.png"
+			textcolor="black" label="$(com.minecolonies.coremod.gui.givetool)" />
+	</box>
+
+</window>

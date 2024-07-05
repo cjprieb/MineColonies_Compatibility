@@ -18,8 +18,8 @@
 	"minecolonies_compatibility:farmers_cook.skills.desc": "요리 속도에 영향을 줍니다.",
 	
 	"_comment_jobs_jei_descs": "JEI 직업 설명",
-	"com.minecolonies.coremod.jei.farmers_cook": "Farmer's Delight 모드의 조리용 냄비를 사용한 요리를 하며, 시민들에게 음식을 나눠줍니다.",
 	"com.minecolonies.coremod.jei.orchardist": "과일, 나무에 열린 작물을 수확합니다.",
+	"com.minecolonies.coremod.jei.farmers_cook": "Farmer's Delight 모드의 조리용 냄비를 사용한 요리를 하며, 시민들에게 음식을 나눠줍니다.",
 	
 	"_comment_requests": "요청",
 	"minecolonies_compatibility.ie_bullet": "총알",
@@ -33,6 +33,9 @@
 	"block.minecolonies_compatibility.citizen_inventory.tooltip": "'Simple Storage Network'와 'Minecolonies 창고'를 연결합니다",
 	
 	"_comment_items": "아이템",
+	"item.minecolonies_compatibility.restrict_tool": "구역 설정 도구",
+	"item.minecolonies_compatibility.restrict_tool.name": "건물: %s",
+	"item.minecolonies_compatibility.restrict_tool.pos": "위치: %1$s, %2$s, %3$s",
 	"item.minecolonies_compatibility.citizen_terminal": "시민용 ME 터미널",
 	
 	"_comment_texts": "텍스트",
@@ -42,6 +45,11 @@
 	"minecolonies_compatibility.gui.linked_pos": "연결됨: : %1$s, %2$s, %3$s",
 	"minecolonies_compatibility.gui.not_linked": "연결 안됨",
 	"minecolonies_compatibility.jei.unsupported_tool": "지원되지 않는 도구",
+	"minecolonies_compatibility.gui.restrict": "구역 모드",
+	"minecolonies_compatibility.gui.restrict.set1": "작업 구역의 첫 번째 위치를 설정했습니다.",
+	"minecolonies_compatibility.gui.restrict.set2": "작업 구역의 두 번째 위치를 설정했습니다.",
+	"minecolonies_compatibility.gui.restrict.update": "작업 구역을 설정했습니다. (X: %1$s ~ %2$s, Y: %3$s ~ %4$s, Z: %5$s ~ %6$s, 블록 수: %7$s, 최대 블록 수: %8$s)",
+	"minecolonies_compatibility.gui.restrict.too_big": "작업 구역이 너무 넓습니다. (설정된 블록 수: %1$s, 최대 블록 수: %2$s)",
 	"minecolonies_compatibility.gui.farmers_cutting_knife": "식칼로 써는 제작법",
 	"minecolonies_compatibility.gui.farmers_cooking": "냄비로 조리하는 제작법",
 	

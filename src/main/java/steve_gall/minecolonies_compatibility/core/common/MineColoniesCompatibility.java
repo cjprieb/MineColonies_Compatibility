@@ -16,6 +16,7 @@ import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesComp
 import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigServer;
 import steve_gall.minecolonies_compatibility.core.common.init.ModBuildingModules;
 import steve_gall.minecolonies_compatibility.core.common.init.ModGuardTypes;
+import steve_gall.minecolonies_compatibility.core.common.init.ModItems;
 import steve_gall.minecolonies_compatibility.core.common.init.ModJobs;
 import steve_gall.minecolonies_compatibility.core.common.init.ModToolTypes;
 import steve_gall.minecolonies_compatibility.core.common.network.NetworkChannel;
@@ -36,6 +37,7 @@ public class MineColoniesCompatibility
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, MineColoniesCompatibilityConfigServer.SPEC);
 
 		var fml_bus = FMLJavaModLoadingContext.get().getModEventBus();
+		ModItems.REGISTER.register(fml_bus);
 		ModGuardTypes.REGISTER.register(fml_bus);
 		ModJobs.REGISTER.register(fml_bus);
 		fml_bus.addListener(this::onFMLCommonSetup);
