@@ -11,6 +11,7 @@ import com.minecolonies.api.entity.citizen.Skill;
 import com.minecolonies.core.colony.buildings.AbstractBuilding;
 import com.minecolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
 import com.minecolonies.core.colony.buildings.modules.BuildingModules;
+import com.minecolonies.core.colony.buildings.modules.CraftingWorkerBuildingModule;
 import com.minecolonies.core.colony.buildings.modules.GuardBuildingModule;
 import com.minecolonies.core.colony.buildings.modules.WorkerBuildingModule;
 import com.minecolonies.core.colony.buildings.modules.settings.BoolSetting;
@@ -21,10 +22,15 @@ import com.minecolonies.core.colony.buildings.workerbuildings.BuildingLumberjack
 import com.mojang.datafixers.util.Pair;
 
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.core.common.building.module.BucketFillingCraftingModule;
+import steve_gall.minecolonies_compatibility.core.common.building.module.BucketFillingCraftingModuleView;
 import steve_gall.minecolonies_compatibility.core.common.building.module.FruitListModule;
 import steve_gall.minecolonies_compatibility.core.common.building.module.FruitListModuleView;
 import steve_gall.minecolonies_compatibility.core.common.building.module.NetworkStorageModule;
 import steve_gall.minecolonies_compatibility.core.common.building.module.NetworkStorageModuleView;
+import steve_gall.minecolonies_compatibility.core.common.building.module.RestrictableModule;
+import steve_gall.minecolonies_compatibility.core.common.building.module.RestrictableModuleView;
+import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigServer;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.orchardist.EntityAIWorkOrchardist;
 
 public class ModBuildingModules
@@ -72,5 +78,30 @@ public class ModBuildingModules
 			BuildingLumberjack.DYNAMIC_TREES_SIZE, //
 			AbstractBuilding.USE_SHEARS//
 	);
+
+	public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule, WorkerBuildingModuleView> FLUID_MANAGER_WORK = new BuildingEntry.ModuleProducer<>("fluid_manager_work", //
+			() -> new CraftingWorkerBuildingModule(ModJobs.FLUID_MANAGER.get(), Skill.Focus, Skill.Athletics, false, b -> 1), //
+			() -> WorkerBuildingModuleView::new);
+
+	public static final BuildingEntry.ModuleProducer<BucketFillingCraftingModule, BucketFillingCraftingModuleView> FLUID_MANAGER_BUCKET_FILLING = new BuildingEntry.ModuleProducer<>("fluid_manager_bucket_filling", //
+			() -> new BucketFillingCraftingModule("fluid_manager_bucket_filling", ModJobs.FLUID_MANAGER.get()), //
+			() -> BucketFillingCraftingModuleView::new);//
+
+	public static final BuildingEntry.ModuleProducer<RestrictableModule, RestrictableModuleView> FLUID_MANAGER_CAULDRON_RESTRICT = new BuildingEntry.ModuleProducer<>("fluid_manager_cauldron_restrict", //
+			() -> new RestrictableModule()
+			{
+				@Override
+				public int getSearchRange()
+				{
+					return MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager.searchRange.get().intValue();
+				}
+			}, //
+			() -> () -> new RestrictableModuleView()
+			{
+				public String getIcon()
+				{
+					return "fluid_manager_cauldron_restrict";
+				};
+			});//
 
 }

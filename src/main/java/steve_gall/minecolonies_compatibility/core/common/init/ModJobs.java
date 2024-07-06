@@ -1,10 +1,12 @@
 package steve_gall.minecolonies_compatibility.core.common.init;
 
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
+import com.minecolonies.core.colony.jobs.views.CrafterJobView;
 import com.minecolonies.core.colony.jobs.views.DefaultJobView;
 
 import net.minecraftforge.registries.RegistryObject;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.core.common.job.JobFluidManager;
 import steve_gall.minecolonies_compatibility.core.common.job.JobGunner;
 import steve_gall.minecolonies_compatibility.core.common.job.JobOrchardist;
 import steve_gall.minecolonies_tweaks.api.registries.JobRegister;
@@ -22,6 +24,11 @@ public class ModJobs
 	{
 		builder.setJobProducer(JobOrchardist::new);
 		builder.setJobViewProducer(() -> DefaultJobView::new);
+	});
+	public static final RegistryObject<JobEntry> FLUID_MANAGER = REGISTER.register("fluid_manager", builder ->
+	{
+		builder.setJobProducer(JobFluidManager::new);
+		builder.setJobViewProducer(() -> CrafterJobView::new);
 	});
 
 	private ModJobs()

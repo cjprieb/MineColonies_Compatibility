@@ -1,5 +1,7 @@
 package steve_gall.minecolonies_compatibility.mixin.common.minecolonies;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,7 +18,10 @@ import com.minecolonies.core.entity.ai.basic.AbstractEntityAICrafting;
 import com.minecolonies.core.entity.ai.basic.AbstractEntityAIInteract;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraftforge.items.IItemHandler;
 import steve_gall.minecolonies_compatibility.api.common.building.module.ICraftingModuleWithExternalWorkingBlocks;
+import steve_gall.minecolonies_compatibility.api.common.building.module.ICraftingResultListenerModule;
 
 @Mixin(value = AbstractEntityAICrafting.class, remap = false)
 public abstract class AbstractEntityAICraftingMixin<J extends AbstractJobCrafter<?, J>, B extends AbstractBuilding> extends AbstractEntityAIInteract<J, B>
@@ -92,6 +97,20 @@ public abstract class AbstractEntityAICraftingMixin<J extends AbstractJobCrafter
 			return building.getPosition();
 		}
 
+	}
+
+	@Redirect(method = "craft", remap = false, at = @At(value = "INVOKE", target = "Lcom/minecolonies/api/crafting/IRecipeStorage;fullfillRecipe(Lnet/minecraft/world/level/storage/loot/LootContext;Ljava/util/List;)Z"))
+	private boolean craft_fullfillRecipe(IRecipeStorage recipeStorage, LootContext context, List<IItemHandler> handlers)
+	{
+		var result = recipeStorage.fullfillRecipe(context, handlers);
+
+		if (this.building.getCraftingModuleForRecipe(recipeStorage.getToken()) instanceof ICraftingResultListenerModule module)
+		{
+			var pos = this.minecolonies_compatibility$workingPosition != null ? this.minecolonies_compatibility$workingPosition : this.building.getPosition();
+			module.onCrafted(this.worker, pos, recipeStorage, result);
+		}
+
+		return result;
 	}
 
 }
