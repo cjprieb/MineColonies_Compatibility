@@ -18,8 +18,8 @@
 	"minecolonies_compatibility:farmers_cook.skills.desc": "Affects cooking speed.",
 	
 	"_comment_jobs_jei_descs": "JEI Jobs",
-	"com.minecolonies.coremod.jei.farmers_cook": "Cooks using Farmer's Delight mod's Cooking Pot and hands out food to colonists.",
 	"com.minecolonies.coremod.jei.orchardist": "Harvests fruits, leaf crops hanging at tree.",
+	"com.minecolonies.coremod.jei.farmers_cook": "Cooks using Farmer's Delight mod's Cooking Pot and hands out food to colonists.",
 	
 	"_comment_requests": "Requests",
 	"minecolonies_compatibility.ie_bullet": "Bullets",
@@ -33,6 +33,9 @@
 	"block.minecolonies_compatibility.citizen_inventory.tooltip": "Link 'Simple Storage Network' and 'Minecolonies Warehouse'",
 	
 	"_comment_items": "Items",
+	"item.minecolonies_compatibility.restrict_tool": "Zoning Tool",
+	"item.minecolonies_compatibility.restrict_tool.name": "Building: %s",
+	"item.minecolonies_compatibility.restrict_tool.pos": "Pos: %1$s, %2$s, %3$s",
 	"item.minecolonies_compatibility.citizen_terminal": "ME Terminal for Colonist",
 	
 	"_comment_texts": "Texts",
@@ -42,6 +45,11 @@
 	"minecolonies_compatibility.gui.linked_pos": "Linked with: %1$s, %2$s, %3$s",
 	"minecolonies_compatibility.gui.not_linked": "Not linked",
 	"minecolonies_compatibility.jei.unsupported_tool": "Unsupported Tool",
+	"minecolonies_compatibility.gui.restrict": "Zoning Mode",
+	"minecolonies_compatibility.gui.restrict.set1": "Setted first position of working area.",
+	"minecolonies_compatibility.gui.restrict.set2": "Setted second position of working area.",
+	"minecolonies_compatibility.gui.restrict.update": "Setted working area. (X: %1$s ~ %2$s, Y: %3$s ~ %4$s, Z: %5$s ~ %6$s, Volume: %7$s, Max volume: %8$s)",
+	"minecolonies_compatibility.gui.restrict.too_big": "Working area is too large. (Setted volume: %1$s, Max volume: %2$s)",
 	"minecolonies_compatibility.gui.farmers_cutting_knife": "Cutting Recipes with Knife",
 	"minecolonies_compatibility.gui.farmers_cooking": "Cooking Recipes with Pot",
 	

@@ -17,6 +17,9 @@ import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhos
 import steve_gall.minecolonies_compatibility.core.common.network.message.JEIRecipeTransferMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.NetworkStorageRefreshMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.PolymorphTeachResultItemMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.RestrictGiveToolMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.RestrictSetAreaMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.RestrictSetEnabledMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRecipeMenuNewResultMessage;
 
 public class NetworkChannel
@@ -36,6 +39,9 @@ public class NetworkChannel
 		this.registerMessage(JEIGhostAcceptFluidMessage.class, JEIGhostAcceptFluidMessage::new);
 		this.registerMessage(JEIRecipeTransferMessage.class, JEIRecipeTransferMessage::new);
 		this.registerMessage(NetworkStorageRefreshMessage.class, NetworkStorageRefreshMessage::new);
+		this.registerMessage(RestrictSetEnabledMessage.class, RestrictSetEnabledMessage::new);
+		this.registerMessage(RestrictSetAreaMessage.class, RestrictSetAreaMessage::new);
+		this.registerMessage(RestrictGiveToolMessage.class, RestrictGiveToolMessage::new);
 		this.registerMessage(FarmersTeachCuttingOpenMessage.class, FarmersTeachCuttingOpenMessage::new);
 		this.registerMessage(FarmersTeachCookingOpenMessage.class, FarmersTeachCookingOpenMessage::new);
 	}
