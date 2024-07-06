@@ -27,8 +27,8 @@ import steve_gall.minecolonies_compatibility.core.common.network.message.Network
 
 public class NetworkStorageModuleWindow extends AbstractModuleWindow
 {
-	public static final Component TEXT_REFRESH = Component.translatable("minecolonies_compatibility.gui.refresh");
-	public static final Component TEXT_REFRESHING = Component.translatable("minecolonies_compatibility.gui.refreshing");
+	public static final Component TEXT_REFRESH = Component.translatable("minecolonies_compatibility.text.refresh");
+	public static final Component TEXT_REFRESHING = Component.translatable("minecolonies_compatibility.text.refreshing");
 
 	private static final String BUTTON_REFRESH = "refresh";
 
@@ -160,7 +160,7 @@ public class NetworkStorageModuleWindow extends AbstractModuleWindow
 		{
 			var blockEntity = level.getBlockEntity(pos);
 			this.view = NetworkStorageViewRegistry.select(blockEntity, direction);
-			this.posText = Component.translatable("minecolonies_compatibility.gui.pos", pos.getX(), pos.getY(), pos.getZ());
+			this.posText = Component.translatable("minecolonies_compatibility.text.pos", pos.getX(), pos.getY(), pos.getZ());
 			this.icon = this.view != null ? this.view.getIcon() : ItemStack.EMPTY;
 			this.name = this.icon.getHoverName();
 		}
