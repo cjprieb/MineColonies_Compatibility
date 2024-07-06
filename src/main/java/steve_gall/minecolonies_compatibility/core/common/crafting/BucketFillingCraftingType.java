@@ -11,12 +11,11 @@ import com.minecolonies.api.crafting.IGenericRecipe;
 import com.minecolonies.api.crafting.registry.CraftingType;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
@@ -35,22 +34,19 @@ public class BucketFillingCraftingType extends CraftingType
 
 	public static BucketFillingRecipeStorage parse(ItemStack filledBucket)
 	{
-		return parse(filledBucket, filledBucket.getCraftingRemainingItem());
-	}
+		var tank = new FluidTank(FluidAttributes.BUCKET_VOLUME);
+		var emptyResult = FluidUtil.tryEmptyContainer(filledBucket, tank, tank.getCapacity(), null, true);
+		var emptyBucket = emptyResult.getResult();
 
-	public static BucketFillingRecipeStorage parse(ItemStack filledBucket, ItemStack emptyBucket)
-	{
-		if (filledBucket.getItem() instanceof BucketItem item)
+		if (emptyResult.isSuccess() && emptyBucket.getItem() == Items.BUCKET)
 		{
-			var fluid = item.getFluid();
+			var fluid = tank.getFluid().getFluid();
 
 			if (!fluid.isSame(Fluids.EMPTY) && fluid.isSource(fluid.defaultFluidState()))
 			{
-				var tank = new FluidTank(FluidAttributes.BUCKET_VOLUME);
-				tank.setFluid(new FluidStack(fluid, tank.getCapacity()));
-				var result = FluidUtil.tryFillContainer(emptyBucket, tank, tank.getCapacity(), null, true);
+				var fillResult = FluidUtil.tryFillContainer(emptyBucket, tank, tank.getCapacity(), null, true);
 
-				if (result.isSuccess() && ItemStack.matches(result.getResult(), filledBucket))
+				if (fillResult.isSuccess() && ItemStack.matches(fillResult.getResult(), filledBucket))
 				{
 					return new BucketFillingRecipeStorage(emptyBucket, fluid, filledBucket);
 				}
