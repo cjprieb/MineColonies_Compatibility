@@ -6,11 +6,7 @@ import java.util.List;
 import com.minecolonies.api.colony.buildings.modules.settings.ISetting;
 import com.minecolonies.api.colony.buildings.modules.settings.ISettingKey;
 import com.minecolonies.api.colony.buildings.registry.BuildingEntry;
-import com.minecolonies.api.colony.buildings.registry.BuildingEntry.ModuleProducer;
 import com.minecolonies.api.entity.citizen.Skill;
-import com.minecolonies.core.colony.buildings.AbstractBuilding;
-import com.minecolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
-import com.minecolonies.core.colony.buildings.modules.BuildingModules;
 import com.minecolonies.core.colony.buildings.modules.CraftingWorkerBuildingModule;
 import com.minecolonies.core.colony.buildings.modules.GuardBuildingModule;
 import com.minecolonies.core.colony.buildings.modules.WorkerBuildingModule;
@@ -18,7 +14,6 @@ import com.minecolonies.core.colony.buildings.modules.settings.BoolSetting;
 import com.minecolonies.core.colony.buildings.modules.settings.SettingKey;
 import com.minecolonies.core.colony.buildings.moduleviews.CombinedHiringLimitModuleView;
 import com.minecolonies.core.colony.buildings.moduleviews.WorkerBuildingModuleView;
-import com.minecolonies.core.colony.buildings.workerbuildings.BuildingLumberjack;
 import com.mojang.datafixers.util.Pair;
 
 import steve_gall.minecolonies_compatibility.api.common.entity.ai.CustomizedAI;
@@ -66,23 +61,6 @@ public class ModBuildingModules
 	public static final BuildingEntry.ModuleProducer<NetworkStorageModule, NetworkStorageModuleView> NETWORK_STORAGE = new BuildingEntry.ModuleProducer<>("warehouse_refinfedstoprage_grid", //
 			() -> new NetworkStorageModule(), //
 			() -> NetworkStorageModuleView::new);//
-
-	public static final List<ModuleProducer<?, ?>> ORCHARDIST_BAN_MODULES = Arrays.asList(//
-			BuildingModules.FORESTER_CRAFT, //
-			BuildingModules.ITEMLIST_SAPLING, //
-			BuildingModules.CRAFT_TASK_VIEW//
-	);
-
-	public static final List<ModuleProducer<?, ?>> ORCHARDIST_ONLY_MODULES = Arrays.asList(//
-			FRUITLIST_BLACKLIST//
-	);
-	public static final List<ISettingKey<?>> ORCHARDIST_BAN_SETTINGS = Arrays.asList(//
-			BuildingLumberjack.REPLANT, //
-			BuildingLumberjack.DEFOLIATE, //
-			AbstractCraftingBuildingModule.RECIPE_MODE, //
-			BuildingLumberjack.DYNAMIC_TREES_SIZE, //
-			AbstractBuilding.USE_SHEARS//
-	);
 
 	public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule, WorkerBuildingModuleView> FLUID_MANAGER_WORK = new BuildingEntry.ModuleProducer<>("fluid_manager_work", //
 			() -> new CraftingWorkerBuildingModule(ModJobs.FLUID_MANAGER.get(), Skill.Focus, Skill.Athletics, false, b -> 1), //

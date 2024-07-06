@@ -48,18 +48,18 @@ public abstract class SettingsModuleViewMixin extends AbstractBuildingModuleView
 		else if (buildingType == ModBuildings.lumberjack.get())
 		{
 			var anyOrchardist = !BuildingViewHelper.getAssignedCitizens(this.buildingView, ModJobs.ORCHARDIST.get()).isEmpty();
-			var list = new ArrayList<>(cir.getReturnValue());
 
 			if (anyOrchardist)
 			{
-				ModBuildingModules.ORCHARDIST_BAN_SETTINGS.stream().forEach(list::remove);
+
 			}
 			else
 			{
+				var list = new ArrayList<>(cir.getReturnValue());
 				ModBuildingModules.ORCHARDIST_SETTINGS.stream().map(Pair::getFirst).forEach(list::remove);
+				cir.setReturnValue(list);
 			}
 
-			cir.setReturnValue(list);
 		}
 
 	}
