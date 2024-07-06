@@ -22,15 +22,15 @@ public class RestrictGiveToolMessage extends BuildingModuleMessage
 	public RestrictGiveToolMessage(FriendlyByteBuf buffer)
 	{
 		super(buffer);
-		
+
 		this.moduleName = buffer.readComponent();
 	}
-	
+
 	@Override
 	public void encode(FriendlyByteBuf buffer)
 	{
 		super.encode(buffer);
-		
+
 		buffer.writeComponent(this.moduleName);
 	}
 
@@ -55,5 +55,5 @@ public class RestrictGiveToolMessage extends BuildingModuleMessage
 	{
 		return this.moduleName;
 	}
-	
+
 }

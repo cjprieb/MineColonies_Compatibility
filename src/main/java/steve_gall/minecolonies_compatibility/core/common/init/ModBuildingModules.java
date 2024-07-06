@@ -81,6 +81,7 @@ public class ModBuildingModules
 			}, //
 			() -> () -> new RestrictableModuleView()
 			{
+				@Override
 				public String getIcon()
 				{
 					return "fluid_manager_lava_cauldron";
