@@ -21,6 +21,7 @@ import com.minecolonies.core.colony.buildings.moduleviews.WorkerBuildingModuleVi
 import com.minecolonies.core.colony.buildings.workerbuildings.BuildingLumberjack;
 import com.mojang.datafixers.util.Pair;
 
+import steve_gall.minecolonies_compatibility.api.common.entity.ai.CustomizedAI;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.building.module.BucketFillingCraftingModule;
 import steve_gall.minecolonies_compatibility.core.common.building.module.BucketFillingCraftingModuleView;
@@ -42,7 +43,11 @@ public class ModBuildingModules
 	);
 
 	public static final BuildingEntry.ModuleProducer<GuardBuildingModule, CombinedHiringLimitModuleView> GUNNER_TOWER_WORK = new BuildingEntry.ModuleProducer<>("gunner_tower_work", //
-			() -> new GuardBuildingModule(ModGuardTypes.GUNNER.get(), true, b -> 1), //
+			() -> new GuardBuildingModule(ModGuardTypes.GUNNER.get(), true, b ->
+			{
+				var jobEntry = ModJobs.GUNNER.get();
+				return CustomizedAI.getValues().stream().filter(e -> e.getJobEntry() == jobEntry).findAny().isPresent() ? 1 : 0;
+			}), //
 			() -> CombinedHiringLimitModuleView::new);
 
 	public static final BuildingEntry.ModuleProducer<WorkerBuildingModule, WorkerBuildingModuleView> ORCHARDIST_WORK = new BuildingEntry.ModuleProducer<>("orchardist_work", //
