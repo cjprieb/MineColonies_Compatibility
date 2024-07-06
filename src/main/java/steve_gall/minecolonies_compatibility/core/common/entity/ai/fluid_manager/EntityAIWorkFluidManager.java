@@ -89,7 +89,6 @@ public class EntityAIWorkFluidManager extends AbstractEntityAICrafting<JobFluidM
 			return this.getState();
 		}
 
-		InventoryUtils.transferXOfFirstSlotInProviderWithIntoNextFreeSlotInItemHandler(this.building, item -> item.is(Items.BUCKET), 16, this.worker.getInventoryCitizen());
 		return this.decideSearch(AIWorkerState.START_WORKING);
 	}
 

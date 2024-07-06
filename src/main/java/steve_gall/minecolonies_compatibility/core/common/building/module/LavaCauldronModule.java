@@ -22,7 +22,7 @@ public abstract class LavaCauldronModule extends RestrictableModule implements I
 	public Map<Predicate<ItemStack>, Tuple<Integer, Boolean>> getRequiredItemsAndAmount()
 	{
 		var map = new HashMap<Predicate<ItemStack>, Tuple<Integer, Boolean>>();
-		map.put(stack -> stack.is(Items.BUCKET), new Tuple<>(16, true));
+		map.put(stack -> stack.is(Items.BUCKET), new Tuple<>(32, true));
 
 		return map;
 	}
