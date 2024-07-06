@@ -72,7 +72,7 @@ public class MineColoniesCompatibility
 
 			ModBuildings.deliveryman.get().getModuleProducers().add(ModBuildingModules.FLUID_MANAGER_WORK);
 			ModBuildings.deliveryman.get().getModuleProducers().add(ModBuildingModules.FLUID_MANAGER_BUCKET_FILLING);
-			ModBuildings.deliveryman.get().getModuleProducers().add(ModBuildingModules.FLUID_MANAGER_CAULDRON_RESTRICT);
+			ModBuildings.deliveryman.get().getModuleProducers().add(ModBuildingModules.FLUID_MANAGER_LAVA_CAULDRON);
 		});
 	}
 

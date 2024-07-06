@@ -140,7 +140,7 @@ public class EntityAIWorkFluidManager extends AbstractEntityAICrafting<JobFluidM
 		var config = MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager;
 		PathJobFindLavaCauldron job = null;
 
-		var restrictModule = building.getModule(ModBuildingModules.FLUID_MANAGER_CAULDRON_RESTRICT);
+		var restrictModule = building.getModule(ModBuildingModules.FLUID_MANAGER_LAVA_CAULDRON);
 
 		if (restrictModule.isRestrictEnabled())
 		{
