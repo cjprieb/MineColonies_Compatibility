@@ -22,9 +22,9 @@ import steve_gall.minecolonies_compatibility.core.common.building.module.BucketF
 import steve_gall.minecolonies_compatibility.core.common.building.module.BucketFillingCraftingModuleView;
 import steve_gall.minecolonies_compatibility.core.common.building.module.FruitListModule;
 import steve_gall.minecolonies_compatibility.core.common.building.module.FruitListModuleView;
+import steve_gall.minecolonies_compatibility.core.common.building.module.LavaCauldronModule;
 import steve_gall.minecolonies_compatibility.core.common.building.module.NetworkStorageModule;
 import steve_gall.minecolonies_compatibility.core.common.building.module.NetworkStorageModuleView;
-import steve_gall.minecolonies_compatibility.core.common.building.module.RestrictableModule;
 import steve_gall.minecolonies_compatibility.core.common.building.module.RestrictableModuleView;
 import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigServer;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.orchardist.EntityAIWorkOrchardist;
@@ -70,8 +70,8 @@ public class ModBuildingModules
 			() -> new BucketFillingCraftingModule("fluid_manager_bucket_filling", ModJobs.FLUID_MANAGER.get()), //
 			() -> BucketFillingCraftingModuleView::new);//
 
-	public static final BuildingEntry.ModuleProducer<RestrictableModule, RestrictableModuleView> FLUID_MANAGER_CAULDRON_RESTRICT = new BuildingEntry.ModuleProducer<>("fluid_manager_cauldron_restrict", //
-			() -> new RestrictableModule()
+	public static final BuildingEntry.ModuleProducer<LavaCauldronModule, RestrictableModuleView> FLUID_MANAGER_LAVA_CAULDRON = new BuildingEntry.ModuleProducer<>("fluid_manager_lava_cauldron", //
+			() -> new LavaCauldronModule()
 			{
 				@Override
 				public int getSearchRange()
@@ -83,7 +83,7 @@ public class ModBuildingModules
 			{
 				public String getIcon()
 				{
-					return "fluid_manager_cauldron_restrict";
+					return "fluid_manager_lava_cauldron";
 				};
 			});//
 
