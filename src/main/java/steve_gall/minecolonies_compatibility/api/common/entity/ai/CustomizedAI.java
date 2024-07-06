@@ -1,16 +1,19 @@
 package steve_gall.minecolonies_compatibility.api.common.entity.ai;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.core.common.colony.CitizenHelper;
 import steve_gall.minecolonies_compatibility.core.common.util.PersistentDataHelper;
 
 public abstract class CustomizedAI
@@ -22,6 +25,11 @@ public abstract class CustomizedAI
 		REGISTRY.add(ai);
 	}
 
+	public static List<CustomizedAI> getValues()
+	{
+		return Collections.unmodifiableList(REGISTRY);
+	}
+
 	@Nullable
 	public static CustomizedAI select(@NotNull CustomizedAIContext context)
 	{
@@ -30,7 +38,14 @@ public abstract class CustomizedAI
 
 	public static final String PERSISTENT_TAG_KEY = MineColoniesCompatibility.rl("customized_citizen_ai").toString();
 
-	public abstract boolean test(@NotNull CustomizedAIContext context);
+	@NotNull
+	public abstract JobEntry getJobEntry();
+
+	public boolean test(@NotNull CustomizedAIContext context)
+	{
+		var jobEntry = CitizenHelper.getJobEntry(context.getUser().getCitizenData());
+		return this.getJobEntry() == jobEntry;
+	}
 
 	public boolean canDump(@NotNull CustomizedAIContext context, int slot, @NotNull ItemStack stackToDup)
 	{

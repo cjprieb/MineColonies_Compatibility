@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.minecolonies.api.colony.guardtype.GuardType;
+import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 import com.minecolonies.api.util.InventoryUtils;
 import com.minecolonies.core.colony.buildings.modules.settings.GuardTaskSetting;
@@ -40,9 +41,9 @@ public abstract class CustomizedAIGunner extends CustomizedAIGuard
 	}
 
 	@Override
-	public boolean test(@NotNull CustomizedAIContext context)
+	public @NotNull JobEntry getJobEntry()
 	{
-		return CitizenHelper.getJobEntry(context.getUser().getCitizenData()) == ModJobs.GUNNER.get();
+		return ModJobs.GUNNER.get();
 	}
 
 	protected abstract boolean testAmmo(ItemStack stack);
