@@ -12,7 +12,7 @@
 		</box>
 	</list>
 	<buttonimage
-		label="$(minecolonies_compatibility.gui.refresh)" id="refresh"
+		label="$(minecolonies_compatibility.text.refresh)" id="refresh"
 		size="86 17" pos="50 194"
 		source="minecolonies:textures/gui/builderhut/builder_button_medium.png"
 		textcolor="black" />

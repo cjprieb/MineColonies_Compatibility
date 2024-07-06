@@ -56,7 +56,7 @@ public class TeachCuttingRecipeTransferHandler implements IRecipeTransferHandler
 	{
 		if (!ItemStackHelper.isTool(IngredientHelper.getStacks(recipe.getTool()), menu.getToolType()))
 		{
-			return this.recipeTransferHandlerHelper.createUserErrorWithTooltip(Component.translatable("minecolonies_compatibility.jei.unsupported_tool"));
+			return this.recipeTransferHandlerHelper.createUserErrorWithTooltip(Component.translatable("minecolonies_compatibility.text.unsupported_tool"));
 		}
 
 		if (doTransfer)

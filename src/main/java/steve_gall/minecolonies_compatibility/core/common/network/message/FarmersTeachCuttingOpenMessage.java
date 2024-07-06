@@ -1,15 +1,11 @@
 package steve_gall.minecolonies_compatibility.core.common.network.message;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.colony.buildings.modules.IBuildingModuleView;
 import com.minecolonies.api.util.constant.IToolType;
 import com.minecolonies.api.util.constant.ToolType;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -42,25 +38,9 @@ public class FarmersTeachCuttingOpenMessage extends ModuleMenuOpenMessage
 	}
 
 	@Override
-	protected MenuProvider createMenuProvider(IBuildingModule module)
+	protected AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player, IBuildingModule module)
 	{
-		var toolType = this.getToolType();
-		return new MenuProvider()
-		{
-			@NotNull
-			@Override
-			public Component getDisplayName()
-			{
-				return Component.translatable("minecolonies_compatibility.gui.farmers_cutting_" + toolType.getName());
-			}
-
-			@NotNull
-			@Override
-			public AbstractContainerMenu createMenu(int id, @NotNull Inventory inv, @NotNull Player player)
-			{
-				return new TeachCuttingMenu(id, inv, module, toolType);
-			}
-		};
+		return new TeachCuttingMenu(windowId, inventory, module, this.toolType);
 	}
 
 	@Override

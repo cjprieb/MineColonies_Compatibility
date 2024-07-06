@@ -1,6 +1,7 @@
 package steve_gall.minecolonies_compatibility.core.common.entity.ai;
 
 import net.minecraftforge.common.ForgeConfigSpec;
+import steve_gall.minecolonies_compatibility.core.common.entity.ai.fluid_manager.FluidManagerConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.guard.GunnerConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.guard.KnightConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.guard.RangerConfig;
@@ -13,6 +14,7 @@ public class JobConfig
 	public final KnightConfig knight;
 	public final GunnerConfig gunner;
 	public final OrchardistConfig orchardist;
+	public final FluidManagerConfig fluidManager;
 	public final FarmersCookConfig farmersCook;
 
 	public JobConfig(ForgeConfigSpec.Builder builder)
@@ -31,6 +33,10 @@ public class JobConfig
 
 		builder.push("orchardist");
 		this.orchardist = new OrchardistConfig(builder);
+		builder.pop();
+
+		builder.push("fluidManager");
+		this.fluidManager = new FluidManagerConfig(builder);
 		builder.pop();
 
 		builder.push("farmersCook");

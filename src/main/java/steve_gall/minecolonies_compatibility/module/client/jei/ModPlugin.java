@@ -4,17 +4,24 @@ import java.util.stream.Stream;
 
 import com.minecolonies.api.MinecoloniesAPIProxy;
 import com.minecolonies.api.blocks.ModBlocks;
+import com.minecolonies.api.colony.jobs.registry.JobEntry;
+import com.minecolonies.api.crafting.IGenericRecipe;
 import com.minecolonies.api.research.IGlobalResearch;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import steve_gall.minecolonies_compatibility.api.client.jei.GhostIngredientHandler;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
 import steve_gall.minecolonies_compatibility.api.common.plant.FruitIconCache;
+import steve_gall.minecolonies_compatibility.core.client.gui.TeachBucketFillingScreen;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.init.ModJobs;
 import steve_gall.minecolonies_compatibility.module.client.jei.ResearchCategory.ResearchCache;
@@ -45,6 +52,20 @@ public class ModPlugin implements IModPlugin
 		registration.addRecipeCatalyst(new ItemStack(ModBlocks.blockHutUniversity), ModJeiRecipeTypes.RESEARCH);
 	}
 
+	@Override
+	public void registerGuiHandlers(IGuiHandlerRegistration registration)
+	{
+		registration.addGhostIngredientHandler(TeachBucketFillingScreen.class, new GhostIngredientHandler<>());
+	}
+
+	@Override
+	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration)
+	{
+		var transferHelper = registration.getTransferHelper();
+		var recipeType = createRecipeType(ModJobs.FLUID_MANAGER.get());
+		registration.addRecipeTransferHandler(new TeachBucketFillingRecipeTransferHandler(transferHelper, recipeType), recipeType);
+	}
+
 	public Stream<IGlobalResearch> getGlobalResearches()
 	{
 		var api = MinecoloniesAPIProxy.getInstance().getGlobalResearchTree();
@@ -56,6 +77,12 @@ public class ModPlugin implements IModPlugin
 		var api = MinecoloniesAPIProxy.getInstance().getGlobalResearchTree();
 		var research = api.getResearch(researchId);
 		return Stream.concat(Stream.of(research), research.getChildren().stream().flatMap(this::getGlobalResearches));
+	}
+
+	public static RecipeType<IGenericRecipe> createRecipeType(JobEntry jobEntry)
+	{
+		var uid = jobEntry.getKey();
+		return RecipeType.create(uid.getNamespace(), uid.getPath(), IGenericRecipe.class);
 	}
 
 	@Override
