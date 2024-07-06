@@ -48,7 +48,7 @@ public class RestrictToolItem extends Item implements IBlockOverlayItem
 		{
 			var stack = player.getMainHandItem();
 			this.setPos1(stack, pos);
-			MessageUtils.format("minecolonies_compatibility.gui.restrict.set1").sendTo(player);
+			MessageUtils.format("minecolonies_compatibility.text.restrict.set1").sendTo(player);
 			this.updateModuleArea(player, stack);
 		}
 
@@ -63,7 +63,7 @@ public class RestrictToolItem extends Item implements IBlockOverlayItem
 			var player = context.getPlayer();
 			var stack = context.getItemInHand();
 			this.setPos2(stack, context.getClickedPos());
-			MessageUtils.format("minecolonies_compatibility.gui.restrict.set2").sendTo(player);
+			MessageUtils.format("minecolonies_compatibility.text.restrict.set2").sendTo(player);
 			this.updateModuleArea(player, stack);
 		}
 
@@ -144,11 +144,11 @@ public class RestrictToolItem extends Item implements IBlockOverlayItem
 
 		if (volume > maxVolume)
 		{
-			MessageUtils.format("minecolonies_compatibility.gui.restrict.too_big", volume, maxVolume).sendTo(player);
+			MessageUtils.format("minecolonies_compatibility.text.restrict.too_big", volume, maxVolume).sendTo(player);
 			return;
 		}
 
-		MessageUtils.format("minecolonies_compatibility.gui.restrict.update", //
+		MessageUtils.format("minecolonies_compatibility.text.restrict.update", //
 				box.minX(), box.maxX(), box.minY(), box.maxY(), box.minZ(), box.maxZ(), //
 				volume, maxVolume).sendTo(player);
 		module.setRestrictArea(pos1, pos2);

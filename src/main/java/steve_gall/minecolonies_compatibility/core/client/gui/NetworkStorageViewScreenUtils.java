@@ -5,8 +5,8 @@ import steve_gall.minecolonies_compatibility.api.common.building.module.INetwork
 
 public class NetworkStorageViewScreenUtils
 {
-	public static final Component TEXT_NOT_LINKED = Component.translatable("minecolonies_compatibility.gui.not_linked");
-	public static final String TEXT_LINKED = "minecolonies_compatibility.gui.linked_pos";
+	public static final Component TEXT_NOT_LINKED = Component.translatable("minecolonies_compatibility.text.not_linked");
+	public static final String TEXT_LINKED = "minecolonies_compatibility.text.linked_pos";
 
 	public static Component getModuleText(INetworkStorageView view)
 	{
