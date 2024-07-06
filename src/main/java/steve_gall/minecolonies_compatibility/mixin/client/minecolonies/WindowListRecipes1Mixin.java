@@ -8,13 +8,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.controls.ItemIcon;
+import com.ldtteam.blockui.views.View;
+import com.lothrazar.cyclic.util.FluidHelpers.FluidAttributes;
 import com.minecolonies.api.util.constant.WindowConstants;
 import com.minecolonies.core.client.gui.modules.WindowListRecipes;
 
+import net.minecraftforge.fluids.FluidStack;
 import steve_gall.minecolonies_compatibility.core.client.gui.ItemIconExtension;
+import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
 import steve_gall.minecolonies_compatibility.module.common.ModuleManager;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CuttingRecipeStorage;
 import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizableRecipeStorage;
+import steve_gall.minecolonies_tweaks.core.client.view.FluidIcon;
 
 @Mixin(targets = "com.minecolonies.core.client.gui.modules.WindowListRecipes$1", remap = false)
 public abstract class WindowListRecipes1Mixin
@@ -37,11 +43,36 @@ public abstract class WindowListRecipes1Mixin
 	@Inject(method = "updateElement", remap = false, at = @At(value = "TAIL"), cancellable = true)
 	private void updateElement(int index, Pane rowPane, CallbackInfo ci) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException
 	{
-		if (ModuleManager.FARMERSDELIGHT.isLoaded())
-		{
-			var accessor = (WindowListRecipesAcccessor) this.getOuter();
+		var accessor = (WindowListRecipesAcccessor) this.getOuter();
 
-			if (accessor.getModule().getRecipes().get(index) instanceof ICustomizableRecipeStorage recipe && recipe.getImpl() instanceof CuttingRecipeStorage cutting)
+		if (accessor.getModule().getRecipes().get(index) instanceof ICustomizableRecipeStorage recipe)
+		{
+			var impl = recipe.getImpl();
+
+			if (impl instanceof BucketFillingRecipeStorage bucketFilling)
+			{
+				if (rowPane instanceof View view)
+				{
+					var id = MineColoniesCompatibility.rl("fluid2").toString();
+					var fluidIcon = view.findPaneOfTypeByID(id, FluidIcon.class);
+					var res2 = view.findPaneOfTypeByID("res2", ItemIcon.class);
+
+					if (fluidIcon == null)
+					{
+						fluidIcon = new FluidIcon();
+						fluidIcon.setID(id);
+						fluidIcon.setPosition(res2.getX(), res2.getY());
+						fluidIcon.setSize(res2.getWidth(), res2.getHeight());
+						fluidIcon.setShowAmount(true);
+						view.addChild(fluidIcon);
+
+						fluidIcon.setFluid(new FluidStack(bucketFilling.getFluid(), FluidAttributes.BUCKET_VOLUME));
+					}
+
+				}
+
+			}
+			else if (ModuleManager.FARMERSDELIGHT.isLoaded() && impl instanceof CuttingRecipeStorage cutting)
 			{
 				var displayStacks = recipe.getRecipeType().getOutputDisplayStacks();
 				var outputIndex = (accessor.getLifeCount() / WindowConstants.LIFE_COUNT_DIVIDER) % displayStacks.size();

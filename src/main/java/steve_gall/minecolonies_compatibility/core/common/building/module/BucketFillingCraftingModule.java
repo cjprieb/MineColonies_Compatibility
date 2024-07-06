@@ -1,0 +1,254 @@
+package steve_gall.minecolonies_compatibility.core.common.building.module;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import com.lothrazar.cyclic.util.FluidHelpers.FluidAttributes;
+import com.minecolonies.api.colony.IColonyManager;
+import com.minecolonies.api.colony.jobs.registry.JobEntry;
+import com.minecolonies.api.colony.requestsystem.token.IToken;
+import com.minecolonies.api.crafting.IGenericRecipe;
+import com.minecolonies.api.crafting.IRecipeStorage;
+import com.minecolonies.api.crafting.registry.CraftingType;
+import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.LevelWriter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+import net.minecraftforge.registries.ForgeRegistries;
+import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractCraftingModuleWithExternalWorkingBlocks;
+import steve_gall.minecolonies_compatibility.api.common.building.module.ICraftingResultListenerModule;
+import steve_gall.minecolonies_compatibility.api.common.entity.pathfinding.PathJobFindWorkingBlocks;
+import steve_gall.minecolonies_compatibility.api.common.entity.pathfinding.WorkingBlocksPathResult;
+import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingCraftingType;
+import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
+import steve_gall.minecolonies_compatibility.core.common.init.ModCraftingTypes;
+import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizableRecipeStorage;
+
+public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExternalWorkingBlocks implements ICraftingResultListenerModule
+{
+	public BucketFillingCraftingModule(String id, JobEntry jobEntry)
+	{
+		super(jobEntry);
+	}
+
+	@Override
+	public boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state)
+	{
+		var blockEntity = level.getBlockEntity(pos);
+
+		if (blockEntity != null)
+		{
+			var capability = blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER);
+			var fluidHandler = capability != null ? capability.orElse(null) : null;
+
+			if (fluidHandler != null)
+			{
+				return true;
+			}
+
+		}
+
+		if (state.getBlock() instanceof LiquidBlock)
+		{
+			if (state.getFluidState().isSource())
+			{
+				return true;
+			}
+
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean needWorkingBlock(@NotNull IRecipeStorage recipeStorage)
+	{
+		return toRecipe(recipeStorage) != null;
+	}
+
+	@Override
+	public @NotNull BlockPos getParticlePosition(@NotNull BlockPos pos)
+	{
+		return pos;
+	}
+
+	@Override
+	public @NotNull String getId()
+	{
+		return ModCraftingTypes.BUCKET_FILLING.getId().getPath();
+	}
+
+	@Override
+	public Set<CraftingType> getSupportedCraftingTypes()
+	{
+		return Set.of(ModCraftingTypes.BUCKET_FILLING.get());
+	}
+
+	@Override
+	public boolean isRecipeCompatible(@NotNull IGenericRecipe recipe)
+	{
+		return true;
+	}
+
+	@Override
+	public @NotNull Component getWorkingBlockNotFoundMessage()
+	{
+		return Component.translatable("minecolonies_compatibility.interaction.no_working_block");
+	}
+
+	@Override
+	public @NotNull Component getWorkingBlockNotFoundMessage(@NotNull IRecipeStorage recipeStorage)
+	{
+		var recipe = toRecipe(recipeStorage);
+
+		if (recipe != null)
+		{
+			return Component.translatable("minecolonies_compatibility.interaction.no_fluid_source", new FluidStack(recipe.getFluid(), 1).getDisplayName());
+		}
+
+		return this.getWorkingBlockNotFoundMessage();
+	}
+
+	@Override
+	public @NotNull WorkingBlocksPathResult createPathResult(@Nullable AbstractEntityCitizen citizen)
+	{
+		return new WorkingBlocksPathResult(this)
+		{
+			@Override
+			public boolean test(@NotNull PathJobFindWorkingBlocks<?> job, @NotNull BlockPos.MutableBlockPos pos)
+			{
+				return super.test(job, pos) || super.test(job, pos.setY(pos.getY() - 1));
+			}
+		};
+	}
+
+	@Override
+	public boolean canBlockRecipeWorking(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull IRecipeStorage recipeStorage)
+	{
+		var recipe = toRecipe(recipeStorage);
+
+		if (recipe != null)
+		{
+			return this.drain(level, pos, state, recipe.getFluid(), true);
+		}
+
+		return false;
+	}
+
+	@Override
+	public void onCrafted(@NotNull AbstractEntityCitizen worker, @NotNull BlockPos workingPos, @NotNull IRecipeStorage recipeStorage, boolean result)
+	{
+		if (result)
+		{
+			var recipe = toRecipe(recipeStorage);
+
+			if (recipe != null)
+			{
+				var level = worker.level();
+				this.drain(level, workingPos, level.getBlockState(workingPos), recipe.getFluid(), false);
+			}
+
+		}
+
+	}
+
+	public boolean drain(LevelReader level, BlockPos pos, BlockState state, Fluid fluid, boolean simulate)
+	{
+		var blockEntity = level.getBlockEntity(pos);
+
+		if (blockEntity != null)
+		{
+			for (var direction : Direction.values())
+			{
+				var capability = blockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER, direction);
+				var fluidHandler = capability != null ? capability.orElse(null) : null;
+
+				if (fluidHandler != null)
+				{
+					var stack = new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME);
+					var drained = fluidHandler.drain(stack, simulate ? FluidAction.SIMULATE : FluidAction.EXECUTE);
+					return drained.getAmount() >= stack.getAmount();
+				}
+
+			}
+
+		}
+
+		if (state.getBlock() instanceof LiquidBlock liquid)
+		{
+			if (state.getFluidState().isSource() && liquid.getFluid() == fluid)
+			{
+				if (!simulate)
+				{
+					((LevelWriter) level).setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
+				}
+
+				return true;
+			}
+
+		}
+
+		return false;
+	}
+
+	@Override
+	public @NotNull List<IGenericRecipe> getAdditionalRecipesForDisplayPurposesOnly(Level level)
+	{
+		var recipes = new ArrayList<IGenericRecipe>();
+
+		for (var fluid : ForgeRegistries.FLUIDS.getValues())
+		{
+			if (!fluid.isSource(fluid.defaultFluidState()))
+			{
+				continue;
+			}
+
+			var recipe = BucketFillingCraftingType.parse(new ItemStack(fluid.getBucket()));
+
+			if (recipe != null)
+			{
+				recipes.add(recipe.getGenericRecipe());
+			}
+
+		}
+
+		return recipes;
+	}
+
+	public static BucketFillingRecipeStorage toRecipe(IToken<?> token)
+	{
+		return toRecipe(IColonyManager.getInstance().getRecipeManager().getRecipe(token));
+	}
+
+	public static BucketFillingRecipeStorage toRecipe(IRecipeStorage recipeStorage)
+	{
+		if (recipeStorage instanceof ICustomizableRecipeStorage crs)
+		{
+			if (crs.getImpl() instanceof BucketFillingRecipeStorage recipe)
+			{
+				return recipe;
+			}
+
+		}
+
+		return null;
+	}
+
+}

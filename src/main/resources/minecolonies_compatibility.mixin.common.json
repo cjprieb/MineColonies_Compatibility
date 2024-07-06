@@ -23,6 +23,7 @@
 		"minecolonies.JobEntryMixin",
 		"minecolonies.KnightCombatAIMixin",
 		"minecolonies.PrivateCraftingTeachingTransferHandlerMixin",
+		"minecolonies.PrivateWorkerCraftingRequestResolverMixin",
 		"minecolonies.RangerCombatAIMixin",
 		"minecolonies.RecipeStorageMixin",
 		"minecolonies.TargetAIMixin",

@@ -13,12 +13,16 @@
 	"minecolonies_compatibility.job.orchardist": "과수재배꾼",
 	"minecolonies_compatibility:orchardist.job.desc": "과일, 나무에 열린 작물을 수확합니다.",
 	"minecolonies_compatibility:orchardist.skills.desc": "수확 속도와 걷는 속도에 영향을 미칩니다.",
+	"minecolonies_compatibility.job.fluid_manager": "유체 관리인",
+	"minecolonies_compatibility:fluid_manager.job.desc": "양동이에 유체를 채우고 가마솥에서 용암을 퍼냅니다.",
+	"minecolonies_compatibility:fluid_manager.skills.desc": "제작 속도와 작업 속도에 영향을 줍니다.",
 	"minecolonies_compatibility.job.farmers_cook": "파머스 요리사",
 	"minecolonies_compatibility:farmers_cook.job.desc": "Farmer's Delight 모드의 조리용 냄비를 사용한 요리를 하며, 시민들에게 음식을 나눠줍니다.",
 	"minecolonies_compatibility:farmers_cook.skills.desc": "요리 속도에 영향을 줍니다.",
 	
 	"_comment_jobs_jei_descs": "JEI 직업 설명",
 	"com.minecolonies.coremod.jei.orchardist": "과일, 나무에 열린 작물을 수확합니다.",
+	"com.minecolonies.coremod.jei.fluid_manager": "양동이에 유체를 채우고 가마솥에서 용암을 퍼냅니다.",
 	"com.minecolonies.coremod.jei.farmers_cook": "Farmer's Delight 모드의 조리용 냄비를 사용한 요리를 하며, 시민들에게 음식을 나눠줍니다.",
 	
 	"_comment_requests": "요청",
@@ -54,6 +58,8 @@
 	"_comment_modules": "모듈",
 	"com.minecolonies.coremod.gui.workerhuts.fruitlist_blacklist": "과일 블랙리스트",
 	"com.minecolonies.coremod.gui.workerhuts.network_storage": "네트워크 저장소",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.bucket_filling": "양동이를 채우는 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.fluid_manager_cauldron_restrict": "용암 가마솥",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "식칼로 써는 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "냄비로 조리하는 제작법",
 	
