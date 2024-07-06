@@ -4,7 +4,6 @@
 	"minVersion": "0.8.5",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"minecolonies.AbstractModuleWindowMixin",
 		"minecolonies.SettingsModuleViewMixin",
 		"minecolonies.WindowListRecipes1Mixin",
 		"minecolonies.WindowListRecipesAcccessor",
