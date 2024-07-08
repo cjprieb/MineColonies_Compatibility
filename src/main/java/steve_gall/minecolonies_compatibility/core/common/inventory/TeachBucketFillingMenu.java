@@ -11,7 +11,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
-import steve_gall.minecolonies_compatibility.api.common.inventory.GhostSlot;
 import steve_gall.minecolonies_compatibility.api.common.inventory.IMenuRecipeValidator;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingCraftingType;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
@@ -43,9 +42,7 @@ public class TeachBucketFillingMenu extends TeachRecipeMenu<BucketFillingRecipeS
 		this.addInventorySlots(INVENTORY_X, INVENTORY_Y);
 
 		this.inputContainer = new TeachInputContainer(this, 1);
-		this.inputSlots.add(this.addSlot(new GhostSlot(this.inputContainer, 0, RESULT_X, RESULT_Y)
-		{
-		}));
+		this.inputSlots.add(this.addSlot(new TeachInputSlot(this.inputContainer, 0, RESULT_X, RESULT_Y)));
 		this.resultContainer = new TeachInputContainer(this, 0);
 
 	}
