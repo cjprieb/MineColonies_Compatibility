@@ -27,9 +27,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.registries.ForgeRegistries;
 import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractCraftingModuleWithExternalWorkingBlocks;
@@ -120,7 +118,7 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 
 		if (recipe != null)
 		{
-			return Component.translatable("minecolonies_compatibility.interaction.no_fluid_source", new FluidStack(recipe.getFluid(), 1).getDisplayName());
+			return Component.translatable("minecolonies_compatibility.interaction.no_fluid_source", recipe.getFluidStack(FluidAttributes.BUCKET_VOLUME).getDisplayName());
 		}
 
 		return this.getWorkingBlockNotFoundMessage();
@@ -146,7 +144,7 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 
 		if (recipe != null)
 		{
-			return this.drain(level, pos, state, recipe.getFluid(), true);
+			return this.drain(level, pos, state, recipe, true);
 		}
 
 		return false;
@@ -162,14 +160,14 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 			if (recipe != null)
 			{
 				var level = worker.level();
-				this.drain(level, workingPos, level.getBlockState(workingPos), recipe.getFluid(), false);
+				this.drain(level, workingPos, level.getBlockState(workingPos), recipe, false);
 			}
 
 		}
 
 	}
 
-	public boolean drain(LevelReader level, BlockPos pos, BlockState state, Fluid fluid, boolean simulate)
+	public boolean drain(LevelReader level, BlockPos pos, BlockState state, BucketFillingRecipeStorage recipe, boolean simulate)
 	{
 		var blockEntity = level.getBlockEntity(pos);
 
@@ -182,7 +180,7 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 
 				if (fluidHandler != null)
 				{
-					var stack = new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME);
+					var stack = recipe.getFluidStack(FluidAttributes.BUCKET_VOLUME);
 					var drained = fluidHandler.drain(stack, simulate ? FluidAction.SIMULATE : FluidAction.EXECUTE);
 					return drained.getAmount() >= stack.getAmount();
 				}
@@ -191,9 +189,9 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 
 		}
 
-		if (state.getBlock() instanceof LiquidBlock liquid)
+		if (recipe.getFluidTag() == null && state.getBlock() instanceof LiquidBlock liquid)
 		{
-			if (state.getFluidState().isSource() && liquid.getFluid() == fluid)
+			if (state.getFluidState().isSource() && liquid.getFluid() == recipe.getFluid())
 			{
 				if (!simulate)
 				{

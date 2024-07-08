@@ -13,7 +13,6 @@ import com.lothrazar.cyclic.util.FluidHelpers.FluidAttributes;
 import com.minecolonies.api.util.constant.WindowConstants;
 import com.minecolonies.core.client.gui.modules.WindowListRecipes;
 
-import net.minecraftforge.fluids.FluidStack;
 import steve_gall.minecolonies_compatibility.core.client.gui.ItemIconExtension;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
@@ -55,20 +54,20 @@ public abstract class WindowListRecipes1Mixin
 				{
 					var id = MineColoniesCompatibility.rl("fluid2").toString();
 					var fluidIcon = view.findPaneOfTypeByID(id, FluidIcon.class);
-					var res2 = view.findPaneOfTypeByID("res2", ItemIcon.class);
 
 					if (fluidIcon == null)
 					{
 						fluidIcon = new FluidIcon();
 						fluidIcon.setID(id);
+						fluidIcon.setShowAmount(true);
+
+						var res2 = view.findPaneOfTypeByID("res2", ItemIcon.class);
 						fluidIcon.setPosition(res2.getX(), res2.getY());
 						fluidIcon.setSize(res2.getWidth(), res2.getHeight());
-						fluidIcon.setShowAmount(true);
 						view.addChild(fluidIcon);
-
-						fluidIcon.setFluid(new FluidStack(bucketFilling.getFluid(), FluidAttributes.BUCKET_VOLUME));
 					}
 
+					fluidIcon.setFluid(bucketFilling.getFluidStack(FluidAttributes.BUCKET_VOLUME));
 				}
 
 			}
