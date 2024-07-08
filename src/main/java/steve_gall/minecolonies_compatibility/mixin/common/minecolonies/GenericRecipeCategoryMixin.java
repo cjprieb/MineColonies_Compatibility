@@ -59,7 +59,7 @@ public abstract class GenericRecipeCategoryMixin extends JobBasedRecipeCategory<
 		if (recipe instanceof BucketFillingGenericRecipe fillingRecipe)
 		{
 			var slot = builder.addSlot(RecipeIngredientRole.INPUT, this.outputSlotX, CITIZEN_Y + 1);
-			slot.addFluidStack(fillingRecipe.getFluid(), FluidAttributes.BUCKET_VOLUME);
+			slot.addFluidStack(fillingRecipe.getFluid(), FluidAttributes.BUCKET_VOLUME, fillingRecipe.getFluidTag());
 			slot.setFluidRenderer(FluidAttributes.BUCKET_VOLUME, false, 16, 16);
 			slot.setBackground(this.slot, -1, -1);
 		}

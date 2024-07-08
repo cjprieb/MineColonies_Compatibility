@@ -12,6 +12,7 @@ import com.minecolonies.api.util.OptionalPredicate;
 import com.minecolonies.api.util.constant.IToolType;
 import com.minecolonies.api.util.constant.ToolType;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,15 +27,17 @@ public class BucketFillingGenericRecipe implements IGenericRecipe
 {
 	private final ItemStack emptyBucket;
 	private final Fluid fluid;
+	private final CompoundTag fluidTag;
 	private final ItemStack filledBucket;
 
 	private final List<ItemStack> allMultiOutputs;
 	private final List<List<ItemStack>> inputs;
 
-	public BucketFillingGenericRecipe(ItemStack emptyBucket, Fluid fluid, ItemStack filledBucket)
+	public BucketFillingGenericRecipe(ItemStack emptyBucket, Fluid fluid, CompoundTag fluidTag, ItemStack filledBucket)
 	{
 		this.emptyBucket = emptyBucket;
 		this.fluid = fluid;
+		this.fluidTag = fluidTag;
 		this.filledBucket = filledBucket;
 
 		this.allMultiOutputs = Collections.singletonList(this.getPrimaryOutput());
@@ -59,6 +62,11 @@ public class BucketFillingGenericRecipe implements IGenericRecipe
 	public Fluid getFluid()
 	{
 		return this.fluid;
+	}
+
+	public CompoundTag getFluidTag()
+	{
+		return this.fluidTag;
 	}
 
 	public ItemStack getFilledBucket()

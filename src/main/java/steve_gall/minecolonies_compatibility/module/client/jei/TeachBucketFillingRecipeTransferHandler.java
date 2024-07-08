@@ -57,7 +57,7 @@ public class TeachBucketFillingRecipeTransferHandler implements IRecipeTransferH
 		{
 			if (doTransfer)
 			{
-				var r = new BucketFillingRecipeStorage(fillingRecipe.getEmptyBucket(), fillingRecipe.getFluid(), fillingRecipe.getFilledBucket());
+				var r = new BucketFillingRecipeStorage(fillingRecipe.getEmptyBucket(), fillingRecipe.getFluid(), fillingRecipe.getFluidTag(), fillingRecipe.getFilledBucket());
 				MineColoniesCompatibility.network().sendToServer(new JEIRecipeTransferMessage<>(menu, r, new CompoundTag()));
 			}
 

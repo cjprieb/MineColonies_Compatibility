@@ -40,7 +40,8 @@ public class BucketFillingCraftingType extends CraftingType
 
 		if (emptyResult.isSuccess() && emptyBucket.getItem() == Items.BUCKET)
 		{
-			var fluid = tank.getFluid().getFluid();
+			var fluidStack = tank.getFluid();
+			var fluid = fluidStack.getFluid();
 
 			if (!fluid.isSame(Fluids.EMPTY) && fluid.isSource(fluid.defaultFluidState()))
 			{
@@ -48,7 +49,7 @@ public class BucketFillingCraftingType extends CraftingType
 
 				if (fillResult.isSuccess() && ItemStack.matches(fillResult.getResult(), filledBucket))
 				{
-					return new BucketFillingRecipeStorage(emptyBucket, fluid, filledBucket);
+					return new BucketFillingRecipeStorage(emptyBucket, fluid, fluidStack.getTag(), filledBucket);
 				}
 
 			}
