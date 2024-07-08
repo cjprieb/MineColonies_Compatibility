@@ -35,6 +35,12 @@ public abstract class GenericedRecipeStorage<GENERIC extends IGenericRecipe> imp
 	@Override
 	public List<ItemStack> getAlternateOutputs()
 	{
+		return Collections.emptyList();
+	}
+
+	@NotNull
+	protected List<ItemStack> getAdditionalOutputs()
+	{
 		return this.getGenericRecipe().getAdditionalOutputs();
 	}
 
@@ -42,7 +48,7 @@ public abstract class GenericedRecipeStorage<GENERIC extends IGenericRecipe> imp
 	public List<ItemStack> getSecondaryOutputs()
 	{
 		var list = new ArrayList<ItemStack>();
-		list.addAll(this.getGenericRecipe().getAdditionalOutputs());
+		list.addAll(this.getAdditionalOutputs());
 		list.addAll(ItemStorageHelper.getCraftingRemainings(this.getInput()));
 		return Collections.unmodifiableList(list);
 	}
