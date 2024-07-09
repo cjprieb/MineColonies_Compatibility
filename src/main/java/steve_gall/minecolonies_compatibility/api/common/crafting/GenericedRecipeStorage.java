@@ -1,6 +1,5 @@
 package steve_gall.minecolonies_compatibility.api.common.crafting;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import com.minecolonies.api.util.constant.IToolType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import steve_gall.minecolonies_compatibility.core.common.crafting.ItemStorageHelper;
 import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizedRecipeStorage;
 
 public abstract class GenericedRecipeStorage<GENERIC extends IGenericRecipe> implements ICustomizedRecipeStorage
@@ -38,19 +36,10 @@ public abstract class GenericedRecipeStorage<GENERIC extends IGenericRecipe> imp
 		return Collections.emptyList();
 	}
 
-	@NotNull
-	protected List<ItemStack> getAdditionalOutputs()
-	{
-		return this.getGenericRecipe().getAdditionalOutputs();
-	}
-
 	@Override
 	public List<ItemStack> getSecondaryOutputs()
 	{
-		var list = new ArrayList<ItemStack>();
-		list.addAll(this.getAdditionalOutputs());
-		list.addAll(ItemStorageHelper.getCraftingRemainings(this.getInput()));
-		return Collections.unmodifiableList(list);
+		return this.getGenericRecipe().getAdditionalOutputs();
 	}
 
 	@Override

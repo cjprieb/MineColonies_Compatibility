@@ -20,6 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import steve_gall.minecolonies_compatibility.core.common.crafting.IngredientHelper;
+import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
@@ -74,7 +75,53 @@ public class CookingGenericRecipe implements IGenericRecipe
 	@Override
 	public @NotNull List<ItemStack> getAdditionalOutputs()
 	{
-		return Collections.emptyList();
+		var list = new ArrayList<ItemStack>();
+
+		for (var input : this.input)
+		{
+			var allRemaining = ItemStack.EMPTY;
+
+			for (var stack : input)
+			{
+				var remain = getCraftingRemainingStack(stack);
+
+				if (remain.isEmpty() || (!allRemaining.isEmpty() && !ItemStack.matches(allRemaining, remain)))
+				{
+					allRemaining = ItemStack.EMPTY;
+					break;
+				}
+				else
+				{
+					allRemaining = remain;
+				}
+
+			}
+
+			if (!allRemaining.isEmpty())
+			{
+				list.add(allRemaining);
+			}
+
+		}
+
+		return list;
+	}
+
+	public static ItemStack getCraftingRemainingStack(ItemStack stack)
+	{
+		if (stack.hasCraftingRemainingItem())
+		{
+			return stack.getCraftingRemainingItem();
+		}
+		else if (CookingPotBlockEntity.INGREDIENT_REMAINDER_OVERRIDES.containsKey(stack.getItem()))
+		{
+			return CookingPotBlockEntity.INGREDIENT_REMAINDER_OVERRIDES.get(stack.getItem()).getDefaultInstance();
+		}
+		else
+		{
+			return ItemStack.EMPTY;
+		}
+
 	}
 
 	@Override

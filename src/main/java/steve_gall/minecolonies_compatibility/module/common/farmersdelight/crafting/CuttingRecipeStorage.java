@@ -75,7 +75,6 @@ public class CuttingRecipeStorage extends GenericedRecipeStorage<CuttingGenericR
 
 		}
 
-		list.addAll(ItemStorageHelper.getCraftingRemainings(this.ingreidnts));
 		return list;
 	}
 

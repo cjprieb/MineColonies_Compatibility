@@ -93,6 +93,25 @@ public class CookingRecipeStorage extends GenericedRecipeStorage<CookingGenericR
 		return input;
 	}
 
+	@Override
+	public List<ItemStack> getSecondaryOutputs()
+	{
+		var list = new ArrayList<ItemStack>();
+
+		for (var storage : this.ingreidnts)
+		{
+			var stack = CookingGenericRecipe.getCraftingRemainingStack(storage.getItemStack());
+
+			if (!stack.isEmpty())
+			{
+				list.add(stack);
+			}
+
+		}
+
+		return list;
+	}
+
 	public List<ItemStorage> getIngredients()
 	{
 		return this.ingreidnts;
