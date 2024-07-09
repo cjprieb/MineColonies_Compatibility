@@ -18,11 +18,15 @@ public class ItemStackHelper
 
 		for (var stack : list)
 		{
-			var craftingRemaining = stack.getCraftingRemainingItem();
-
-			if (!craftingRemaining.isEmpty())
+			if (stack.hasCraftingRemainingItem())
 			{
-				craftingRemainings.add(craftingRemaining);
+				var craftingRemaining = stack.getCraftingRemainingItem();
+
+				if (!craftingRemaining.isEmpty())
+				{
+					craftingRemainings.add(craftingRemaining);
+				}
+
 			}
 
 		}
