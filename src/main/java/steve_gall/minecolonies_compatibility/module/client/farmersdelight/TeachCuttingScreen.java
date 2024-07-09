@@ -34,7 +34,7 @@ public class TeachCuttingScreen extends TeachRecipeScreen<TeachCuttingMenu, Cutt
 	@Override
 	protected ICustomizedRecipeStorage createRecipeStorage(CuttingBoardRecipe recipe, List<ItemStorage> input)
 	{
-		var results = recipe.getRollableResults().stream().map(CuttingChanceResult::new).toList();
+		var results = this.menu.getResults().stream().map(CuttingChanceResult::new).toList();
 		return new CuttingRecipeStorage(recipe.getId(), input, results, this.menu.getToolType());
 	}
 

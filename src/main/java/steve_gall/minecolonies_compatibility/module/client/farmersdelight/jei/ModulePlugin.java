@@ -5,7 +5,6 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.resources.ResourceLocation;
-import steve_gall.minecolonies_compatibility.api.client.jei.GhostIngredientHandler;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.TeachCookingScreen;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.TeachCuttingScreen;
@@ -23,10 +22,7 @@ public class ModulePlugin implements IModPlugin
 			return;
 		}
 
-		registration.addGhostIngredientHandler(TeachCuttingScreen.class, new GhostIngredientHandler<>());
 		registration.addRecipeClickArea(TeachCuttingScreen.class, 40, 36, 22, 15, FDRecipeTypes.CUTTING);
-
-		registration.addGhostIngredientHandler(TeachCookingScreen.class, new GhostIngredientHandler<>());
 		registration.addRecipeClickArea(TeachCookingScreen.class, 91, 26, 22, 15, FDRecipeTypes.COOKING);
 	}
 

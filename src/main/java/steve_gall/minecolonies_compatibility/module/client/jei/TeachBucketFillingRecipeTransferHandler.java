@@ -2,32 +2,25 @@ package steve_gall.minecolonies_compatibility.module.client.jei;
 
 import java.util.Optional;
 
-import org.jetbrains.annotations.Nullable;
-
 import com.minecolonies.api.crafting.IGenericRecipe;
 
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.transfer.IRecipeTransferError;
-import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
-import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingGenericRecipe;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachBucketFillingMenu;
-import steve_gall.minecolonies_compatibility.core.common.network.message.JEIRecipeTransferMessage;
 
-public class TeachBucketFillingRecipeTransferHandler implements IRecipeTransferHandler<TeachBucketFillingMenu, IGenericRecipe>
+public class TeachBucketFillingRecipeTransferHandler extends TeachRecipeTransferHandler<TeachBucketFillingMenu, BucketFillingRecipeStorage, IGenericRecipe>
 {
-	private final IRecipeTransferHandlerHelper recipeTransferHandlerHelper;
 	private final RecipeType<IGenericRecipe> recipeType;
 
 	public TeachBucketFillingRecipeTransferHandler(IRecipeTransferHandlerHelper recipeTransferHandlerHelper, RecipeType<IGenericRecipe> recipeType)
 	{
-		this.recipeTransferHandlerHelper = recipeTransferHandlerHelper;
+		super(recipeTransferHandlerHelper);
 		this.recipeType = recipeType;
 	}
 
@@ -50,21 +43,23 @@ public class TeachBucketFillingRecipeTransferHandler implements IRecipeTransferH
 	}
 
 	@Override
-	@Nullable
-	public IRecipeTransferError transferRecipe(TeachBucketFillingMenu menu, IGenericRecipe recipe, IRecipeSlotsView recipeSlots, Player player, boolean maxTransfer, boolean doTransfer)
+	protected BucketFillingRecipeStorage getRecipe(TeachBucketFillingMenu menu, IGenericRecipe categoryRecipe, IRecipeSlotsView recipeSlots, Player player)
 	{
-		if (recipe instanceof BucketFillingGenericRecipe fillingRecipe)
+		if (categoryRecipe instanceof BucketFillingGenericRecipe fillingRecipe)
 		{
-			if (doTransfer)
-			{
-				var r = new BucketFillingRecipeStorage(fillingRecipe.getEmptyBucket(), fillingRecipe.getFluid(), fillingRecipe.getFluidTag(), fillingRecipe.getFilledBucket());
-				MineColoniesCompatibility.network().sendToServer(new JEIRecipeTransferMessage<>(menu, r, new CompoundTag()));
-			}
-
+			return new BucketFillingRecipeStorage(fillingRecipe.getEmptyBucket(), fillingRecipe.getFluid(), fillingRecipe.getFluidTag(), fillingRecipe.getFilledBucket());
+		}
+		else
+		{
 			return null;
 		}
 
-		return this.recipeTransferHandlerHelper.createInternalError();
+	}
+
+	@Override
+	protected void serializePayload(TeachBucketFillingMenu menu, BucketFillingRecipeStorage recipe, IRecipeSlotsView recipeSlots, Player player, CompoundTag tag)
+	{
+
 	}
 
 }

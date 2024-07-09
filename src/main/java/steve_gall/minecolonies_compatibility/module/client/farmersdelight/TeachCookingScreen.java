@@ -32,8 +32,10 @@ public class TeachCookingScreen extends TeachRecipeScreen<TeachCookingMenu, Cook
 	@Override
 	protected ICustomizedRecipeStorage createRecipeStorage(CookingPotRecipe recipe, List<ItemStorage> input)
 	{
-		var output = recipe.getResultItem();
-		return new CookingRecipeStorage(recipe.getId(), input, new ItemStorage(recipe.getOutputContainer()), output);
+		var resultContainer = this.menu.getResultContainer();
+		var output = resultContainer.getItem(0);
+		var container = resultContainer.getItem(1);
+		return new CookingRecipeStorage(recipe.getId(), input, new ItemStorage(container), output);
 	}
 
 	@Override

@@ -48,6 +48,7 @@
 	"minecolonies_compatibility.text.pos": "위치: %1$s, %2$s, %3$s",
 	"minecolonies_compatibility.text.linked_pos": "연결됨: : %1$s, %2$s, %3$s",
 	"minecolonies_compatibility.text.not_linked": "연결 안됨",
+	"minecolonies_compatibility.text.recipe_not_found": "제작법을 찾을 수 없음",
 	"minecolonies_compatibility.text.unsupported_tool": "지원되지 않는 도구",
 	"minecolonies_compatibility.text.restrict": "구역 모드",
 	"minecolonies_compatibility.text.restrict.set1": "작업 구역의 첫 번째 위치를 설정했습니다.",

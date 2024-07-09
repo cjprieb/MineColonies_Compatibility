@@ -34,9 +34,9 @@ public class TeachBucketFillingOpenMessage extends ModuleMenuOpenMessage
 	}
 
 	@Override
-	protected void toBuffer(FriendlyByteBuf buffer)
+	protected void toBuffer(FriendlyByteBuf buffer, IBuildingModule module)
 	{
-		super.toBuffer(buffer);
+		super.toBuffer(buffer, module);
 	}
 
 }
