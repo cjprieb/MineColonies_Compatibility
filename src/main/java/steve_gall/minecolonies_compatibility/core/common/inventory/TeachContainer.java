@@ -7,12 +7,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 
-public class TeachInputContainer implements Container
+public class TeachContainer implements Container
 {
 	private final NonNullList<ItemStack> items;
 	private final AbstractContainerMenu menu;
 
-	public TeachInputContainer(AbstractContainerMenu menu, int count)
+	public TeachContainer(AbstractContainerMenu menu, int count)
 	{
 		this.items = NonNullList.withSize(count, ItemStack.EMPTY);
 		this.menu = menu;
@@ -54,27 +54,19 @@ public class TeachInputContainer implements Container
 	@Override
 	public ItemStack removeItem(int slot, int amount)
 	{
-		var itemstack = ContainerHelper.removeItem(this.items, slot, amount);
-
-		if (!itemstack.isEmpty())
-		{
-			this.menu.slotsChanged(this);
-		}
-
-		return itemstack;
+		return ContainerHelper.removeItem(this.items, slot, amount);
 	}
 
 	@Override
 	public void setItem(int slot, ItemStack stack)
 	{
 		this.items.set(slot, stack);
-		this.menu.slotsChanged(this);
 	}
 
 	@Override
 	public void setChanged()
 	{
-
+		this.menu.slotsChanged(this);
 	}
 
 	@Override

@@ -83,6 +83,11 @@ public class CookingRecipeStorage extends GenericedRecipeStorage<CookingGenericR
 		return ID;
 	}
 
+	public ResourceLocation getRecipeId()
+	{
+		return this.recipeId;
+	}
+
 	@Override
 	public List<ItemStorage> getInput()
 	{

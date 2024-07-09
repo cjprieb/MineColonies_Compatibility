@@ -71,7 +71,7 @@ public abstract class ModuleMenuOpenMessage extends BuildingModuleMessage
 				return ModuleMenuOpenMessage.this.createMenu(windowId, inventory, player, module);
 			}
 
-		}, this::toBuffer);
+		}, buffer -> this.toBuffer(buffer, module));
 	}
 
 	protected Component getDisplayName()
@@ -81,7 +81,7 @@ public abstract class ModuleMenuOpenMessage extends BuildingModuleMessage
 
 	protected abstract AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player, IBuildingModule module);
 
-	protected void toBuffer(FriendlyByteBuf buffer)
+	protected void toBuffer(FriendlyByteBuf buffer, IBuildingModule module)
 	{
 		this.getModulePos().serializeBuffer(buffer);
 	}

@@ -48,6 +48,7 @@
 	"minecolonies_compatibility.text.pos": "Pos: %1$s, %2$s, %3$s",
 	"minecolonies_compatibility.text.linked_pos": "Linked with: %1$s, %2$s, %3$s",
 	"minecolonies_compatibility.text.not_linked": "Not linked",
+	"minecolonies_compatibility.text.recipe_not_found": "Recipe Not Found",
 	"minecolonies_compatibility.text.unsupported_tool": "Unsupported Tool",
 	"minecolonies_compatibility.text.restrict": "Zoning Mode",
 	"minecolonies_compatibility.text.restrict.set1": "Setted first position of working area.",

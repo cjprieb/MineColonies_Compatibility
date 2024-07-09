@@ -3,15 +3,16 @@ package steve_gall.minecolonies_compatibility.core.common.inventory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.crafting.registry.CraftingType;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -28,7 +29,9 @@ import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRe
 
 public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IItemGhostMenu, IRecipeTransferableMenu<RECIPE>
 {
-	protected TeachInputContainer inputContainer;
+	public static final Component TEXT_RECIPE_NOT_FOUND = Component.translatable("minecolonies_compatibility.text.recipe_not_found");
+
+	protected TeachContainer inputContainer;
 	protected List<Slot> inputSlots;
 
 	protected Container resultContainer;
@@ -81,10 +84,7 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	@Override
 	public void onRecipeTransfer(@NotNull RECIPE recipe, @NotNull CompoundTag payload)
 	{
-		for (var slot : this.inputSlots)
-		{
-			slot.set(ItemStack.EMPTY);
-		}
+		this.inputContainer.clearContent();
 
 		this.setRecipe(recipe);
 	}
@@ -118,36 +118,27 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 
 	public void setRecipe(RECIPE recipe)
 	{
-		var prev = this.recipe;
+		this.recipe = recipe;
+		this.onRecipeChanged();
 
-		if (recipe != null && this.testRecipe(recipe))
+		if (this.inventory.player instanceof ServerPlayer player)
 		{
-			this.recipe = recipe;
-		}
-		else
-		{
-			this.recipe = null;
-		}
-
-		var next = this.recipe;
-
-		if (!Objects.equals(prev, next))
-		{
-			this.onRecipeChanged();
-
-			if (this.inventory.player instanceof ServerPlayer player)
-			{
-				var tag = next != null ? this.getRecipeValidator().serialize(next) : null;
-				MineColoniesCompatibility.network().sendToPlayer(new TeachRecipeMenuNewResultMessage(tag), player);
-			}
-
+			var tag = recipe != null ? this.getRecipeValidator().serialize(recipe) : null;
+			MineColoniesCompatibility.network().sendToPlayer(new TeachRecipeMenuNewResultMessage(tag), player);
 		}
 
 	}
 
-	public boolean testRecipe(RECIPE recipe)
+	@Nullable
+	public Component getCurrentError()
 	{
-		return true;
+		return this.recipe != null ? this.getRecipeError(this.recipe) : TEXT_RECIPE_NOT_FOUND;
+	}
+
+	@Nullable
+	public Component getRecipeError(@NotNull RECIPE recipe)
+	{
+		return null;
 	}
 
 	@Override
@@ -219,7 +210,7 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		return true;
 	}
 
-	public TeachInputContainer getInputContainer()
+	public TeachContainer getInputContainer()
 	{
 		return this.inputContainer;
 	}

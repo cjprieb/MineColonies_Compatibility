@@ -24,11 +24,16 @@ import steve_gall.minecolonies_tweaks.core.common.config.MineColoniesTweaksConfi
 
 public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RECIPE> extends AbstractContainerScreen<MENU> implements CloseableWindowExtension
 {
+	private static final Component TEXT_WARNING_MAXIMUM_NUMBER_RECIPES = Component.translatable(TranslationConstants.WARNING_MAXIMUM_NUMBER_RECIPES);
+	private static final Component TEXT_DONE = Component.translatable(BaseGameTranslationConstants.BASE_GUI_DONE);
+
 	protected final CraftingModuleView module;
 
 	private Button doneButton;
 	private Button closeButton;
 	private Screen parent;
+
+	private Component lastError;
 
 	public TeachRecipeScreen(MENU menu, Inventory inventory, Component title)
 	{
@@ -42,10 +47,8 @@ public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RE
 	{
 		super.init();
 
-		var canLearn = this.module.canLearn(this.menu.getCraftingType());
-		var text = Component.translatable(canLearn ? BaseGameTranslationConstants.BASE_GUI_DONE : TranslationConstants.WARNING_MAXIMUM_NUMBER_RECIPES);
-		this.doneButton = Button.builder(text, this::onDoneButtonPress).bounds(this.leftPos + 1, this.topPos + this.imageHeight + 4, 150, 20).build();
-		this.doneButton.active = canLearn && this.menu.getRecipe() != null;
+		this.doneButton = Button.builder(TEXT_DONE, this::onDoneButtonPress).bounds(this.leftPos + 1, this.topPos + this.imageHeight + 4, 150, 20).build();
+		this.doneButton.active = false;
 		this.addRenderableWidget(this.doneButton);
 
 		if (MineColoniesTweaksConfigClient.INSTANCE.addReturnButton.get().booleanValue())
@@ -63,12 +66,49 @@ public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RE
 
 		super.render(graphics, mouseX, mouseY, partialTicks);
 
-		var canLearn = this.module.canLearn(this.menu.getCraftingType());
-		this.doneButton.active = canLearn && this.menu.getRecipe() != null;
+		if (this.lastError != null)
+		{
+			var x = this.doneButton.getX() + (this.doneButton.getWidth() - this.minecraft.font.width(this.lastError)) / 2;
+			var y = this.doneButton.getY() + this.doneButton.getHeight() + 2;
+			graphics.drawString(this.minecraft.font, this.lastError, x, y, 0xFFFF0000, true);
+		}
+
+	}
+
+	@Override
+	protected void containerTick()
+	{
+		super.containerTick();
+
+		var error = this.getError();
+		this.doneButton.active = error == null;
+		this.lastError = error;
+	}
+
+	protected Component getError()
+	{
+		if (!this.module.canLearn(this.menu.getCraftingType()))
+		{
+			return TEXT_WARNING_MAXIMUM_NUMBER_RECIPES;
+		}
+
+		var recipe = this.menu.getRecipe();
+
+		if (recipe == null)
+		{
+			return TeachRecipeMenu.TEXT_RECIPE_NOT_FOUND;
+		}
+
+		return this.menu.getCurrentError();
 	}
 
 	private void onDoneButtonPress(Button button)
 	{
+		if (this.getError() != null)
+		{
+			return;
+		}
+
 		var recipe = this.menu.getRecipe();
 
 		if (recipe != null)

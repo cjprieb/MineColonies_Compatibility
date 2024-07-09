@@ -41,9 +41,9 @@ public class TeachBucketFillingMenu extends TeachRecipeMenu<BucketFillingRecipeS
 	{
 		this.addInventorySlots(INVENTORY_X, INVENTORY_Y);
 
-		this.inputContainer = new TeachInputContainer(this, 1);
+		this.inputContainer = new TeachContainer(this, 1);
 		this.inputSlots.add(this.addSlot(new TeachInputSlot(this.inputContainer, 0, RESULT_X, RESULT_Y)));
-		this.resultContainer = new TeachInputContainer(this, 0);
+		this.resultContainer = new TeachContainer(this, 0);
 
 	}
 
@@ -78,7 +78,7 @@ public class TeachBucketFillingMenu extends TeachRecipeMenu<BucketFillingRecipeS
 	{
 		super.onRecipeTransfer(recipe, payload);
 
-		this.inputSlots.get(0).set(recipe.getFilledBucket());
+		this.inputContainer.setItem(0, recipe.getFilledBucket());
 	}
 
 	@Override

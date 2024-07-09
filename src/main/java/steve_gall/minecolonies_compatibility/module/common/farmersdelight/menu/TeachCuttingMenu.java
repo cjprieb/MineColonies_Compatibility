@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.crafting.registry.CraftingType;
@@ -13,6 +14,7 @@ import com.minecolonies.api.util.constant.ToolType;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +25,7 @@ import steve_gall.minecolonies_compatibility.api.common.inventory.IMenuRecipeVal
 import steve_gall.minecolonies_compatibility.api.common.inventory.MenuRecipeValidatorRecipe;
 import steve_gall.minecolonies_compatibility.core.common.crafting.IngredientHelper;
 import steve_gall.minecolonies_compatibility.core.common.inventory.ReadOnlySlotsContainer;
-import steve_gall.minecolonies_compatibility.core.common.inventory.TeachInputContainer;
+import steve_gall.minecolonies_compatibility.core.common.inventory.TeachContainer;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachInputSlot;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachRecipeMenu;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachResultSlot;
@@ -70,7 +72,7 @@ public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 	{
 		this.addInventorySlots(INVENTORY_X, INVENTORY_Y);
 
-		this.inputContainer = new TeachInputContainer(this, 1);
+		this.inputContainer = new TeachContainer(this, 1);
 
 		for (var i = 0; i < CRAFTING_SLOTS; i++)
 		{
@@ -107,7 +109,7 @@ public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 	{
 		super.onRecipeTransfer(recipe, payload);
 
-		this.inputSlots.get(0).set(ItemStack.of(payload));
+		this.inputContainer.setItem(0, ItemStack.of(payload.getCompound("input")));
 	}
 
 	@Override
@@ -143,9 +145,14 @@ public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 	}
 
 	@Override
-	public boolean testRecipe(CuttingBoardRecipe recipe)
+	public @Nullable Component getRecipeError(@NotNull CuttingBoardRecipe recipe)
 	{
-		return ItemStackHelper.isTool(IngredientHelper.getStacks(recipe.getTool()), this.getToolType());
+		if (!ItemStackHelper.isTool(IngredientHelper.getStacks(recipe.getTool()), this.getToolType()))
+		{
+			return Component.translatable("minecolonies_compatibility.text.unsupported_tool");
+		}
+
+		return super.getRecipeError(recipe);
 	}
 
 	@Override

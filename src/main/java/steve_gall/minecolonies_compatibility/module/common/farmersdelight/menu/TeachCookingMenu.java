@@ -15,7 +15,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import steve_gall.minecolonies_compatibility.api.common.inventory.IMenuRecipeValidator;
 import steve_gall.minecolonies_compatibility.api.common.inventory.MenuRecipeValidatorRecipe;
-import steve_gall.minecolonies_compatibility.core.common.inventory.TeachInputContainer;
+import steve_gall.minecolonies_compatibility.core.common.inventory.TeachContainer;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachInputSlot;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachRecipeMenu;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachResultSlot;
@@ -58,7 +58,7 @@ public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
 	{
 		this.addInventorySlots(INVENTORY_X, INVENTORY_Y);
 
-		this.inputContainer = new TeachInputContainer(this, CRAFTING_COLUMNS * CRAFTING_ROW);
+		this.inputContainer = new TeachContainer(this, CRAFTING_COLUMNS * CRAFTING_ROW);
 
 		for (var i = 0; i < CRAFTING_SLOTS; i++)
 		{
@@ -67,7 +67,7 @@ public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
 			this.inputSlots.add(this.addSlot(new TeachInputSlot(this.inputContainer, i, CRAFTING_X + col * SLOT_OFFSET, CRAFTING_Y + row * SLOT_OFFSET)));
 		}
 
-		this.resultContainer = new TeachInputContainer(this, 2);
+		this.resultContainer = new TeachContainer(this, 2);
 		this.resultSlots.add(this.addSlot(new TeachResultSlot(this.resultContainer, 0, RESULT_X, RESULT_Y)));
 		this.resultSlots.add(this.addSlot(new TeachResultSlot(this.resultContainer, 1, CONTAINER_X, CONTAINER_Y)));
 	}
@@ -100,7 +100,7 @@ public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
 
 		for (var i = 0; i < CRAFTING_SLOTS; i++)
 		{
-			this.inputSlots.get(i).set(i < input.size() ? input.get(i) : ItemStack.EMPTY);
+			this.inputContainer.setItem(i, i < input.size() ? input.get(i) : ItemStack.EMPTY);
 		}
 
 	}
@@ -108,8 +108,8 @@ public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
 	@Override
 	protected void onRecipeChanged()
 	{
-		this.resultSlots.get(0).set(this.recipe != null ? this.recipe.getResultItem(this.inventory.player.level().registryAccess()) : ItemStack.EMPTY);
-		this.resultSlots.get(1).set(this.recipe != null ? this.recipe.getOutputContainer() : ItemStack.EMPTY);
+		this.resultContainer.setItem(0, this.recipe != null ? this.recipe.getResultItem(this.inventory.player.level().registryAccess()) : ItemStack.EMPTY);
+		this.resultContainer.setItem(1, this.recipe != null ? this.recipe.getOutputContainer() : ItemStack.EMPTY);
 	}
 
 	@Override
