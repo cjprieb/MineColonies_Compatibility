@@ -92,9 +92,9 @@ public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
 	}
 
 	@Override
-	public void onRecipeTransfer(@NotNull CookingPotRecipe recipe, @NotNull CompoundTag payload)
+	protected void setContainerByTransfer(@NotNull CookingPotRecipe recipe, @NotNull CompoundTag payload)
 	{
-		super.onRecipeTransfer(recipe, payload);
+		super.setContainerByTransfer(recipe, payload);
 
 		var input = NBTUtils2.deserializeList(payload, "input", ItemStack::of);
 

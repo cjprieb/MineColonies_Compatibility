@@ -82,11 +82,16 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	}
 
 	@Override
-	public void onRecipeTransfer(@NotNull RECIPE recipe, @NotNull CompoundTag payload)
+	public final void onRecipeTransfer(@NotNull RECIPE recipe, @NotNull CompoundTag payload)
 	{
-		this.inputContainer.clearContent();
+		this.setContainerByTransfer(recipe, payload);
 
 		this.setRecipe(recipe);
+	}
+
+	protected void setContainerByTransfer(@NotNull RECIPE recipe, @NotNull CompoundTag payload)
+	{
+		this.inputContainer.clearContent();
 	}
 
 	@Override

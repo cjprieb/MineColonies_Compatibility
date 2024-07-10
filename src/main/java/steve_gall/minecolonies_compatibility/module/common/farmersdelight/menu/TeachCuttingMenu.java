@@ -105,9 +105,9 @@ public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 	}
 
 	@Override
-	public void onRecipeTransfer(@NotNull CuttingBoardRecipe recipe, @NotNull CompoundTag payload)
+	protected void setContainerByTransfer(@NotNull CuttingBoardRecipe recipe, @NotNull CompoundTag payload)
 	{
-		super.onRecipeTransfer(recipe, payload);
+		super.setContainerByTransfer(recipe, payload);
 
 		this.inputContainer.setItem(0, ItemStack.of(payload.getCompound("input")));
 	}

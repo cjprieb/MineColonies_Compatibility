@@ -74,9 +74,9 @@ public class TeachBucketFillingMenu extends TeachRecipeMenu<BucketFillingRecipeS
 	}
 
 	@Override
-	public void onRecipeTransfer(@NotNull BucketFillingRecipeStorage recipe, @NotNull CompoundTag payload)
+	protected void setContainerByTransfer(@NotNull BucketFillingRecipeStorage recipe, @NotNull CompoundTag payload)
 	{
-		super.onRecipeTransfer(recipe, payload);
+		super.setContainerByTransfer(recipe, payload);
 
 		this.inputContainer.setItem(0, recipe.getFilledBucket());
 	}
