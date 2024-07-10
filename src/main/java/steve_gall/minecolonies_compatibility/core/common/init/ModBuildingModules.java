@@ -60,7 +60,7 @@ public class ModBuildingModules
 
 	public static final BuildingEntry.ModuleProducer<NetworkStorageModule, NetworkStorageModuleView> NETWORK_STORAGE = new BuildingEntry.ModuleProducer<>("warehouse_refinfedstoprage_grid", //
 			() -> new NetworkStorageModule(), //
-			() -> NetworkStorageModuleView::new);//
+			() -> NetworkStorageModuleView::new);
 
 	public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule, WorkerBuildingModuleView> FLUID_MANAGER_WORK = new BuildingEntry.ModuleProducer<>("fluid_manager_work", //
 			() -> new CraftingWorkerBuildingModule(ModJobs.FLUID_MANAGER.get(), Skill.Focus, Skill.Athletics, false, b -> 1), //
@@ -68,7 +68,7 @@ public class ModBuildingModules
 
 	public static final BuildingEntry.ModuleProducer<BucketFillingCraftingModule, BucketFillingCraftingModuleView> FLUID_MANAGER_BUCKET_FILLING = new BuildingEntry.ModuleProducer<>("fluid_manager_bucket_filling", //
 			() -> new BucketFillingCraftingModule("fluid_manager_bucket_filling", ModJobs.FLUID_MANAGER.get()), //
-			() -> BucketFillingCraftingModuleView::new);//
+			() -> BucketFillingCraftingModuleView::new);
 
 	public static final BuildingEntry.ModuleProducer<LavaCauldronModule, RestrictableModuleView> FLUID_MANAGER_LAVA_CAULDRON = new BuildingEntry.ModuleProducer<>("fluid_manager_lava_cauldron", //
 			() -> new LavaCauldronModule()
@@ -86,6 +86,6 @@ public class ModBuildingModules
 				{
 					return "fluid_manager_lava_cauldron";
 				};
-			});//
+			});
 
 }
