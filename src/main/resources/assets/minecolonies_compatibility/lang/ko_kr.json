@@ -61,6 +61,7 @@
 	"com.minecolonies.coremod.gui.workerhuts.network_storage": "네트워크 저장소",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.bucket_filling": "양동이를 채우는 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.fluid_manager_lava_cauldron": "용암 가마솥",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.smithing": "장비 강화 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "식칼로 써는 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "냄비로 조리하는 제작법",
 	

@@ -61,6 +61,7 @@
 	"com.minecolonies.coremod.gui.workerhuts.network_storage": "Network Storage",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.bucket_filling": "Bucket Filling Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.fluid_manager_lava_cauldron": "Lava Cauldron",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.smithing": "Gear Upgrading Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "Cutting Recipes with Knife",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "Cooking Recipes with Cooking Pot",
 	

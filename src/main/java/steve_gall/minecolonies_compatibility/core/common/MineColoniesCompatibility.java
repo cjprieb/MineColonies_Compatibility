@@ -14,10 +14,13 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
 import steve_gall.minecolonies_compatibility.core.client.gui.BucketFillingTeachScreen;
+import steve_gall.minecolonies_compatibility.core.client.gui.TeachSmithingScreen;
 import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigCommon;
 import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigServer;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
+import steve_gall.minecolonies_compatibility.core.common.crafting.SmithingRecipeStorage;
 import steve_gall.minecolonies_compatibility.core.common.init.ModBuildingModules;
 import steve_gall.minecolonies_compatibility.core.common.init.ModCraftingTypes;
 import steve_gall.minecolonies_compatibility.core.common.init.ModGuardTypes;
@@ -59,6 +62,7 @@ public class MineColoniesCompatibility
 		ModuleManager.initialize();
 
 		CustomizedRecipeStorageRegistry.INSTANCE.register(BucketFillingRecipeStorage.ID, BucketFillingRecipeStorage::serialize, BucketFillingRecipeStorage::deserialize);
+		CustomizedRecipeStorageRegistry.INSTANCE.register(SmithingRecipeStorage.ID, SmithingRecipeStorage::serialize, SmithingRecipeStorage::deserialize);
 	}
 
 	private void onFMLCommonSetup(FMLCommonSetupEvent e)
@@ -69,6 +73,7 @@ public class MineColoniesCompatibility
 			ModBuildings.lumberjack.get().getModuleProducers().add(ModBuildingModules.ORCHARDIST_WORK);
 			ModBuildings.lumberjack.get().getModuleProducers().add(ModBuildingModules.FRUITLIST_BLACKLIST);
 			ModBuildings.wareHouse.get().getModuleProducers().add(ModBuildingModules.NETWORK_STORAGE);
+			ModBuildings.blacksmith.get().getModuleProducers().add(ModBuildingModules.BLACKSMITH_SMITHING);
 
 			ModBuildings.deliveryman.get().getModuleProducers().add(ModBuildingModules.FLUID_MANAGER_WORK);
 			ModBuildings.deliveryman.get().getModuleProducers().add(ModBuildingModules.FLUID_MANAGER_BUCKET_FILLING);
@@ -79,6 +84,7 @@ public class MineColoniesCompatibility
 	private void onFMLClientSetup(FMLClientSetupEvent e)
 	{
 		MenuScreens.register(ModMenuTypes.BUCKET_FILLING_TEACH.get(), BucketFillingTeachScreen::new);
+		MenuScreens.register(ModMenuTypes.TEACH_SMITHING.get(), TeachSmithingScreen::new);
 	}
 
 	private void onCustomToolTypeRegister(CustomToolTypeRegisterEvent e)

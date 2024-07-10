@@ -26,6 +26,8 @@ import steve_gall.minecolonies_compatibility.core.common.building.module.LavaCau
 import steve_gall.minecolonies_compatibility.core.common.building.module.NetworkStorageModule;
 import steve_gall.minecolonies_compatibility.core.common.building.module.NetworkStorageModuleView;
 import steve_gall.minecolonies_compatibility.core.common.building.module.RestrictableModuleView;
+import steve_gall.minecolonies_compatibility.core.common.building.module.SmithingCraftingModule;
+import steve_gall.minecolonies_compatibility.core.common.building.module.SmithingCraftingModuleView;
 import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigServer;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.orchardist.EntityAIWorkOrchardist;
 
@@ -87,5 +89,9 @@ public class ModBuildingModules
 					return "fluid_manager_lava_cauldron";
 				};
 			});
+
+	public static final BuildingEntry.ModuleProducer<SmithingCraftingModule, SmithingCraftingModuleView> BLACKSMITH_SMITHING = new BuildingEntry.ModuleProducer<>("blacksmith_smithing", //
+			() -> new SmithingCraftingModule(com.minecolonies.api.colony.jobs.ModJobs.blacksmith.get()), //
+			() -> SmithingCraftingModuleView::new);
 
 }
