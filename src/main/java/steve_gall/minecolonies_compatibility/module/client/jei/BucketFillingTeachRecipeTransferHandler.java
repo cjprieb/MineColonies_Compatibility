@@ -12,26 +12,26 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingGenericRecipe;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
-import steve_gall.minecolonies_compatibility.core.common.inventory.TeachBucketFillingMenu;
+import steve_gall.minecolonies_compatibility.core.common.inventory.BucketFillingTeachMenu;
 
-public class TeachBucketFillingRecipeTransferHandler extends TeachRecipeTransferHandler<TeachBucketFillingMenu, BucketFillingRecipeStorage, IGenericRecipe>
+public class BucketFillingTeachRecipeTransferHandler extends TeachRecipeTransferHandler<BucketFillingTeachMenu, BucketFillingRecipeStorage, IGenericRecipe>
 {
 	private final RecipeType<IGenericRecipe> recipeType;
 
-	public TeachBucketFillingRecipeTransferHandler(IRecipeTransferHandlerHelper recipeTransferHandlerHelper, RecipeType<IGenericRecipe> recipeType)
+	public BucketFillingTeachRecipeTransferHandler(IRecipeTransferHandlerHelper recipeTransferHandlerHelper, RecipeType<IGenericRecipe> recipeType)
 	{
 		super(recipeTransferHandlerHelper);
 		this.recipeType = recipeType;
 	}
 
 	@Override
-	public Class<? extends TeachBucketFillingMenu> getContainerClass()
+	public Class<? extends BucketFillingTeachMenu> getContainerClass()
 	{
-		return TeachBucketFillingMenu.class;
+		return BucketFillingTeachMenu.class;
 	}
 
 	@Override
-	public Optional<MenuType<TeachBucketFillingMenu>> getMenuType()
+	public Optional<MenuType<BucketFillingTeachMenu>> getMenuType()
 	{
 		return Optional.empty();
 	}
@@ -43,7 +43,7 @@ public class TeachBucketFillingRecipeTransferHandler extends TeachRecipeTransfer
 	}
 
 	@Override
-	protected BucketFillingRecipeStorage getRecipe(TeachBucketFillingMenu menu, IGenericRecipe categoryRecipe, IRecipeSlotsView recipeSlots, Player player)
+	protected BucketFillingRecipeStorage getRecipe(BucketFillingTeachMenu menu, IGenericRecipe categoryRecipe, IRecipeSlotsView recipeSlots, Player player)
 	{
 		if (categoryRecipe instanceof BucketFillingGenericRecipe fillingRecipe)
 		{
@@ -57,7 +57,7 @@ public class TeachBucketFillingRecipeTransferHandler extends TeachRecipeTransfer
 	}
 
 	@Override
-	protected void serializePayload(TeachBucketFillingMenu menu, BucketFillingRecipeStorage recipe, IRecipeSlotsView recipeSlots, Player player, CompoundTag tag)
+	protected void serializePayload(BucketFillingTeachMenu menu, BucketFillingRecipeStorage recipe, IRecipeSlotsView recipeSlots, Player player, CompoundTag tag)
 	{
 
 	}

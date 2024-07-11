@@ -63,7 +63,7 @@ public class ModPlugin implements IModPlugin
 	{
 		var transferHelper = registration.getTransferHelper();
 		var recipeType = createRecipeType(ModJobs.FLUID_MANAGER.get());
-		registration.addRecipeTransferHandler(new TeachBucketFillingRecipeTransferHandler(transferHelper, recipeType), recipeType);
+		registration.addRecipeTransferHandler(new BucketFillingTeachRecipeTransferHandler(transferHelper, recipeType), recipeType);
 	}
 
 	public Stream<IGlobalResearch> getGlobalResearches()

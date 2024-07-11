@@ -7,7 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.TeachCookingMenu;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.FarmersCookingTeachMenu;
 
 public class FarmersCookingOpenTeachMessage extends ModuleMenuOpenMessage
 {
@@ -30,7 +30,7 @@ public class FarmersCookingOpenTeachMessage extends ModuleMenuOpenMessage
 	@Override
 	protected AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player, IBuildingModule module)
 	{
-		return new TeachCookingMenu(windowId, inventory, module);
+		return new FarmersCookingTeachMenu(windowId, inventory, module);
 	}
 
 	@Override

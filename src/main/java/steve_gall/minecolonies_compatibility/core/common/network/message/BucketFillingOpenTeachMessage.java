@@ -7,7 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import steve_gall.minecolonies_compatibility.core.common.inventory.TeachBucketFillingMenu;
+import steve_gall.minecolonies_compatibility.core.common.inventory.BucketFillingTeachMenu;
 
 public class BucketFillingOpenTeachMessage extends ModuleMenuOpenMessage
 {
@@ -30,7 +30,7 @@ public class BucketFillingOpenTeachMessage extends ModuleMenuOpenMessage
 	@Override
 	protected AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player, IBuildingModule module)
 	{
-		return new TeachBucketFillingMenu(windowId, inventory, module);
+		return new BucketFillingTeachMenu(windowId, inventory, module);
 	}
 
 	@Override

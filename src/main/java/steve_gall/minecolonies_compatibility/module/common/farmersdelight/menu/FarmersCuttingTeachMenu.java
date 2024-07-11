@@ -36,7 +36,7 @@ import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
-public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
+public class FarmersCuttingTeachMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 {
 	public static final int INVENTORY_X = 8;
 	public static final int INVENTORY_Y = 84;
@@ -54,16 +54,16 @@ public class TeachCuttingMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 
 	private List<ChanceResult> results;
 
-	public TeachCuttingMenu(int windowId, Inventory inventory, IBuildingModule module, IToolType toolType)
+	public FarmersCuttingTeachMenu(int windowId, Inventory inventory, IBuildingModule module, IToolType toolType)
 	{
-		super(ModuleMenuTypes.TEACH_CUTTING.get(), windowId, inventory, module);
+		super(ModuleMenuTypes.FARMERS_CUTTING_TEACH.get(), windowId, inventory, module);
 		this.toolType = toolType;
 		this.setup();
 	}
 
-	public TeachCuttingMenu(int windowId, Inventory inventory, FriendlyByteBuf buffer)
+	public FarmersCuttingTeachMenu(int windowId, Inventory inventory, FriendlyByteBuf buffer)
 	{
-		super(ModuleMenuTypes.TEACH_CUTTING.get(), windowId, inventory, buffer);
+		super(ModuleMenuTypes.FARMERS_CUTTING_TEACH.get(), windowId, inventory, buffer);
 		this.toolType = ToolType.getToolType(buffer.readUtf());
 		this.setup();
 	}

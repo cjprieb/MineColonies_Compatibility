@@ -14,7 +14,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import steve_gall.minecolonies_compatibility.core.client.gui.TeachBucketFillingScreen;
+import steve_gall.minecolonies_compatibility.core.client.gui.BucketFillingTeachScreen;
 import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigCommon;
 import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigServer;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
@@ -78,7 +78,7 @@ public class MineColoniesCompatibility
 
 	private void onFMLClientSetup(FMLClientSetupEvent e)
 	{
-		MenuScreens.register(ModMenuTypes.TEACH_BUCKET_FILLING.get(), TeachBucketFillingScreen::new);
+		MenuScreens.register(ModMenuTypes.BUCKET_FILLING_TEACH.get(), BucketFillingTeachScreen::new);
 	}
 
 	private void onCustomToolTypeRegister(CustomToolTypeRegisterEvent e)

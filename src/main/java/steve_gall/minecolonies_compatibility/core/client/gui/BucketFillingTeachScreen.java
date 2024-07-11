@@ -10,14 +10,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
-import steve_gall.minecolonies_compatibility.core.common.inventory.TeachBucketFillingMenu;
+import steve_gall.minecolonies_compatibility.core.common.inventory.BucketFillingTeachMenu;
 import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizedRecipeStorage;
 
-public class TeachBucketFillingScreen extends TeachRecipeScreen<TeachBucketFillingMenu, BucketFillingRecipeStorage>
+public class BucketFillingTeachScreen extends TeachRecipeScreen<BucketFillingTeachMenu, BucketFillingRecipeStorage>
 {
 	public static final ResourceLocation TEXTURE = MineColoniesCompatibility.rl("textures/gui/teach_bucket_filling.png");
 
-	public TeachBucketFillingScreen(TeachBucketFillingMenu menu, Inventory inventory, Component title)
+	public BucketFillingTeachScreen(BucketFillingTeachMenu menu, Inventory inventory, Component title)
 	{
 		super(menu, inventory, title);
 

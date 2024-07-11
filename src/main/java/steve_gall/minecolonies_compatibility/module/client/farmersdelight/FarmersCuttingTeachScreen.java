@@ -13,15 +13,15 @@ import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibili
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.FarmersDelightModule;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CuttingChanceResult;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CuttingRecipeStorage;
-import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.TeachCuttingMenu;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.FarmersCuttingTeachMenu;
 import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizedRecipeStorage;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 
-public class TeachCuttingScreen extends TeachRecipeScreen<TeachCuttingMenu, CuttingBoardRecipe>
+public class FarmersCuttingTeachScreen extends TeachRecipeScreen<FarmersCuttingTeachMenu, CuttingBoardRecipe>
 {
 	public static final ResourceLocation TEXTURE = MineColoniesCompatibility.rl("textures/gui/teach_cutting.png");
 
-	public TeachCuttingScreen(TeachCuttingMenu menu, Inventory inventory, Component title)
+	public FarmersCuttingTeachScreen(FarmersCuttingTeachMenu menu, Inventory inventory, Component title)
 	{
 		super(menu, inventory, title);
 

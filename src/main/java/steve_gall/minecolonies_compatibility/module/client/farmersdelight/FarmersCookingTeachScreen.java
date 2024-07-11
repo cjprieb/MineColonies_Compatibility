@@ -11,15 +11,15 @@ import net.minecraft.world.entity.player.Inventory;
 import steve_gall.minecolonies_compatibility.core.client.gui.TeachRecipeScreen;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CookingRecipeStorage;
-import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.TeachCookingMenu;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.FarmersCookingTeachMenu;
 import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizedRecipeStorage;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
-public class TeachCookingScreen extends TeachRecipeScreen<TeachCookingMenu, CookingPotRecipe>
+public class FarmersCookingTeachScreen extends TeachRecipeScreen<FarmersCookingTeachMenu, CookingPotRecipe>
 {
 	public static final ResourceLocation TEXTURE = MineColoniesCompatibility.rl("textures/gui/teach_cooking.png");
 
-	public TeachCookingScreen(TeachCookingMenu menu, Inventory inventory, Component title)
+	public FarmersCookingTeachScreen(FarmersCookingTeachMenu menu, Inventory inventory, Component title)
 	{
 		super(menu, inventory, title);
 

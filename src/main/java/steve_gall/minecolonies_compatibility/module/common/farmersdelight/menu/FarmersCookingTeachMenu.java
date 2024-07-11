@@ -25,7 +25,7 @@ import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.M
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
-public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
+public class FarmersCookingTeachMenu extends TeachRecipeMenu<CookingPotRecipe>
 {
 	public static final int INVENTORY_X = 8;
 	public static final int INVENTORY_Y = 84;
@@ -42,15 +42,15 @@ public class TeachCookingMenu extends TeachRecipeMenu<CookingPotRecipe>
 	public static final int CONTAINER_X = 88;
 	public static final int CONTAINER_Y = 45;
 
-	public TeachCookingMenu(int windowId, Inventory inventory, IBuildingModule module)
+	public FarmersCookingTeachMenu(int windowId, Inventory inventory, IBuildingModule module)
 	{
-		super(ModuleMenuTypes.TEACH_COOKING.get(), windowId, inventory, module);
+		super(ModuleMenuTypes.FARMERS_COOKING_TEACH.get(), windowId, inventory, module);
 		this.setup();
 	}
 
-	public TeachCookingMenu(int windowId, Inventory inventory, FriendlyByteBuf buffer)
+	public FarmersCookingTeachMenu(int windowId, Inventory inventory, FriendlyByteBuf buffer)
 	{
-		super(ModuleMenuTypes.TEACH_COOKING.get(), windowId, inventory, buffer);
+		super(ModuleMenuTypes.FARMERS_COOKING_TEACH.get(), windowId, inventory, buffer);
 		this.setup();
 	}
 
