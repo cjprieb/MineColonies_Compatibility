@@ -17,7 +17,7 @@ import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
 public class FarmersCookingTeachScreen extends TeachRecipeScreen<FarmersCookingTeachMenu, CookingPotRecipe>
 {
-	public static final ResourceLocation TEXTURE = MineColoniesCompatibility.rl("textures/gui/teach_cooking.png");
+	public static final ResourceLocation TEXTURE = MineColoniesCompatibility.rl("textures/gui/farmers_cooking_teach.png");
 
 	public FarmersCookingTeachScreen(FarmersCookingTeachMenu menu, Inventory inventory, Component title)
 	{
