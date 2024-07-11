@@ -17,7 +17,7 @@ import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizedRecipeStora
 
 public class BucketFillingTeachScreen extends TeachRecipeScreen<BucketFillingTeachMenu, BucketFillingRecipeStorage>
 {
-	public static final ResourceLocation TEXTURE = MineColoniesCompatibility.rl("textures/gui/teach_bucket_filling.png");
+	public static final ResourceLocation TEXTURE = MineColoniesCompatibility.rl("textures/gui/bucket_filling_teach.png");
 
 	public BucketFillingTeachScreen(BucketFillingTeachMenu menu, Inventory inventory, Component title)
 	{
