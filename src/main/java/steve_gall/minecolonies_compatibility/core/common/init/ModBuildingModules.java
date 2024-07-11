@@ -28,6 +28,8 @@ import steve_gall.minecolonies_compatibility.core.common.building.module.Network
 import steve_gall.minecolonies_compatibility.core.common.building.module.RestrictableModuleView;
 import steve_gall.minecolonies_compatibility.core.common.building.module.SmithingCraftingModule;
 import steve_gall.minecolonies_compatibility.core.common.building.module.SmithingCraftingModuleView;
+import steve_gall.minecolonies_compatibility.core.common.building.module.SmithingTemplateCraftingModule;
+import steve_gall.minecolonies_compatibility.core.common.building.module.SmithingTemplateCraftingModuleView;
 import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigServer;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.orchardist.EntityAIWorkOrchardist;
 
@@ -94,4 +96,7 @@ public class ModBuildingModules
 			() -> new SmithingCraftingModule(com.minecolonies.api.colony.jobs.ModJobs.blacksmith.get()), //
 			() -> SmithingCraftingModuleView::new);
 
+	public static final BuildingEntry.ModuleProducer<SmithingTemplateCraftingModule, SmithingTemplateCraftingModuleView> BLACKSMITH_SMITHING_TEMPLATE_CRAFTING = new BuildingEntry.ModuleProducer<>("blacksmith_smithing_template_crafting", //
+			() -> new SmithingTemplateCraftingModule(com.minecolonies.api.colony.jobs.ModJobs.blacksmith.get()), //
+			() -> SmithingTemplateCraftingModuleView::new);
 }

@@ -5,6 +5,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"client": [
 		"minecolonies.SettingsModuleViewMixin",
+		"minecolonies.WindowCraftingMixin",
 		"minecolonies.WindowListRecipes1Mixin",
 		"minecolonies.WindowListRecipesAcccessor",
 		

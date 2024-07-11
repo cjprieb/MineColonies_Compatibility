@@ -22,6 +22,7 @@ import steve_gall.minecolonies_compatibility.core.common.network.message.Restric
 import steve_gall.minecolonies_compatibility.core.common.network.message.RestrictSetAreaMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.RestrictSetEnabledMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.SmithingOpenTeachMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.SmithingTemplateOpenInventoryMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRecipeMenuNewResultMessage;
 
 public class NetworkChannel
@@ -46,6 +47,7 @@ public class NetworkChannel
 		this.registerMessage(RestrictGiveToolMessage.class, RestrictGiveToolMessage::new);
 		this.registerMessage(BucketFillingOpenTeachMessage.class, BucketFillingOpenTeachMessage::new);
 		this.registerMessage(SmithingOpenTeachMessage.class, SmithingOpenTeachMessage::new);
+		this.registerMessage(SmithingTemplateOpenInventoryMessage.class, SmithingTemplateOpenInventoryMessage::new);
 		this.registerMessage(FarmersCuttingOpenTeachMessage.class, FarmersCuttingOpenTeachMessage::new);
 		this.registerMessage(FarmersCookingOpenTeachMessage.class, FarmersCookingOpenTeachMessage::new);
 	}

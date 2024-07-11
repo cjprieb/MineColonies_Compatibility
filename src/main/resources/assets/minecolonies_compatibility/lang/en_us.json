@@ -50,6 +50,9 @@
 	"minecolonies_compatibility.text.not_linked": "Not linked",
 	"minecolonies_compatibility.text.recipe_not_found": "Recipe Not Found",
 	"minecolonies_compatibility.text.unsupported_tool": "Unsupported Tool",
+	"minecolonies_compatibility.text.smithing_template_inventory": "Template Inventory",
+	"minecolonies_compatibility.text.smithing_template_needs": "Needs same %1$s x %2$s in Template Inventory for crafting.",
+	"minecolonies_compatibility.text.smithing_template_counts": "[%1$s / %2$s]",
 	"minecolonies_compatibility.text.restrict": "Zoning Mode",
 	"minecolonies_compatibility.text.restrict.set1": "Setted first position of working area.",
 	"minecolonies_compatibility.text.restrict.set2": "Setted second position of working area.",
@@ -62,6 +65,7 @@
 	"com.minecolonies.coremod.gui.workerhuts.recipe.bucket_filling": "Bucket Filling Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.fluid_manager_lava_cauldron": "Lava Cauldron",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.smithing": "Gear Upgrading Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.smithing_template_crafting": "Smithing Template Crafting Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "Cutting Recipes with Knife",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "Cooking Recipes with Cooking Pot",
 	

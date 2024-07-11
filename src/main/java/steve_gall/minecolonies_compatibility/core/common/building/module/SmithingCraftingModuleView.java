@@ -3,7 +3,7 @@ package steve_gall.minecolonies_compatibility.core.common.building.module;
 import com.minecolonies.core.colony.buildings.moduleviews.CraftingModuleView;
 
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
-import steve_gall.minecolonies_compatibility.core.common.network.message.TeachSmithingOpenMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.SmithingOpenTeachMessage;
 
 public class SmithingCraftingModuleView extends CraftingModuleView
 {
@@ -15,7 +15,7 @@ public class SmithingCraftingModuleView extends CraftingModuleView
 	@Override
 	public void openCraftingGUI()
 	{
-		MineColoniesCompatibility.network().sendToServer(new TeachSmithingOpenMessage(this));
+		MineColoniesCompatibility.network().sendToServer(new SmithingOpenTeachMessage(this));
 	}
 
 }
