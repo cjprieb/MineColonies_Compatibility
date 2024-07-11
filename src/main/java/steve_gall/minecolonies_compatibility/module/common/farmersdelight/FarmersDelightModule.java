@@ -12,8 +12,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedCrop;
-import steve_gall.minecolonies_compatibility.module.client.farmersdelight.TeachCookingScreen;
-import steve_gall.minecolonies_compatibility.module.client.farmersdelight.TeachCuttingScreen;
+import steve_gall.minecolonies_compatibility.module.client.farmersdelight.FarmersCookingTeachScreen;
+import steve_gall.minecolonies_compatibility.module.client.farmersdelight.FarmersCuttingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.common.AbstractModule;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CookingRecipeStorage;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CuttingRecipeStorage;
@@ -58,8 +58,8 @@ public class FarmersDelightModule extends AbstractModule
 	{
 		super.onFMLClientSetup(e);
 
-		MenuScreens.register(ModuleMenuTypes.TEACH_CUTTING.get(), TeachCuttingScreen::new);
-		MenuScreens.register(ModuleMenuTypes.TEACH_COOKING.get(), TeachCookingScreen::new);
+		MenuScreens.register(ModuleMenuTypes.FARMERS_CUTTING_TEACH.get(), FarmersCuttingTeachScreen::new);
+		MenuScreens.register(ModuleMenuTypes.FARMERS_COOKING_TEACH.get(), FarmersCookingTeachScreen::new);
 	}
 
 	public static List<Component> getChanceTooltip(float chance)

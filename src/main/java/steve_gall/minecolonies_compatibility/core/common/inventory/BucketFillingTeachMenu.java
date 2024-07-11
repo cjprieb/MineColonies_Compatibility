@@ -17,7 +17,7 @@ import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingR
 import steve_gall.minecolonies_compatibility.core.common.init.ModCraftingTypes;
 import steve_gall.minecolonies_compatibility.core.common.init.ModMenuTypes;
 
-public class TeachBucketFillingMenu extends TeachRecipeMenu<BucketFillingRecipeStorage>
+public class BucketFillingTeachMenu extends TeachRecipeMenu<BucketFillingRecipeStorage>
 {
 	public static final int INVENTORY_X = 8;
 	public static final int INVENTORY_Y = 84;
@@ -25,15 +25,15 @@ public class TeachBucketFillingMenu extends TeachRecipeMenu<BucketFillingRecipeS
 	public static final int RESULT_X = 80;
 	public static final int RESULT_Y = 35;
 
-	public TeachBucketFillingMenu(int windowId, Inventory inventory, IBuildingModule module)
+	public BucketFillingTeachMenu(int windowId, Inventory inventory, IBuildingModule module)
 	{
-		super(ModMenuTypes.TEACH_BUCKET_FILLING.get(), windowId, inventory, module);
+		super(ModMenuTypes.BUCKET_FILLING_TEACH.get(), windowId, inventory, module);
 		this.setup();
 	}
 
-	public TeachBucketFillingMenu(int windowId, Inventory inventory, FriendlyByteBuf buffer)
+	public BucketFillingTeachMenu(int windowId, Inventory inventory, FriendlyByteBuf buffer)
 	{
-		super(ModMenuTypes.TEACH_BUCKET_FILLING.get(), windowId, inventory, buffer);
+		super(ModMenuTypes.BUCKET_FILLING_TEACH.get(), windowId, inventory, buffer);
 		this.setup();
 	}
 

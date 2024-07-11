@@ -10,25 +10,25 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import steve_gall.minecolonies_compatibility.module.client.jei.TeachRecipeTransferHandler;
-import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.TeachCuttingMenu;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.FarmersCuttingTeachMenu;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
-public class TeachCuttingRecipeTransferHandler extends TeachRecipeTransferHandler<TeachCuttingMenu, CuttingBoardRecipe, CuttingBoardRecipe>
+public class FarmersCuttingTeachRecipeTransferHandler extends TeachRecipeTransferHandler<FarmersCuttingTeachMenu, CuttingBoardRecipe, CuttingBoardRecipe>
 {
-	public TeachCuttingRecipeTransferHandler(IRecipeTransferHandlerHelper recipeTransferHandlerHelper)
+	public FarmersCuttingTeachRecipeTransferHandler(IRecipeTransferHandlerHelper recipeTransferHandlerHelper)
 	{
 		super(recipeTransferHandlerHelper);
 	}
 
 	@Override
-	public Class<? extends TeachCuttingMenu> getContainerClass()
+	public Class<? extends FarmersCuttingTeachMenu> getContainerClass()
 	{
-		return TeachCuttingMenu.class;
+		return FarmersCuttingTeachMenu.class;
 	}
 
 	@Override
-	public Optional<MenuType<TeachCuttingMenu>> getMenuType()
+	public Optional<MenuType<FarmersCuttingTeachMenu>> getMenuType()
 	{
 		return Optional.empty();
 	}
@@ -40,13 +40,13 @@ public class TeachCuttingRecipeTransferHandler extends TeachRecipeTransferHandle
 	}
 
 	@Override
-	protected CuttingBoardRecipe getRecipe(TeachCuttingMenu menu, CuttingBoardRecipe categoryRecipe, IRecipeSlotsView recipeSlots, Player player)
+	protected CuttingBoardRecipe getRecipe(FarmersCuttingTeachMenu menu, CuttingBoardRecipe categoryRecipe, IRecipeSlotsView recipeSlots, Player player)
 	{
 		return categoryRecipe;
 	}
 
 	@Override
-	protected void serializePayload(TeachCuttingMenu menu, CuttingBoardRecipe recipe, IRecipeSlotsView recipeSlots, Player player, CompoundTag tag)
+	protected void serializePayload(FarmersCuttingTeachMenu menu, CuttingBoardRecipe recipe, IRecipeSlotsView recipeSlots, Player player, CompoundTag tag)
 	{
 		var input = this.getDisplayedItemStacks(recipeSlots, RecipeIngredientRole.INPUT);
 		tag.put("input", input.get(1).serializeNBT());

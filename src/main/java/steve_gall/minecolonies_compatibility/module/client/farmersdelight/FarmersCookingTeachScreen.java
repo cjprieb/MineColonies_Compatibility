@@ -1,4 +1,4 @@
-package steve_gall.minecolonies_compatibility.core.client.gui;
+package steve_gall.minecolonies_compatibility.module.client.farmersdelight;
 
 import java.util.List;
 
@@ -10,16 +10,18 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import steve_gall.minecolonies_compatibility.core.client.gui.TeachRecipeScreen;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
-import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
-import steve_gall.minecolonies_compatibility.core.common.inventory.TeachBucketFillingMenu;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CookingRecipeStorage;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.FarmersCookingTeachMenu;
 import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizedRecipeStorage;
+import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
-public class TeachBucketFillingScreen extends TeachRecipeScreen<TeachBucketFillingMenu, BucketFillingRecipeStorage>
+public class FarmersCookingTeachScreen extends TeachRecipeScreen<FarmersCookingTeachMenu, CookingPotRecipe>
 {
-	public static final ResourceLocation TEXTURE = MineColoniesCompatibility.rl("textures/gui/teach_bucket_filling.png");
+	public static final ResourceLocation TEXTURE = MineColoniesCompatibility.rl("textures/gui/teach_cooking.png");
 
-	public TeachBucketFillingScreen(TeachBucketFillingMenu menu, Inventory inventory, Component title)
+	public FarmersCookingTeachScreen(FarmersCookingTeachMenu menu, Inventory inventory, Component title)
 	{
 		super(menu, inventory, title);
 
@@ -28,9 +30,12 @@ public class TeachBucketFillingScreen extends TeachRecipeScreen<TeachBucketFilli
 	}
 
 	@Override
-	protected ICustomizedRecipeStorage createRecipeStorage(BucketFillingRecipeStorage recipe, List<ItemStorage> input)
+	protected ICustomizedRecipeStorage createRecipeStorage(CookingPotRecipe recipe, List<ItemStorage> input)
 	{
-		return recipe;
+		var resultContainer = this.menu.getResultContainer();
+		var output = resultContainer.getItem(0);
+		var container = resultContainer.getItem(1);
+		return new CookingRecipeStorage(recipe.getId(), input, new ItemStorage(container), output);
 	}
 
 	@Override
