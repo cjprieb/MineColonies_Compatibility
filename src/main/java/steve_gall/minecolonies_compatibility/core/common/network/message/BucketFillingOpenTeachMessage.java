@@ -9,14 +9,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachBucketFillingMenu;
 
-public class TeachBucketFillingOpenMessage extends ModuleMenuOpenMessage
+public class BucketFillingOpenTeachMessage extends ModuleMenuOpenMessage
 {
-	public TeachBucketFillingOpenMessage(IBuildingModuleView module)
+	public BucketFillingOpenTeachMessage(IBuildingModuleView module)
 	{
 		super(module);
 	}
 
-	public TeachBucketFillingOpenMessage(FriendlyByteBuf buffer)
+	public BucketFillingOpenTeachMessage(FriendlyByteBuf buffer)
 	{
 		super(buffer);
 	}

@@ -3,7 +3,7 @@ package steve_gall.minecolonies_compatibility.module.common.farmersdelight.build
 import com.minecolonies.core.colony.buildings.moduleviews.CraftingModuleView;
 
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
-import steve_gall.minecolonies_compatibility.core.common.network.message.FarmersTeachCookingOpenMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.FarmersCookingOpenTeachMessage;
 
 public class CookingCraftingModuleView extends CraftingModuleView
 {
@@ -15,7 +15,7 @@ public class CookingCraftingModuleView extends CraftingModuleView
 	@Override
 	public void openCraftingGUI()
 	{
-		MineColoniesCompatibility.network().sendToServer(new FarmersTeachCookingOpenMessage(this));
+		MineColoniesCompatibility.network().sendToServer(new FarmersCookingOpenTeachMessage(this));
 	}
 
 }
