@@ -11,18 +11,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.TeachCuttingMenu;
 
-public class FarmersTeachCuttingOpenMessage extends ModuleMenuOpenMessage
+public class FarmersCuttingOpenTeachMessage extends ModuleMenuOpenMessage
 {
 	private final IToolType toolType;
 
-	public FarmersTeachCuttingOpenMessage(IBuildingModuleView module, IToolType toolType)
+	public FarmersCuttingOpenTeachMessage(IBuildingModuleView module, IToolType toolType)
 	{
 		super(module);
 
 		this.toolType = toolType;
 	}
 
-	public FarmersTeachCuttingOpenMessage(FriendlyByteBuf buffer)
+	public FarmersCuttingOpenTeachMessage(FriendlyByteBuf buffer)
 	{
 		super(buffer);
 

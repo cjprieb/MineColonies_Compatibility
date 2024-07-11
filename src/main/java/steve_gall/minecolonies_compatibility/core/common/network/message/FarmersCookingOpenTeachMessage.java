@@ -9,14 +9,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.TeachCookingMenu;
 
-public class FarmersTeachCookingOpenMessage extends ModuleMenuOpenMessage
+public class FarmersCookingOpenTeachMessage extends ModuleMenuOpenMessage
 {
-	public FarmersTeachCookingOpenMessage(IBuildingModuleView module)
+	public FarmersCookingOpenTeachMessage(IBuildingModuleView module)
 	{
 		super(module);
 	}
 
-	public FarmersTeachCookingOpenMessage(FriendlyByteBuf buffer)
+	public FarmersCookingOpenTeachMessage(FriendlyByteBuf buffer)
 	{
 		super(buffer);
 	}
