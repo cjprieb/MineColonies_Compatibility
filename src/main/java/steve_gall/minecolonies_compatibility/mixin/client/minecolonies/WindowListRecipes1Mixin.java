@@ -17,6 +17,7 @@ import steve_gall.minecolonies_compatibility.core.client.gui.ItemIconExtension;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
 import steve_gall.minecolonies_compatibility.module.common.ModuleManager;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.FarmersDelightModule;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CuttingRecipeStorage;
 import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizableRecipeStorage;
 import steve_gall.minecolonies_tweaks.core.client.view.FluidIcon;
@@ -47,6 +48,9 @@ public abstract class WindowListRecipes1Mixin
 		if (accessor.getModule().getRecipes().get(index) instanceof ICustomizableRecipeStorage recipe)
 		{
 			var impl = recipe.getImpl();
+			var displayStacks = recipe.getRecipeType().getOutputDisplayStacks();
+			var outputIndex = (accessor.getLifeCount() / WindowConstants.LIFE_COUNT_DIVIDER) % displayStacks.size();
+			var icon = rowPane.findPaneOfTypeByID(WindowListRecipesAcccessor.getOutputIcon(), ItemIcon.class);
 
 			if (impl instanceof BucketFillingRecipeStorage bucketFilling)
 			{
@@ -73,15 +77,12 @@ public abstract class WindowListRecipes1Mixin
 			}
 			else if (ModuleManager.FARMERSDELIGHT.isLoaded() && impl instanceof CuttingRecipeStorage cutting)
 			{
-				var displayStacks = recipe.getRecipeType().getOutputDisplayStacks();
-				var outputIndex = (accessor.getLifeCount() / WindowConstants.LIFE_COUNT_DIVIDER) % displayStacks.size();
 				var results = cutting.getResults();
 
 				if (0 <= outputIndex && outputIndex < results.size())
 				{
-					var result = results.get(outputIndex);
-					var icon = rowPane.findPaneOfTypeByID(WindowListRecipesAcccessor.getOutputIcon(), ItemIcon.class);
-					((ItemIconExtension) icon).minecolonies_compatibility$setFarmersChance(result.getChance());
+					var chance = results.get(outputIndex).getChance();
+					((ItemIconExtension) icon).minecolonies_compatibility$addTooltip(FarmersDelightModule.getChanceTooltip(chance));
 				}
 
 			}
