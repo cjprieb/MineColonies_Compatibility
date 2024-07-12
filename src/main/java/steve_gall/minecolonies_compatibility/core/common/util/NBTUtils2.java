@@ -1,8 +1,10 @@
 package steve_gall.minecolonies_compatibility.core.common.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,20 +15,25 @@ import net.minecraft.nbt.Tag;
 
 public class NBTUtils2
 {
-	public static <T> List<T> deserializeList(@NotNull CompoundTag tag, @NotNull String key, Function<CompoundTag, T> func)
+	public static <T> List<T> deserializeList(@NotNull CompoundTag tag, @NotNull String key, Function<CompoundTag, T> elementFunc)
+	{
+		return deserializeList(tag, key, ArrayList::new, elementFunc);
+	}
+
+	public static <T, COLLECTION extends Collection<T>> COLLECTION deserializeList(@NotNull CompoundTag tag, @NotNull String key, IntFunction<COLLECTION> collectionFunc, Function<CompoundTag, T> elementFunc)
 	{
 		var listTag = tag.getList(key, Tag.TAG_COMPOUND);
-		var list = new ArrayList<T>();
+		var collection = collectionFunc.apply(listTag.size());
 
 		for (var i = 0; i < listTag.size(); i++)
 		{
-			list.add(func.apply(listTag.getCompound(i)));
+			collection.add(elementFunc.apply(listTag.getCompound(i)));
 		}
 
-		return list;
+		return collection;
 	}
 
-	public static <T> ListTag serializeList(@NotNull CompoundTag tag, @NotNull String key, @NotNull List<T> list, @NotNull Function<T, CompoundTag> func)
+	public static <T> ListTag serializeCollection(@NotNull CompoundTag tag, @NotNull String key, @NotNull Collection<T> list, @NotNull Function<T, CompoundTag> func)
 	{
 		var listTag = new ListTag();
 		tag.put(key, listTag);

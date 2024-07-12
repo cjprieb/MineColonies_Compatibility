@@ -51,7 +51,7 @@ public class FarmersCookingTeachRecipeTransferHandler extends TeachRecipeTransfe
 	protected void serializePayload(FarmersCookingTeachMenu menu, CookingPotRecipe recipe, IRecipeSlotsView recipeSlots, Player player, CompoundTag tag)
 	{
 		var input = this.getDisplayedItemStacks(recipeSlots, RecipeIngredientRole.INPUT);
-		NBTUtils2.serializeList(tag, "input", input, ItemStack::serializeNBT);
+		NBTUtils2.serializeCollection(tag, "input", input, ItemStack::serializeNBT);
 	}
 
 }

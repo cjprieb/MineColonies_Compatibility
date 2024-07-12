@@ -26,7 +26,7 @@ public class CookingRecipeStorage extends GenericedRecipeStorage<CookingGenericR
 	public static void serialize(CompoundTag tag, CookingRecipeStorage recipe)
 	{
 		tag.putString("recipeId", recipe.recipeId.toString());
-		NBTUtils2.serializeList(tag, "ingreidnts", recipe.ingreidnts, StandardFactoryController.getInstance()::serialize);
+		NBTUtils2.serializeCollection(tag, "ingreidnts", recipe.ingreidnts, StandardFactoryController.getInstance()::serialize);
 		tag.put("container", StandardFactoryController.getInstance().serialize(recipe.container));
 		tag.put("output", recipe.output.serializeNBT());
 	}

@@ -29,8 +29,8 @@ public class CuttingRecipeStorage extends GenericedRecipeStorage<CuttingGenericR
 	public static void serialize(CompoundTag tag, CuttingRecipeStorage recipe)
 	{
 		tag.putString("recipeId", recipe.recipeId.toString());
-		NBTUtils2.serializeList(tag, "ingreidnts", recipe.ingreidnts, StandardFactoryController.getInstance()::serialize);
-		NBTUtils2.serializeList(tag, "results", recipe.results, CuttingChanceResult::serializeNBT);
+		NBTUtils2.serializeCollection(tag, "ingreidnts", recipe.ingreidnts, StandardFactoryController.getInstance()::serialize);
+		NBTUtils2.serializeCollection(tag, "results", recipe.results, CuttingChanceResult::serializeNBT);
 		tag.putString("toolType", recipe.toolType.getName());
 	}
 
