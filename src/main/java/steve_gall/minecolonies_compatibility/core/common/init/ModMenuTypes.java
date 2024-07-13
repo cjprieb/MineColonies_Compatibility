@@ -7,8 +7,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.inventory.BucketFillingTeachMenu;
-import steve_gall.minecolonies_compatibility.core.common.inventory.SmithingTemplateInventoryMenu;
 import steve_gall.minecolonies_compatibility.core.common.inventory.SmithingTeachMenu;
+import steve_gall.minecolonies_compatibility.core.common.inventory.SmithingTemplateInventoryMenu;
 
 public class ModMenuTypes
 {

@@ -76,7 +76,7 @@ public abstract class WindowCraftingMixin extends AbstractContainerScreen<Contai
 			}
 
 			primaryOutput = primaryOutput.copyWithCount(primaryOutput.getCount() - inputCount);
-			
+
 			if (primaryOutput.isEmpty())
 			{
 				return;

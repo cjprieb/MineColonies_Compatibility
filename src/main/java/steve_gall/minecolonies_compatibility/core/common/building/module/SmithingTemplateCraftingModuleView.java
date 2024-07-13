@@ -15,17 +15,17 @@ import steve_gall.minecolonies_compatibility.core.common.item.ItemStackCounter;
 public class SmithingTemplateCraftingModuleView extends CraftingModuleView
 {
 	private final ItemStackCounter counter;
-	
+
 	public SmithingTemplateCraftingModuleView()
 	{
 		this.counter = new ItemStackCounter();
 	}
-	
+
 	@Override
 	public void deserialize(@NotNull FriendlyByteBuf buf)
 	{
 		super.deserialize(buf);
-		
+
 		this.counter.deserializeBuffer(buf);
 	}
 
@@ -35,7 +35,7 @@ public class SmithingTemplateCraftingModuleView extends CraftingModuleView
 	{
 		return new WindowListSmithingTemplateRecipes(this.buildingView, Constants.MOD_ID + ":gui/layouthuts/layoutlistrecipes.xml", this);
 	}
-	
+
 	public ItemStackCounter getCounter()
 	{
 		return this.counter;

@@ -20,9 +20,9 @@ import net.minecraft.world.item.crafting.SmithingRecipe;
 import steve_gall.minecolonies_compatibility.api.common.inventory.IMenuRecipeValidator;
 import steve_gall.minecolonies_compatibility.api.common.inventory.MenuRecipeValidatorRecipe;
 import steve_gall.minecolonies_compatibility.core.common.crafting.SmithingCraftingType;
+import steve_gall.minecolonies_compatibility.core.common.crafting.SmithingRecipeAccessor;
 import steve_gall.minecolonies_compatibility.core.common.init.ModCraftingTypes;
 import steve_gall.minecolonies_compatibility.core.common.init.ModMenuTypes;
-import steve_gall.minecolonies_compatibility.mixin.common.minecraft.SmithingRecipeAccessor;
 
 public class SmithingTeachMenu extends TeachRecipeMenu<SmithingRecipe>
 {

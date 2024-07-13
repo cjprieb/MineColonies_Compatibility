@@ -27,7 +27,6 @@ import net.minecraft.world.item.crafting.SmithingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import steve_gall.minecolonies_compatibility.core.common.init.ModTags;
-import steve_gall.minecolonies_compatibility.mixin.common.minecraft.SmithingRecipeAccessor;
 
 public class SmithingCraftingType extends CraftingType
 {
