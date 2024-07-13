@@ -27,6 +27,7 @@ public class CookingGenericRecipe implements IGenericRecipe
 {
 	private final ResourceLocation recipeId;
 	private final List<List<ItemStack>> input;
+	private final List<ItemStack> container;
 	private final ItemStack output;
 
 	public CookingGenericRecipe(CookingPotRecipe recipe)
@@ -38,10 +39,11 @@ public class CookingGenericRecipe implements IGenericRecipe
 	{
 		this.recipeId = recipeId;
 		this.input = new ArrayList<>(ingredients);
+		this.container = new ArrayList<>();
 
 		if (!container.isEmpty() && !container.stream().allMatch(ItemStack::isEmpty))
 		{
-			this.input.add(container);
+			this.container.addAll(container);
 		}
 
 		this.output = output;
@@ -126,7 +128,15 @@ public class CookingGenericRecipe implements IGenericRecipe
 	@Override
 	public @NotNull List<List<ItemStack>> getInputs()
 	{
-		return this.input;
+		var list = new ArrayList<List<ItemStack>>();
+		list.addAll(this.input);
+
+		if (this.container.size() > 0)
+		{
+			list.add(this.container);
+		}
+
+		return list;
 	}
 
 	@Override

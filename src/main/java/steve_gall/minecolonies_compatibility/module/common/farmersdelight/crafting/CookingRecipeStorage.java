@@ -93,7 +93,11 @@ public class CookingRecipeStorage extends GenericedRecipeStorage<CookingGenericR
 	{
 		var input = new ArrayList<ItemStorage>();
 		input.addAll(this.ingreidnts);
-		input.add(this.container);
+
+		if (!this.container.isEmpty())
+		{
+			input.add(this.container);
+		}
 
 		return input;
 	}
