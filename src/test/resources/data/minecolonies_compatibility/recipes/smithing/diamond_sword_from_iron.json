@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:smithing_transform",
+	"base": {
+		"item": "minecraft:iron_sword"
+	},
+	"addition": {
+		"tag": "forge:gems/diamond"
+	},
+	"result": {
+		"item": "minecraft:diamond_sword"
+	},
+	"template": {
+		"item": "minecraft:netherite_upgrade_smithing_template"
+	}
+}

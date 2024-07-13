@@ -1,5 +1,7 @@
 package steve_gall.minecolonies_compatibility.mixin.client.minecolonies;
 
+import java.util.ArrayList;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,9 +15,15 @@ import com.lothrazar.cyclic.util.FluidHelpers.FluidAttributes;
 import com.minecolonies.api.util.constant.WindowConstants;
 import com.minecolonies.core.client.gui.modules.WindowListRecipes;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import steve_gall.minecolonies_compatibility.core.client.gui.ItemIconExtension;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.core.common.building.module.SmithingTemplateCraftingModuleView;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
+import steve_gall.minecolonies_compatibility.core.common.crafting.SmithingTemplateRecipeStorage;
+import steve_gall.minecolonies_compatibility.core.common.item.ItemStackKey;
 import steve_gall.minecolonies_compatibility.module.common.ModuleManager;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.FarmersDelightModule;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CuttingRecipeStorage;
@@ -44,8 +52,9 @@ public abstract class WindowListRecipes1Mixin
 	private void updateElement(int index, Pane rowPane, CallbackInfo ci) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException
 	{
 		var accessor = (WindowListRecipesAcccessor) this.getOuter();
+		var module = accessor.getModule();
 
-		if (accessor.getModule().getRecipes().get(index) instanceof ICustomizableRecipeStorage recipe)
+		if (module.getRecipes().get(index) instanceof ICustomizableRecipeStorage recipe)
 		{
 			var impl = recipe.getImpl();
 			var displayStacks = recipe.getRecipeType().getOutputDisplayStacks();
@@ -72,6 +81,22 @@ public abstract class WindowListRecipes1Mixin
 					}
 
 					fluidIcon.setFluid(bucketFilling.getFluidStack(FluidAttributes.BUCKET_VOLUME));
+				}
+
+			}
+			else if (module instanceof SmithingTemplateCraftingModuleView view && impl instanceof SmithingTemplateRecipeStorage smithingTemplate)
+			{
+				var counter = view.getCounter();
+				var currentCount = counter.get(new ItemStackKey(smithingTemplate.getPrimaryOutput()));
+				var needCount = smithingTemplate.getInputTemplateCount();
+
+				var list = new ArrayList<MutableComponent>();
+				list.add(Component.translatable("minecolonies_compatibility.text.smithing_template_needs", smithingTemplate.getPrimaryOutput().getHoverName(), needCount));
+				list.add(Component.translatable("minecolonies_compatibility.text.smithing_template_counts", currentCount, needCount));
+
+				for (var component : list)
+				{
+					((ItemIconExtension) icon).minecolonies_compatibility$addTooltip(component.withStyle(currentCount >= needCount ? ChatFormatting.GREEN : ChatFormatting.RED));
 				}
 
 			}
