@@ -10,6 +10,7 @@ import com.minecolonies.api.research.IGlobalResearch;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -21,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import steve_gall.minecolonies_compatibility.api.client.jei.GhostIngredientHandler;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
 import steve_gall.minecolonies_compatibility.api.common.plant.FruitIconCache;
+import steve_gall.minecolonies_compatibility.core.client.gui.SmithingTeachScreen;
 import steve_gall.minecolonies_compatibility.core.client.gui.TeachRecipeScreen;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.init.ModJobs;
@@ -56,6 +58,8 @@ public class ModPlugin implements IModPlugin
 	public void registerGuiHandlers(IGuiHandlerRegistration registration)
 	{
 		registration.addGhostIngredientHandler(TeachRecipeScreen.class, new GhostIngredientHandler<>());
+
+		registration.addRecipeClickArea(SmithingTeachScreen.class, 102, 49, 22, 15, RecipeTypes.SMITHING);
 	}
 
 	@Override
@@ -64,6 +68,7 @@ public class ModPlugin implements IModPlugin
 		var transferHelper = registration.getTransferHelper();
 		var recipeType = createRecipeType(ModJobs.FLUID_MANAGER.get());
 		registration.addRecipeTransferHandler(new BucketFillingTeachRecipeTransferHandler(transferHelper, recipeType), recipeType);
+		registration.addRecipeTransferHandler(new TeachSmithingRecipeTransferHandler(transferHelper), RecipeTypes.SMITHING);
 	}
 
 	public Stream<IGlobalResearch> getGlobalResearches()
