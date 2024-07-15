@@ -6,7 +6,6 @@ import steve_gall.minecolonies_compatibility.core.common.entity.ai.guard.GunnerC
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.guard.KnightConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.guard.RangerConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.orchardist.OrchardistConfig;
-import steve_gall.minecolonies_compatibility.module.common.farmersdelight.entity.ai.FarmersCookConfig;
 
 public class JobConfig
 {
@@ -15,7 +14,6 @@ public class JobConfig
 	public final GunnerConfig gunner;
 	public final OrchardistConfig orchardist;
 	public final FluidManagerConfig fluidManager;
-	public final FarmersCookConfig farmersCook;
 
 	public JobConfig(ForgeConfigSpec.Builder builder)
 	{
@@ -37,10 +35,6 @@ public class JobConfig
 
 		builder.push("fluidManager");
 		this.fluidManager = new FluidManagerConfig(builder);
-		builder.pop();
-
-		builder.push("farmersCook");
-		this.farmersCook = new FarmersCookConfig(builder);
 		builder.pop();
 	}
 

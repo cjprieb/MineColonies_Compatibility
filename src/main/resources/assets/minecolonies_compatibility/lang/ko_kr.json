@@ -16,9 +16,9 @@
 	"minecolonies_compatibility.job.fluid_manager": "유체 관리인",
 	"minecolonies_compatibility:fluid_manager.job.desc": "양동이에 유체를 채우고 가마솥에서 용암을 퍼냅니다.",
 	"minecolonies_compatibility:fluid_manager.skills.desc": "제작 속도와 작업 속도에 영향을 줍니다.",
-	"minecolonies_compatibility.job.farmers_cook": "파머스 요리사",
-	"minecolonies_compatibility:farmers_cook.job.desc": "Farmer's Delight 모드의 조리용 냄비를 사용한 요리를 하며, 시민들에게 음식을 나눠줍니다.",
-	"minecolonies_compatibility:farmers_cook.skills.desc": "요리 속도에 영향을 줍니다.",
+	"minecolonies_compatibility.job.farmers_cook": "파머스 요리사(삭제됨, Kitchen에서 다시 고용해주세요.)",
+	"minecolonies_compatibility:farmers_cook.job.desc": "삭제됨, Kitchen에서 다시 고용해주세요.",
+	"minecolonies_compatibility:farmers_cook.skills.desc": "삭제됨, Kitchen에서 다시 고용해주세요.",
 	
 	"_comment_jobs_jei_descs": "JEI 직업 설명",
 	"com.minecolonies.coremod.jei.orchardist": "과일, 나무에 열린 작물을 수확합니다.",

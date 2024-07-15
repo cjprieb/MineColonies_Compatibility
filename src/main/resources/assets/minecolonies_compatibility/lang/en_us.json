@@ -16,9 +16,9 @@
 	"minecolonies_compatibility.job.fluid_manager": "Fluid Manager",
 	"minecolonies_compatibility:fluid_manager.job.desc": "Fill bucket with fluid and Pickup lava from cauldron.",
 	"minecolonies_compatibility:fluid_manager.skills.desc": "Affects crafting speed and pickup speed.",
-	"minecolonies_compatibility.job.farmers_cook": "Farmer's Cook",
-	"minecolonies_compatibility:farmers_cook.job.desc": "Cooks using Farmer's Delight mod's Cooking Pot and hands out food to colonists.",
-	"minecolonies_compatibility:farmers_cook.skills.desc": "Affects cooking speed.",
+	"minecolonies_compatibility.job.farmers_cook": "Farmer's Cook (Deleted, please rehire from Kitchen.)",
+	"minecolonies_compatibility:farmers_cook.job.desc": "Deleted, please rehire from Kitchen.",
+	"minecolonies_compatibility:farmers_cook.skills.desc": "Deleted, please rehire from Kitchen.",
 	
 	"_comment_jobs_jei_descs": "JEI Jobs",
 	"com.minecolonies.coremod.jei.orchardist": "Harvests fruits, leaf crops hanging at tree.",
