@@ -201,8 +201,8 @@ public abstract class EntityAIWorkFarmerMixin extends AbstractEntityAICrafting<J
 		return this.mineBlock(position);
 	}
 
-	@Redirect(method = "hoeIfAble", remap = false, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z", remap = true))
-	private boolean hoeIfAble_setBlockAndUpdate(Level level, BlockPos pos, BlockState next)
+	@Redirect(method = "createCorrectFarmlandForSeed", remap = false, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z", remap = true))
+	private boolean createCorrectFarmlandForSeed_setBlockAndUpdate(Level level, BlockPos pos, BlockState next)
 	{
 		var hand = this.worker.getUsedItemHand();
 		var hoe = this.worker.getInventoryCitizen().getHeldItem(hand);
