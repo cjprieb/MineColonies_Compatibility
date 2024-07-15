@@ -100,7 +100,7 @@ public class RestrictToolItem extends Item implements IBlockOverlayItem
 	@Nullable
 	public ModulePos getModulePos(ItemStack stack)
 	{
-		var tag = PersistentDataHelper.getOrEmpty(stack, TAG_RESTRICT);
+		var tag = stack.getTagElement(TAG_RESTRICT);
 		return tag != null ? new ModulePos(tag.getCompound(TAG_MODULE)) : null;
 	}
 
