@@ -50,6 +50,7 @@
 	"minecolonies_compatibility.text.not_linked": "Not linked",
 	"minecolonies_compatibility.text.recipe_not_found": "Recipe not found",
 	"minecolonies_compatibility.text.unsupported_tool": "Unsupported tool",
+	"minecolonies_compatibility.text.no_primary_result_item": "No primary result item",
 	"minecolonies_compatibility.text.restrict": "Zoning Mode",
 	"minecolonies_compatibility.text.restrict.set1": "Setted first position of working area.",
 	"minecolonies_compatibility.text.restrict.set2": "Setted second position of working area.",

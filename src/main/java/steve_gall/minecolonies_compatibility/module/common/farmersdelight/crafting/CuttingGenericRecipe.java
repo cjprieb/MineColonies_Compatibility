@@ -15,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import steve_gall.minecolonies_compatibility.api.common.crafting.IRecipeSlotTooltipableGenericRecipe;
 import steve_gall.minecolonies_compatibility.api.common.crafting.RecipeSlotRole;
@@ -40,9 +41,9 @@ public class CuttingGenericRecipe implements IRecipeSlotTooltipableGenericRecipe
 
 	public CuttingGenericRecipe(ResourceLocation recipeId, List<List<ItemStack>> ingredients, List<CuttingChanceResult> results, IToolType toolType)
 	{
+		var allResults = new ArrayList<CuttingChanceResult>();
 		this.recipeId = recipeId;
 		this.input = ingredients;
-		this.allResults = results;
 		this.primaryOutputs = new ArrayList<>();
 		this.additionalResults = new ArrayList<>();
 		this.additionalOutputs = new ArrayList<>();
@@ -59,8 +60,18 @@ public class CuttingGenericRecipe implements IRecipeSlotTooltipableGenericRecipe
 				this.additionalOutputs.add(result.getStack());
 			}
 
+			allResults.add(result);
 		}
 
+		if (this.primaryOutputs.size() == 0)
+		{
+			var empty = new ItemStack(Items.BARRIER);
+			empty.setHoverName(Component.translatable("minecolonies_compatibility.text.no_primary_result_item"));
+			allResults.add(0, new CuttingChanceResult(empty, 0.0F));
+			this.primaryOutputs.add(empty);
+		}
+
+		this.allResults = Collections.unmodifiableList(allResults);
 		this.toolType = toolType;
 	}
 

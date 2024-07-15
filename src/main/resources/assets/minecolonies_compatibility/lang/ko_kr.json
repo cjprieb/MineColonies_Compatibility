@@ -50,6 +50,7 @@
 	"minecolonies_compatibility.text.not_linked": "연결 안됨",
 	"minecolonies_compatibility.text.recipe_not_found": "제작법을 찾을 수 없습니다",
 	"minecolonies_compatibility.text.unsupported_tool": "지원되지 않는 도구입니다",
+	"minecolonies_compatibility.text.no_primary_result_item": "기본 결과 아이템이 없습니다",
 	"minecolonies_compatibility.text.restrict": "구역 모드",
 	"minecolonies_compatibility.text.restrict.set1": "작업 구역의 첫 번째 위치를 설정했습니다.",
 	"minecolonies_compatibility.text.restrict.set2": "작업 구역의 두 번째 위치를 설정했습니다.",
