@@ -67,7 +67,7 @@ public class CuttingGenericRecipe implements IRecipeSlotTooltipableGenericRecipe
 	@Override
 	public List<Component> getRecipeSlotToolTip(RecipeSlotRole role, int index)
 	{
-		if (role == RecipeSlotRole.OUTPUT)
+		if (role == RecipeSlotRole.OUTPUT && index < this.allResults.size())
 		{
 			var result = this.allResults.get(index);
 			return FarmersDelightModule.getChanceTooltip(result.getChance());
