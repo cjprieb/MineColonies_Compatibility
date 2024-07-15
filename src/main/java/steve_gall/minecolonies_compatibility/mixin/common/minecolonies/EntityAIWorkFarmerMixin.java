@@ -204,11 +204,19 @@ public abstract class EntityAIWorkFarmerMixin extends AbstractEntityAICrafting<J
 	@Redirect(method = "hoeIfAble", remap = false, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z", remap = true))
 	private boolean hoeIfAble_setBlockAndUpdate(Level level, BlockPos pos, BlockState next)
 	{
-		var hand = this.worker.getUsedItemHand();
-		var hoe = this.worker.getInventoryCitizen().getHeldItem(hand);
-		var tilled = BlockUtils.getHoeTilledState(level, pos, hand, hoe, false);
+		if (next.getBlock() == Blocks.FARMLAND)
+		{
+			var hand = this.worker.getUsedItemHand();
+			var hoe = this.worker.getInventoryCitizen().getHeldItem(hand);
+			var tilled = BlockUtils.getHoeTilledState(level, pos, hand, hoe, false);
 
-		return tilled != null ? level.setBlockAndUpdate(pos, tilled) : false;
+			return tilled != null ? level.setBlockAndUpdate(pos, tilled) : false;
+		}
+		else
+		{
+			return level.setBlockAndUpdate(pos, next);
+		}
+
 	}
 
 	@Inject(method = "findHoeableSurface", remap = false, at = @At(value = "TAIL"), cancellable = true)
