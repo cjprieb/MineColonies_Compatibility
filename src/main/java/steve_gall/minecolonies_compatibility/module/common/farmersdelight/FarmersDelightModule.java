@@ -48,8 +48,7 @@ public class FarmersDelightModule extends AbstractModule
 			CustomizedCrop.register(new TomatoCrop());
 
 			ModBuildings.cook.get().getModuleProducers().add(ModuleBuildingModules.COOKASSISTENT_CUTTING);
-			ModBuildings.cook.get().getModuleProducers().add(ModuleBuildingModules.COOK_WORK);
-			ModBuildings.cook.get().getModuleProducers().add(ModuleBuildingModules.COOK_COOKING);
+			ModBuildings.cook.get().getModuleProducers().add(ModuleBuildingModules.COOKASSISTENT_COOKING);
 		});
 	}
 
