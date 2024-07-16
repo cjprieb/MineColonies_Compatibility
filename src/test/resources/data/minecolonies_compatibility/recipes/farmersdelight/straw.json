@@ -1,0 +1,18 @@
+{
+	"type": "farmersdelight:cutting",
+	"ingredients": [
+		{
+			"item": "minecraft:grass"
+		}
+	],
+	"result": [
+		{
+			"item": "farmersdelight:straw",
+			"count": 1,
+			"chance": 0.5
+		}
+	],
+	"tool": {
+		"tag": "forge:tools/knives"
+	}
+}
