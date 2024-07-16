@@ -97,9 +97,10 @@ public abstract class GenericRecipeCategoryMixin extends JobBasedRecipeCategory<
 
 			if (role != null && index > -1)
 			{
+				final var tooltipRecipe = this.minecolonies_compatibility$recipe;
 				final var tooltipRole = role;
 				final var toolTipIndex = index;
-				slotBuilder.addTooltipCallback((recipeSlotView, tooltip) -> tooltip.addAll(1, this.minecolonies_compatibility$recipe.getRecipeSlotToolTip(tooltipRole, toolTipIndex)));
+				slotBuilder.addTooltipCallback((recipeSlotView, tooltip) -> tooltip.addAll(1, tooltipRecipe.getRecipeSlotToolTip(tooltipRole, toolTipIndex)));
 			}
 
 		}
