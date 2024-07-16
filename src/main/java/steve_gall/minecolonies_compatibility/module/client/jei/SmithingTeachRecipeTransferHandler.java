@@ -16,9 +16,9 @@ import net.minecraft.world.item.crafting.UpgradeRecipe;
 import steve_gall.minecolonies_compatibility.core.common.inventory.SmithingTeachMenu;
 import steve_gall.minecolonies_compatibility.core.common.util.NBTUtils2;
 
-public class TeachSmithingRecipeTransferHandler extends TeachRecipeTransferHandler<SmithingTeachMenu, UpgradeRecipe, UpgradeRecipe>
+public class SmithingTeachRecipeTransferHandler extends TeachRecipeTransferHandler<SmithingTeachMenu, UpgradeRecipe, UpgradeRecipe>
 {
-	public TeachSmithingRecipeTransferHandler(IRecipeTransferHandlerHelper recipeTransferHandlerHelper)
+	public SmithingTeachRecipeTransferHandler(IRecipeTransferHandlerHelper recipeTransferHandlerHelper)
 	{
 		super(recipeTransferHandlerHelper);
 	}

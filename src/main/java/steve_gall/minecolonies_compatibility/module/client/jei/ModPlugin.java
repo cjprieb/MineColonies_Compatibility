@@ -68,7 +68,7 @@ public class ModPlugin implements IModPlugin
 		var transferHelper = registration.getTransferHelper();
 		var recipeType = createRecipeType(ModJobs.FLUID_MANAGER.get());
 		registration.addRecipeTransferHandler(new BucketFillingTeachRecipeTransferHandler(transferHelper, recipeType), recipeType);
-		registration.addRecipeTransferHandler(new TeachSmithingRecipeTransferHandler(transferHelper), RecipeTypes.SMITHING);
+		registration.addRecipeTransferHandler(new SmithingTeachRecipeTransferHandler(transferHelper), RecipeTypes.SMITHING);
 	}
 
 	public Stream<IGlobalResearch> getGlobalResearches()

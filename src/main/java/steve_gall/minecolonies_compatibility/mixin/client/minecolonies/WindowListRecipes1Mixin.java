@@ -44,8 +44,9 @@ public abstract class WindowListRecipes1Mixin
 	private void updateElement(int index, Pane rowPane, CallbackInfo ci) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException
 	{
 		var accessor = (WindowListRecipesAcccessor) this.getOuter();
+		var module = accessor.getModule();
 
-		if (accessor.getModule().getRecipes().get(index) instanceof ICustomizableRecipeStorage recipe)
+		if (module.getRecipes().get(index) instanceof ICustomizableRecipeStorage recipe)
 		{
 			var impl = recipe.getImpl();
 			var displayStacks = recipe.getRecipeType().getOutputDisplayStacks();
