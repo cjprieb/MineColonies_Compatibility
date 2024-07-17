@@ -152,6 +152,13 @@ public class FarmersCuttingTeachMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 			return Component.translatable("minecolonies_compatibility.text.unsupported_tool");
 		}
 
+		var anyPrimary = recipe.getRollableResults().stream().anyMatch(r -> r.getChance() >= 1.0D);
+
+		if (!anyPrimary)
+		{
+			return Component.translatable("minecolonies_compatibility.text.no_primary_result_item");
+		}
+
 		return super.getRecipeError(recipe);
 	}
 
