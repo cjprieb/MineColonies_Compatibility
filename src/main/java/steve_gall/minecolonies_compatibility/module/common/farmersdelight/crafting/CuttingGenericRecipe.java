@@ -17,14 +17,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import steve_gall.minecolonies_compatibility.api.common.crafting.IRecipeSlotTooltipableGenericRecipe;
+import steve_gall.minecolonies_compatibility.api.common.crafting.IRecipeSlotModifiableGenericRecipe;
 import steve_gall.minecolonies_compatibility.api.common.crafting.RecipeSlotRole;
 import steve_gall.minecolonies_compatibility.core.common.crafting.IngredientHelper;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.FarmersDelightModule;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-public class CuttingGenericRecipe implements IRecipeSlotTooltipableGenericRecipe
+public class CuttingGenericRecipe implements IRecipeSlotModifiableGenericRecipe
 {
 	private final ResourceLocation recipeId;
 	private final List<List<ItemStack>> input;
@@ -73,6 +73,21 @@ public class CuttingGenericRecipe implements IRecipeSlotTooltipableGenericRecipe
 
 		this.allResults = Collections.unmodifiableList(allResults);
 		this.toolType = toolType;
+	}
+
+	@Override
+	public boolean isRecipeSlotOptional(RecipeSlotRole role, int index)
+	{
+		if (role == RecipeSlotRole.OUTPUT && index < this.allResults.size())
+		{
+			var result = this.allResults.get(index);
+			return result.getChance() < 1.0F;
+		}
+		else
+		{
+			return false;
+		}
+
 	}
 
 	@Override
