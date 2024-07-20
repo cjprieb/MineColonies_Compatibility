@@ -17,12 +17,13 @@ import com.minecolonies.core.compatibility.jei.JobBasedRecipeCategory;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
+import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.world.item.ItemStack;
-import steve_gall.minecolonies_compatibility.api.common.crafting.IRecipeSlotTooltipableGenericRecipe;
+import steve_gall.minecolonies_compatibility.api.common.crafting.IRecipeSlotModifiableGenericRecipe;
 import steve_gall.minecolonies_compatibility.api.common.crafting.RecipeSlotRole;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingGenericRecipe;
 
@@ -35,13 +36,18 @@ public abstract class GenericRecipeCategoryMixin extends JobBasedRecipeCategory<
 	}
 
 	@Unique
+	private RecipeSlotRole minecolonies_compatibility$role = null;
+	@Unique
+	private int minecolonies_compatibility$roleIndex = 0;
+
+	@Unique
 	private int minecolonies_compatibility$inputIndex = 0;
 	@Unique
 	private int minecolonies_compatibility$outputIndex = 0;
 	@Unique
 	private int minecolonies_compatibility$catalystIndex = 0;
 	@Unique
-	private IRecipeSlotTooltipableGenericRecipe minecolonies_compatibility$recipe = null;
+	private IRecipeSlotModifiableGenericRecipe minecolonies_compatibility$recipe = null;
 
 	@Shadow(remap = false)
 	private int outputSlotX;
@@ -51,10 +57,13 @@ public abstract class GenericRecipeCategoryMixin extends JobBasedRecipeCategory<
 	@Inject(method = "setNormalRecipe", remap = false, at = @At(value = "HEAD"), cancellable = true)
 	private void setNormalRecipe_Head(@NotNull IRecipeLayoutBuilder builder, @NotNull IGenericRecipe recipe, @NotNull IFocusGroup focuses, CallbackInfo ci)
 	{
+		this.minecolonies_compatibility$role = null;
+		this.minecolonies_compatibility$roleIndex = 0;
+
 		this.minecolonies_compatibility$inputIndex = 0;
 		this.minecolonies_compatibility$outputIndex = 0;
 		this.minecolonies_compatibility$catalystIndex = 0;
-		this.minecolonies_compatibility$recipe = recipe instanceof IRecipeSlotTooltipableGenericRecipe genericRecipe ? genericRecipe : null;
+		this.minecolonies_compatibility$recipe = recipe instanceof IRecipeSlotModifiableGenericRecipe genericRecipe ? genericRecipe : null;
 
 		if (recipe instanceof BucketFillingGenericRecipe fillingRecipe)
 		{
@@ -95,17 +104,50 @@ public abstract class GenericRecipeCategoryMixin extends JobBasedRecipeCategory<
 				this.minecolonies_compatibility$catalystIndex++;
 			}
 
+			this.minecolonies_compatibility$role = role;
+			this.minecolonies_compatibility$roleIndex = index;
+
 			if (role != null && index > -1)
 			{
 				final var tooltipRecipe = this.minecolonies_compatibility$recipe;
 				final var tooltipRole = role;
 				final var toolTipIndex = index;
+
+				if (tooltipRecipe.isRecipeSlotOptional(tooltipRole, toolTipIndex))
+				{
+					slotBuilder.setBackground(this.chanceSlot, -1, -1);
+				}
+
 				slotBuilder.addTooltipCallback((recipeSlotView, tooltip) -> tooltip.addAll(1, tooltipRecipe.getRecipeSlotToolTip(tooltipRole, toolTipIndex)));
 			}
 
 		}
+		else
+		{
+			this.minecolonies_compatibility$role = null;
+		}
 
 		return slotBuilder;
+	}
+
+	@Redirect(method = "setNormalRecipe", remap = false, at = @At(value = "INVOKE", target = "Lmezz/jei/api/gui/builder/IRecipeSlotBuilder;setBackground"))
+	private IRecipeSlotBuilder setNormalRecipe_setBackground(IRecipeSlotBuilder builder, IDrawable background, int xOffset, int yOffset)
+	{
+		var recipe = this.minecolonies_compatibility$recipe;
+		var role = this.minecolonies_compatibility$role;
+
+		if (recipe != null && role != null)
+		{
+			var index = this.minecolonies_compatibility$roleIndex;
+
+			if (recipe.isRecipeSlotOptional(role, index))
+			{
+				return builder.setBackground(this.chanceSlot, -1, -1);
+			}
+
+		}
+
+		return builder.setBackground(background, xOffset, yOffset);
 	}
 
 }
