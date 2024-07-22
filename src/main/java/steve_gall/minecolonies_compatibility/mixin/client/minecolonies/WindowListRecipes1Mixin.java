@@ -16,6 +16,7 @@ import com.minecolonies.core.client.gui.modules.WindowListRecipes;
 import steve_gall.minecolonies_compatibility.core.client.gui.ItemIconExtension;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
+import steve_gall.minecolonies_compatibility.core.common.util.ReflectionUtils;
 import steve_gall.minecolonies_compatibility.module.common.ModuleManager;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.FarmersDelightModule;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.crafting.CuttingRecipeStorage;
@@ -26,24 +27,12 @@ import steve_gall.minecolonies_tweaks.core.client.view.FluidIcon;
 public abstract class WindowListRecipes1Mixin
 {
 	@Unique
-	private WindowListRecipes minecolonies_compatibility$this$0;
-
-	private WindowListRecipes getOuter() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException
-	{
-		if (minecolonies_compatibility$this$0 == null)
-		{
-			var field = this.getClass().getDeclaredField("this$0");
-			field.setAccessible(true);
-			minecolonies_compatibility$this$0 = (WindowListRecipes) field.get(this);
-		}
-
-		return minecolonies_compatibility$this$0;
-	}
+	private final WindowListRecipes minecolonies_compatibility$this$0 = ReflectionUtils.getOuter(this);
 
 	@Inject(method = "updateElement", remap = false, at = @At(value = "TAIL"), cancellable = true)
 	private void updateElement(int index, Pane rowPane, CallbackInfo ci) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException
 	{
-		var accessor = (WindowListRecipesAcccessor) this.getOuter();
+		var accessor = (WindowListRecipesAcccessor) this.minecolonies_compatibility$this$0;
 		var module = accessor.getModule();
 
 		if (module.getRecipes().get(index) instanceof ICustomizableRecipeStorage recipe)
