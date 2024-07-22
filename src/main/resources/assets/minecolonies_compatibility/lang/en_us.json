@@ -73,7 +73,7 @@
 	"_comment_module_settings": "Module Settings",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility.tooltip": "Added by %s.",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "Request Firework Rocket",
-	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket.tooltip": "If Archer is using Crossbow, requests Firework Rocket as ammo.",
+	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket.tooltip": "If Archer is using Crossbow, requests Firework Rocket as ammo.\nNeed to research 'Consume Arrows'.",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:need_max_harvest": "Harvest Only Max Age",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:need_max_harvest.tooltip": "Orchardist harvests only max age fruits/crops.",
 	
