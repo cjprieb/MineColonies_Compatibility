@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.ImmutableSet;
+import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.crafting.IGenericRecipe;
 import com.minecolonies.api.crafting.IRecipeStorage;
@@ -28,6 +29,12 @@ public class CookingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	public CookingCraftingModule(JobEntry jobEntry)
 	{
 		super(jobEntry);
+	}
+
+	@Override
+	public void improveRecipe(IRecipeStorage recipe, int count, ICitizenData citizen)
+	{
+
 	}
 
 	@Override
