@@ -59,7 +59,7 @@ public abstract class EntityAIRangerMixin extends AbstractEntityAIGuard<JobRange
 
 				if (this.building.getSetting(ModBuildingModules.REQUEST_FIREWORK_ROCKET).getValue().booleanValue() && InventoryUtils.getItemCountInItemHandler(inventory, item -> item.is(Items.FIREWORK_ROCKET)) < 16)
 				{
-					this.checkIfRequestForItemExistOrCreateAsync(new ItemStack(Items.FIREWORK_ROCKET), 64, 16);
+					this.checkIfRequestForItemExistOrCreateAsync(new ItemStack(Items.FIREWORK_ROCKET), 64, 16, false);
 				}
 
 			}
