@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.lothrazar.cyclic.util.FluidHelpers.FluidAttributes;
+import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.IColonyManager;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
@@ -46,6 +47,12 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 		super(jobEntry);
 	}
 
+	@Override
+	public void improveRecipe(IRecipeStorage recipe, int count, ICitizenData citizen)
+	{
+
+	}
+		
 	@Override
 	public boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state)
 	{

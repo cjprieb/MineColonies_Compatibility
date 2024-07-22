@@ -3,11 +3,13 @@ package steve_gall.minecolonies_compatibility.core.common.building.module;
 import org.jetbrains.annotations.NotNull;
 
 import com.minecolonies.api.IMinecoloniesAPI;
+import com.minecolonies.api.colony.ICitizenData;
 import com.minecolonies.api.colony.buildings.modules.IBuildingEventsModule;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.colony.requestsystem.requestable.IDeliverable;
 import com.minecolonies.api.colony.requestsystem.token.IToken;
 import com.minecolonies.api.crafting.IGenericRecipe;
+import com.minecolonies.api.crafting.IRecipeStorage;
 import com.minecolonies.api.util.InventoryUtils;
 import com.minecolonies.core.colony.buildings.modules.AbstractCraftingBuildingModule;
 
@@ -53,6 +55,12 @@ public class SmithingTemplateCraftingModule extends AbstractCraftingBuildingModu
 
 		this.counter = new ItemStackCounter();
 		this.counter.addListener(this::onCounterChanged);
+	}
+
+	@Override
+	public void improveRecipe(IRecipeStorage recipe, int count, ICitizenData citizen)
+	{
+
 	}
 
 	public void refreshCounter()
