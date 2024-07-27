@@ -67,7 +67,7 @@ public class CocoaFruit extends CustomizedFruit
 	{
 		var drops = context.getDrops(null);
 		var newState = context.getState().setValue(CocoaBlock.AGE, 0);
-		this.replant(context, drops, newState);
+		PlantBlockContext.replant(context, drops, newState);
 		return drops;
 	}
 
