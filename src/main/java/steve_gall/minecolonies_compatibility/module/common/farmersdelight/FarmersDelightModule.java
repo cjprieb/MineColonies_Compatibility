@@ -12,6 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedCrop;
+import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.FarmersCookingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.FarmersCuttingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.common.AbstractModule;
@@ -46,6 +47,9 @@ public class FarmersDelightModule extends AbstractModule
 		e.enqueueWork(() ->
 		{
 			CustomizedCrop.register(new TomatoCrop());
+			CustomizedFruit.register(new BrownMushroomColonyFruit());
+			CustomizedFruit.register(new RedMushroomColonyFruit());
+			CustomizedFruit.register(new RiceFruit());
 
 			ModBuildings.kitchen.get().getModuleProducers().add(ModuleBuildingModules.CHEF_CUTTING);
 			ModBuildings.kitchen.get().getModuleProducers().add(ModuleBuildingModules.CHEF_COOKING);
