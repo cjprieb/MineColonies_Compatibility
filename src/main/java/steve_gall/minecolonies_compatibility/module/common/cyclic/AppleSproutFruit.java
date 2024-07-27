@@ -70,7 +70,7 @@ public class AppleSproutFruit extends CustomizedFruit
 		// https://github.com/Lothrazar/Cyclic/blob/trunk/1.20.1/src/main/resources/data/cyclic/loot_tables/blocks/apple_sprout.json
 		var drops = context.getDrops(harvester);
 		var newState = context.getState().getBlock().defaultBlockState();
-		this.replant(context, drops, newState);
+		PlantBlockContext.replant(context, drops, newState);
 		return drops;
 	}
 
