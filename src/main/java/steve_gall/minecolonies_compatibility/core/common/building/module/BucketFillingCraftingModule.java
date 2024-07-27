@@ -52,7 +52,7 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 	{
 
 	}
-		
+
 	@Override
 	public boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state)
 	{
