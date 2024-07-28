@@ -4,6 +4,7 @@ import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.colony.buildings.modules.IBuildingModuleView;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -37,6 +38,12 @@ public class FarmersCookingOpenTeachMessage extends ModuleMenuOpenMessage
 	protected void toBuffer(FriendlyByteBuf buffer, IBuildingModule module)
 	{
 		super.toBuffer(buffer, module);
+	}
+
+	@Override
+	protected Component getDisplayName()
+	{
+		return Component.translatable(this.desc + ".menu");
 	}
 
 }
