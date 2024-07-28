@@ -73,7 +73,6 @@
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking.menu": "냄비로 조리하는 제작법",
 	
 	"_comment_module_settings": "모듈 설정",
-	"com.minecolonies.coremod.setting.minecolonies_compatibility.tooltip": "%s에서 추가됨.",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "폭죽 로켓 요청",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket.tooltip": "궁수가 쇠뇌를 사용하고 있다면, 폭죽 로켓을 요청합니다.\n'화살 소모'를 연구해야 합니다.",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:need_max_harvest": "최대 성장만 수확",
