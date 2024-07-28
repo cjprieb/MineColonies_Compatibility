@@ -9,7 +9,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.FarmersCuttingTeachMenu;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.CuttingTeachMenu;
 
 public class FarmersCuttingOpenTeachMessage extends ModuleMenuOpenMessage
 {
@@ -40,7 +40,7 @@ public class FarmersCuttingOpenTeachMessage extends ModuleMenuOpenMessage
 	@Override
 	protected AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player, IBuildingModule module)
 	{
-		return new FarmersCuttingTeachMenu(windowId, inventory, module, this.toolType);
+		return new CuttingTeachMenu(windowId, inventory, module, this.toolType);
 	}
 
 	@Override
