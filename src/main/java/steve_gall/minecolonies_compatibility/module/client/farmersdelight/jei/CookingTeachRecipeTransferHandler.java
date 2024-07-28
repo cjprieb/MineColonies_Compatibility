@@ -12,25 +12,25 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import steve_gall.minecolonies_compatibility.core.common.util.NBTUtils2;
 import steve_gall.minecolonies_compatibility.module.client.jei.TeachRecipeTransferHandler;
-import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.FarmersCookingTeachMenu;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.CookingTeachMenu;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
-public class FarmersCookingTeachRecipeTransferHandler extends TeachRecipeTransferHandler<FarmersCookingTeachMenu, CookingPotRecipe, CookingPotRecipe>
+public class CookingTeachRecipeTransferHandler extends TeachRecipeTransferHandler<CookingTeachMenu, CookingPotRecipe, CookingPotRecipe>
 {
-	public FarmersCookingTeachRecipeTransferHandler(IRecipeTransferHandlerHelper recipeTransferHandlerHelper)
+	public CookingTeachRecipeTransferHandler(IRecipeTransferHandlerHelper recipeTransferHandlerHelper)
 	{
 		super(recipeTransferHandlerHelper);
 	}
 
 	@Override
-	public Class<? extends FarmersCookingTeachMenu> getContainerClass()
+	public Class<? extends CookingTeachMenu> getContainerClass()
 	{
-		return FarmersCookingTeachMenu.class;
+		return CookingTeachMenu.class;
 	}
 
 	@Override
-	public Optional<MenuType<FarmersCookingTeachMenu>> getMenuType()
+	public Optional<MenuType<CookingTeachMenu>> getMenuType()
 	{
 		return Optional.empty();
 	}
@@ -42,13 +42,13 @@ public class FarmersCookingTeachRecipeTransferHandler extends TeachRecipeTransfe
 	}
 
 	@Override
-	protected CookingPotRecipe getRecipe(FarmersCookingTeachMenu menu, CookingPotRecipe categoryRecipe, IRecipeSlotsView recipeSlots, Player player)
+	protected CookingPotRecipe getRecipe(CookingTeachMenu menu, CookingPotRecipe categoryRecipe, IRecipeSlotsView recipeSlots, Player player)
 	{
 		return categoryRecipe;
 	}
 
 	@Override
-	protected void serializePayload(FarmersCookingTeachMenu menu, CookingPotRecipe recipe, IRecipeSlotsView recipeSlots, Player player, CompoundTag tag)
+	protected void serializePayload(CookingTeachMenu menu, CookingPotRecipe recipe, IRecipeSlotsView recipeSlots, Player player, CompoundTag tag)
 	{
 		var input = this.getDisplayedItemStacks(recipeSlots, RecipeIngredientRole.INPUT);
 		NBTUtils2.serializeCollection(tag, "input", input, ItemStack::serializeNBT);
