@@ -1,4 +1,4 @@
-package steve_gall.minecolonies_compatibility.module.common.vinery;
+package steve_gall.minecolonies_compatibility.module.common.lets_do_vinery;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -6,7 +6,7 @@ import net.satisfy.vinery.registry.GrapeTypeRegistry;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
 import steve_gall.minecolonies_compatibility.module.common.AbstractModule;
 
-public class VineryModule extends AbstractModule
+public class LetsDoVineryModule extends AbstractModule
 {
 	@Override
 	protected void onFMLCommonSetup(FMLCommonSetupEvent e)

@@ -1,4 +1,4 @@
-package steve_gall.minecolonies_compatibility.module.common.vinery;
+package steve_gall.minecolonies_compatibility.module.common.lets_do_vinery;
 
 import java.util.Arrays;
 import java.util.Collections;
