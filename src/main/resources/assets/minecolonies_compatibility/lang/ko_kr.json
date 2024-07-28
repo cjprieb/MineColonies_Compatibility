@@ -71,6 +71,14 @@
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife.menu": "식칼로 써는 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "Farmer's Delight - 냄비로 조리하는 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking.menu": "냄비로 조리하는 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_stove": "[Let's Do] Bakery - 스토브 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_stove.menu": "스토브 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_bowl": "[Let's Do] Bakery - 제작용 그릇 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_bowl.menu": "제작용 그릇 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_baking": "[Let's Do] Bakery - 제빵 스테이션 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_baking.menu": "제빵 스테이션 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_cooking": "[Let's Do] Bakery - 작은 요리 냄비 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_cooking.menu": "작은 요리 냄비 제작법",
 	
 	"_comment_module_settings": "모듈 설정",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "폭죽 로켓 요청",
@@ -83,6 +91,10 @@
 	"minecolonies_compatibility.interaction.no_fluid_source": "제 건물에 %1$s이(가) 담긴 유체 탱크 혹은 액체 %1$s이(가) 없어요! 사용할 수 있도록 설치해주세요!",
 	"minecolonies_compatibility.interaction.no_farmers_cutting_board": "제 건물에 Farmer's Delight의 도마가 없어요! 사용할 수 있도록 설치해주세요!",
 	"minecolonies_compatibility.interaction.no_farmers_heated_cooking_pot": "제 건물에 달궈진 Farmer's Delight의 조리용 냄비가 없어요! 조리용 냄비와 그 아래에 열원을 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_lets_do_stove": "제 건물에 [Let's Do] Bakery의 오븐 혹은 스토브가 없어요! 사용할 수 있도록 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_lets_do_bowl": "제 건물에 [Let's Do] Bakery의 제작용 그릇이 없어요! 사용할 수 있도록 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_lets_do_baker_station": "제 건물에 [Let's Do] Bakery의 제빵 스테이션이 없어요! 사용할 수 있도록 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_lets_do_burend_cooking_pot": "제 건물에 달궈진 [Let's Do] Bakery의 작은 요리 냄비가 없어요! 작은 요리 냄비와 그 아래에 열원을 설치해주세요!",
 	
 	"_eof": "EOF"
 }

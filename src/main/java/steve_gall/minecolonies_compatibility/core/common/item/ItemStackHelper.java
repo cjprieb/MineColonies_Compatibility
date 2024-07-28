@@ -36,6 +36,11 @@ public class ItemStackHelper
 		return outputs;
 	}
 
+	public static List<ItemStack> filterNotEmpty(List<ItemStack> inputs)
+	{
+		return inputs.stream().filter(stack -> !stack.isEmpty()).toList();
+	}
+
 	public static boolean isTool(@NotNull ItemStack stack, @NotNull IToolType toolType)
 	{
 		return ItemStackUtils.isTool(stack, toolType);
