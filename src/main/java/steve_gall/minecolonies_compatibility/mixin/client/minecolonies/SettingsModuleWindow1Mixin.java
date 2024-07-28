@@ -15,6 +15,7 @@ import com.minecolonies.api.colony.buildings.modules.settings.ISettingsModuleVie
 import com.minecolonies.api.colony.buildings.views.IBuildingView;
 import com.minecolonies.core.client.gui.modules.SettingsModuleWindow;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.fml.ModList;
@@ -41,16 +42,14 @@ public class SettingsModuleWindow1Mixin
 			if (rowDescriptionField != null && rowDescriptionField.getHoverPane() == null)
 			{
 				var ttBuilder = PaneBuilders.tooltipBuilder().hoverPane(rowDescriptionField);
-				ttBuilder.append(Component.translatable("com.minecolonies.coremod.setting." + id.getNamespace() + ".tooltip", ModList.get().getModContainerById(id.getNamespace()).get().getModInfo().getDisplayName()));
-
 				var settingTooltipKey = "com.minecolonies.coremod.setting." + id.toString() + ".tooltip";
 
 				if (I18n.exists(settingTooltipKey))
 				{
-					ttBuilder.newLine();
-					ttBuilder.append(Component.translatable(settingTooltipKey));
+					ttBuilder.appendNL(Component.translatable(settingTooltipKey));
 				}
 
+				ttBuilder.appendNL(Component.literal(ModList.get().getModContainerById(id.getNamespace()).get().getModInfo().getDisplayName()).withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC));
 				rowDescriptionField.setHoverPane(ttBuilder.build());
 			}
 
