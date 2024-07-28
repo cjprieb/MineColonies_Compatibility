@@ -14,6 +14,7 @@ import steve_gall.minecolonies_compatibility.module.common.cyclic.CyclicModule;
 import steve_gall.minecolonies_compatibility.module.common.delightful.DelightfulModule;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.FarmersDelightModule;
 import steve_gall.minecolonies_compatibility.module.common.ie.IEModule;
+import steve_gall.minecolonies_compatibility.module.common.lets_do_vinery.LetsDoVineryModule;
 import steve_gall.minecolonies_compatibility.module.common.minecraft.MinecraftModule;
 import steve_gall.minecolonies_compatibility.module.common.oreberries.OreberriesModule;
 import steve_gall.minecolonies_compatibility.module.common.pamhc2trees.PamsHarvestCraft2TreesModule;
@@ -24,7 +25,6 @@ import steve_gall.minecolonies_compatibility.module.common.reliquary.ReliquaryMo
 import steve_gall.minecolonies_compatibility.module.common.storagenetwork.StorageNetworkModule;
 import steve_gall.minecolonies_compatibility.module.common.thermal.ThermalModule;
 import steve_gall.minecolonies_compatibility.module.common.undergarden.UndergardenModule;
-import steve_gall.minecolonies_compatibility.module.common.vinery.VineryModule;
 
 public class ModuleManager
 {
@@ -53,6 +53,7 @@ public class ModuleManager
 	public static final OptionalModule<DelightfulModule> DELIGHTFUL = register("delightful", () -> DelightfulModule::new);
 	public static final OptionalModule<FarmersDelightModule> FARMERSDELIGHT = register("farmersdelight", () -> FarmersDelightModule::new);
 	public static final OptionalModule<IEModule> IE = register("immersiveengineering", () -> IEModule::new);
+	public static final OptionalModule<LetsDoVineryModule> LETS_DO_VINERY = register("vinery", () -> LetsDoVineryModule::new);
 	public static final OptionalModule<OreberriesModule> OREBERRIES = register("oreberriesreplanted", () -> OreberriesModule::new);
 	public static final OptionalModule<PamsHarvestCraft2TreesModule> PHC2TREES = register("pamhc2trees", () -> PamsHarvestCraft2TreesModule::new);
 	public static final OptionalModule<PolymorphModule> POLYMORPH = register("polymorph", () -> PolymorphModule::new);
@@ -62,7 +63,6 @@ public class ModuleManager
 	public static final OptionalModule<StorageNetworkModule> STORAGE_NETWORK = register("storagenetwork", () -> StorageNetworkModule::new);
 	public static final OptionalModule<ThermalModule> THERMAL = register("thermal", () -> ThermalModule::new);
 	public static final OptionalModule<UndergardenModule> UNDERGARDEN = register("undergarden", () -> UndergardenModule::new);
-	public static final OptionalModule<VineryModule> VINERY = register("vinery", () -> VineryModule::new);
 
 	private static <MODULE extends AbstractModule> OptionalModule<MODULE> register(String modid, Supplier<Supplier<MODULE>> initializer)
 	{
