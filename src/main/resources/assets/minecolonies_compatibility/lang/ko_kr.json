@@ -67,8 +67,10 @@
 	"com.minecolonies.coremod.gui.workerhuts.fluid_manager_lava_cauldron": "용암 가마솥",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.smithing": "장비 강화 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.smithing_template_crafting": "대장장이 형판 조합 제작법",
-	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "식칼로 써는 제작법",
-	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "냄비로 조리하는 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "Farmer's Delight - 식칼로 써는 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife.menu": "식칼로 써는 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "Farmer's Delight - 냄비로 조리하는 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking.menu": "냄비로 조리하는 제작법",
 	
 	"_comment_module_settings": "모듈 설정",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility.tooltip": "%s에서 추가됨.",

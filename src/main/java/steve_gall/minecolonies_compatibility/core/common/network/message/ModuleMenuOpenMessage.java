@@ -14,7 +14,7 @@ import net.minecraftforge.network.NetworkHooks;
 
 public abstract class ModuleMenuOpenMessage extends BuildingModuleMessage
 {
-	private final String desc;
+	protected final String desc;
 
 	public ModuleMenuOpenMessage(IBuildingModuleView module)
 	{

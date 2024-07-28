@@ -67,8 +67,10 @@
 	"com.minecolonies.coremod.gui.workerhuts.fluid_manager_lava_cauldron": "Lava Cauldron",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.smithing": "Gear Upgrading Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.smithing_template_crafting": "Smithing Template Crafting Recipes",
-	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "Cutting Recipes with Knife",
-	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "Cooking Recipes with Cooking Pot",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife": "Farmer's Delight - Cutting Recipes with Knife",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cutting_knife.menu": "Cutting Recipes with Knife",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking": "Farmer's Delight - Cooking Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.farmers_cooking.menu": "Cooking Recipes",
 	
 	"_comment_module_settings": "Module Settings",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility.tooltip": "Added by %s.",
