@@ -97,7 +97,7 @@ public class CuttingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	@NotNull
 	public Component getWorkingBlockNotFoundMessage()
 	{
-		return Component.translatable("minecolonies_compatibility.interaction.no_cutting_board");
+		return Component.translatable("minecolonies_compatibility.interaction.no_farmers_cutting_board");
 	}
 
 	public IToolType getToolType()
