@@ -2,6 +2,7 @@ package steve_gall.minecolonies_compatibility.core.common.item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -14,24 +15,25 @@ public class ItemStackHelper
 {
 	public static List<ItemStack> getCraftingRemainings(List<ItemStack> list)
 	{
-		var craftingRemainings = new ArrayList<ItemStack>();
+		return mapAndFilterNotEmpty(list, ItemStack::getCraftingRemainingItem);
+	}
 
-		for (var stack : list)
+	public static List<ItemStack> mapAndFilterNotEmpty(List<ItemStack> inputs, Function<ItemStack, ItemStack> func)
+	{
+		var outputs = new ArrayList<ItemStack>();
+
+		for (var input : inputs)
 		{
-			if (stack.hasCraftingRemainingItem())
+			var output = func.apply(input);
+
+			if (!output.isEmpty())
 			{
-				var craftingRemaining = stack.getCraftingRemainingItem();
-
-				if (!craftingRemaining.isEmpty())
-				{
-					craftingRemainings.add(craftingRemaining);
-				}
-
+				outputs.add(output);
 			}
 
 		}
 
-		return craftingRemainings;
+		return outputs;
 	}
 
 	public static boolean isTool(@NotNull ItemStack stack, @NotNull IToolType toolType)
