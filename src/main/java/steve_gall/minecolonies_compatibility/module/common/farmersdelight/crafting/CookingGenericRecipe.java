@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import steve_gall.minecolonies_compatibility.core.common.crafting.GenericRecipeHelper;
 import steve_gall.minecolonies_compatibility.core.common.crafting.IngredientHelper;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
@@ -29,6 +30,7 @@ public class CookingGenericRecipe implements IGenericRecipe
 	private final List<List<ItemStack>> input;
 	private final List<ItemStack> container;
 	private final ItemStack output;
+	private final List<ItemStack> additionalOutputs;
 
 	public CookingGenericRecipe(CookingPotRecipe recipe)
 	{
@@ -47,6 +49,7 @@ public class CookingGenericRecipe implements IGenericRecipe
 		}
 
 		this.output = output;
+		this.additionalOutputs = GenericRecipeHelper.getAdditionalOutputs(ingredients, CookingGenericRecipe::getCraftingRemainingStack);
 	}
 
 	@Override
@@ -76,36 +79,7 @@ public class CookingGenericRecipe implements IGenericRecipe
 	@Override
 	public @NotNull List<ItemStack> getAdditionalOutputs()
 	{
-		var list = new ArrayList<ItemStack>();
-
-		for (var input : this.input)
-		{
-			var allRemaining = ItemStack.EMPTY;
-
-			for (var stack : input)
-			{
-				var remain = getCraftingRemainingStack(stack);
-
-				if (remain.isEmpty() || (!allRemaining.isEmpty() && !ItemStack.matches(allRemaining, remain)))
-				{
-					allRemaining = ItemStack.EMPTY;
-					break;
-				}
-				else
-				{
-					allRemaining = remain;
-				}
-
-			}
-
-			if (!allRemaining.isEmpty())
-			{
-				list.add(allRemaining);
-			}
-
-		}
-
-		return list;
+		return this.additionalOutputs;
 	}
 
 	public static ItemStack getCraftingRemainingStack(ItemStack stack)

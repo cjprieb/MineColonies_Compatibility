@@ -2,6 +2,7 @@ package steve_gall.minecolonies_compatibility.core.common.crafting;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.util.ItemStackUtils;
@@ -14,6 +15,11 @@ public class ItemStorageHelper
 	public static List<ItemStack> getCraftingRemainings(List<ItemStorage> list)
 	{
 		return ItemStackHelper.getCraftingRemainings(list.stream().map(ItemStorage::getItemStack).toList());
+	}
+
+	public static List<ItemStack> mapAndFilterNotEmpty(List<ItemStorage> list, Function<ItemStack, ItemStack> func)
+	{
+		return ItemStackHelper.mapAndFilterNotEmpty(list.stream().map(ItemStorage::getItemStack).toList(), func);
 	}
 
 	public static List<List<ItemStack>> getStacksLists(List<ItemStorage> list)

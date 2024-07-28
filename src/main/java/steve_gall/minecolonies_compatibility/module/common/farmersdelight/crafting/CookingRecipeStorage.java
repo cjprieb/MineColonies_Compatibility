@@ -44,6 +44,7 @@ public class CookingRecipeStorage extends GenericedRecipeStorage<CookingGenericR
 	private final List<ItemStorage> ingreidnts;
 	private final ItemStorage container;
 	private final ItemStack output;
+	private final List<ItemStack> secondaryOutputs;
 
 	private final CookingGenericRecipe genericRecipe;
 
@@ -53,6 +54,8 @@ public class CookingRecipeStorage extends GenericedRecipeStorage<CookingGenericR
 		this.ingreidnts = Collections.unmodifiableList(ingreidnts);
 		this.container = container;
 		this.output = output;
+		this.secondaryOutputs = ItemStorageHelper.mapAndFilterNotEmpty(ingreidnts, CookingGenericRecipe::getCraftingRemainingStack);
+
 		this.genericRecipe = new CookingGenericRecipe(recipeId, ItemStorageHelper.getStacksLists(ingreidnts), ItemStorageHelper.getStacks(container), output);
 	}
 
@@ -105,20 +108,7 @@ public class CookingRecipeStorage extends GenericedRecipeStorage<CookingGenericR
 	@Override
 	public List<ItemStack> getSecondaryOutputs()
 	{
-		var list = new ArrayList<ItemStack>();
-
-		for (var storage : this.ingreidnts)
-		{
-			var stack = CookingGenericRecipe.getCraftingRemainingStack(storage.getItemStack());
-
-			if (!stack.isEmpty())
-			{
-				list.add(stack);
-			}
-
-		}
-
-		return list;
+		return this.secondaryOutputs;
 	}
 
 	public List<ItemStorage> getIngredients()
