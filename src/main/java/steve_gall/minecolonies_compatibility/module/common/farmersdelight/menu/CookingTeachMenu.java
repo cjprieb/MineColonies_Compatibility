@@ -34,8 +34,6 @@ public class CookingTeachMenu extends TeachRecipeMenu<CookingPotRecipe>
 	public static final int CRAFTING_COLS = 3;
 	public static final int CRAFTING_X = 26;
 	public static final int CRAFTING_Y = 17;
-	public static final int CRAFTING_COLUMNS = 3;
-	public static final int CRAFTING_ROW = 2;
 
 	public static final int RESULT_X = 130;
 	public static final int RESULT_Y = 30;
@@ -58,7 +56,7 @@ public class CookingTeachMenu extends TeachRecipeMenu<CookingPotRecipe>
 	{
 		this.addInventorySlots(INVENTORY_X, INVENTORY_Y);
 
-		this.inputContainer = new TeachContainer(this, CRAFTING_COLUMNS * CRAFTING_ROW);
+		this.inputContainer = new TeachContainer(this, CRAFTING_SLOTS);
 
 		for (var i = 0; i < CRAFTING_SLOTS; i++)
 		{
