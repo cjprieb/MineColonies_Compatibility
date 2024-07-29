@@ -22,6 +22,11 @@ public class ItemStorageHelper
 		return ItemStackHelper.mapAndFilterNotEmpty(list.stream().map(ItemStorage::getItemStack).toList(), func);
 	}
 
+	public static List<ItemStorage> filterNotEmpty(List<ItemStorage> inputs)
+	{
+		return inputs.stream().filter(storage -> !storage.isEmpty()).toList();
+	}
+
 	public static List<List<ItemStack>> getStacksLists(List<ItemStorage> list)
 	{
 		return list.stream().map(ItemStorageHelper::getStacks).toList();

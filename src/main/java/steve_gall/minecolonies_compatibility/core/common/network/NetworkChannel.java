@@ -16,6 +16,9 @@ import steve_gall.minecolonies_compatibility.core.common.network.message.Farmers
 import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhostAcceptFluidMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhostAcceptItemMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.JEIRecipeTransferMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.LetsDoBakeryBakingOpenTeachMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.LetsDoBakeryCookingOpenTeachMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.LetsDoBakeryStoveOpenTeachMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.NetworkStorageRefreshMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.PolymorphTeachResultItemMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.RestrictGiveToolMessage;
@@ -48,6 +51,9 @@ public class NetworkChannel
 		this.registerMessage(SmithingOpenTeachMessage.class, SmithingOpenTeachMessage::new);
 		this.registerMessage(FarmersCuttingOpenTeachMessage.class, FarmersCuttingOpenTeachMessage::new);
 		this.registerMessage(FarmersCookingOpenTeachMessage.class, FarmersCookingOpenTeachMessage::new);
+		this.registerMessage(LetsDoBakeryStoveOpenTeachMessage.class, LetsDoBakeryStoveOpenTeachMessage::new);
+		this.registerMessage(LetsDoBakeryBakingOpenTeachMessage.class, LetsDoBakeryBakingOpenTeachMessage::new);
+		this.registerMessage(LetsDoBakeryCookingOpenTeachMessage.class, LetsDoBakeryCookingOpenTeachMessage::new);
 	}
 
 	public void sendToServer(AbstractMessage message)
