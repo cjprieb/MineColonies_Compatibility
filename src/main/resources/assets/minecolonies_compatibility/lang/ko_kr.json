@@ -61,7 +61,7 @@
 	"minecolonies_compatibility.text.restrict.too_big": "작업 구역이 너무 넓습니다. (설정된 블록 수: %1$s, 최대 블록 수: %2$s)",
 	
 	"_comment_modules": "모듈",
-	"com.minecolonies.coremod.gui.workerhuts.fruitlist_blacklist": "과일 블랙리스트",
+	"com.minecolonies.coremod.gui.workerhuts.fruitlist_blacklist": "과일 목록",
 	"com.minecolonies.coremod.gui.workerhuts.network_storage": "네트워크 저장소",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.bucket_filling": "양동이를 채우는 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.fluid_manager_lava_cauldron": "용암 가마솥",
