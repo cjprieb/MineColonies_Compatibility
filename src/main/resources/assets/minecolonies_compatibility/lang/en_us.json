@@ -61,7 +61,7 @@
 	"minecolonies_compatibility.text.restrict.too_big": "Working area is too large. (Setted volume: %1$s, Max volume: %2$s)",
 	
 	"_comment_modules": "Modules",
-	"com.minecolonies.coremod.gui.workerhuts.fruitlist_blacklist": "Fruit Blacklist",
+	"com.minecolonies.coremod.gui.workerhuts.fruitlist_blacklist": "Fruits",
 	"com.minecolonies.coremod.gui.workerhuts.network_storage": "Network Storage",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.bucket_filling": "Bucket Filling Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.fluid_manager_lava_cauldron": "Lava Cauldron",
