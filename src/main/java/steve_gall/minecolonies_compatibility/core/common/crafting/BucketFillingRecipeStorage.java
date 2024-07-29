@@ -25,7 +25,7 @@ public class BucketFillingRecipeStorage extends GenericedRecipeStorage<BucketFil
 	public static String TAG_FLUID_TAG = "fluidTag";
 	public static String TAG_FILLED_BUCKET = "filledBucket";
 
-	public static void serialize(CompoundTag tag, BucketFillingRecipeStorage recipe)
+	public static void serialize(BucketFillingRecipeStorage recipe, CompoundTag tag)
 	{
 		tag.put(TAG_EMPTY_BUCKET, recipe.emptyBucket.serializeNBT());
 		tag.putString(TAG_FLUID, ForgeRegistries.FLUIDS.getKey(recipe.fluid).toString());

@@ -78,7 +78,7 @@ public class CookingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	@NotNull
 	public Component getWorkingBlockNotFoundMessage()
 	{
-		return Component.translatable("minecolonies_compatibility.interaction.no_lets_do_burend_cooking_pot");
+		return Component.translatable("minecolonies_compatibility.interaction.no_lets_do_heated_cooking_pot");
 	}
 
 }

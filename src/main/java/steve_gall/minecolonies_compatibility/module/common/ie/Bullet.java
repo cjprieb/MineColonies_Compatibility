@@ -42,7 +42,7 @@ public class Bullet implements IDeliverableObject
 		return new Bullet(minCount);
 	}
 
-	public static void serialize(@NotNull CompoundTag tag, Bullet request)
+	public static void serialize(Bullet request, @NotNull CompoundTag tag)
 	{
 		tag.putInt("minCount", request.minCount);
 	}

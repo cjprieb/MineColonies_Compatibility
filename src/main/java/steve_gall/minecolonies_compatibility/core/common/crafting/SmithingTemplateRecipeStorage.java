@@ -30,7 +30,7 @@ public class SmithingTemplateRecipeStorage implements ICustomizedRecipeStorage
 	public static final String TAG_PRIMARY_OUTPUT = "primaryOutput";
 	public static final String TAG_SECONDARY_OUTPUTS = "secondaryOutputs";
 
-	public static void serialize(CompoundTag tag, SmithingTemplateRecipeStorage recipe)
+	public static void serialize(SmithingTemplateRecipeStorage recipe, CompoundTag tag)
 	{
 		tag.putInt(TAG_GRID_SIZE, recipe.gridSize);
 		NBTUtils2.serializeCollection(tag, TAG_INPUT, recipe.input, StandardFactoryController.getInstance()::serialize);

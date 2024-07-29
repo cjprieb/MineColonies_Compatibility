@@ -94,7 +94,7 @@
 	"minecolonies_compatibility.interaction.no_lets_do_stove": "제 건물에 [Let's Do] Bakery의 오븐 혹은 스토브가 없어요! 사용할 수 있도록 설치해주세요!",
 	"minecolonies_compatibility.interaction.no_lets_do_bowl": "제 건물에 [Let's Do] Bakery의 제작용 그릇이 없어요! 사용할 수 있도록 설치해주세요!",
 	"minecolonies_compatibility.interaction.no_lets_do_baker_station": "제 건물에 [Let's Do] Bakery의 제빵 스테이션이 없어요! 사용할 수 있도록 설치해주세요!",
-	"minecolonies_compatibility.interaction.no_lets_do_burend_cooking_pot": "제 건물에 달궈진 [Let's Do] Bakery의 작은 요리 냄비가 없어요! 작은 요리 냄비와 그 아래에 열원을 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_lets_do_heated_cooking_pot": "제 건물에 달궈진 [Let's Do] Bakery의 작은 요리 냄비가 없어요! 작은 요리 냄비와 그 아래에 열원을 설치해주세요!",
 	
 	"_eof": "EOF"
 }

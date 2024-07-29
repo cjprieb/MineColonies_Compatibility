@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
 import steve_gall.minecolonies_compatibility.api.common.plant.HarvesterContext;
 import steve_gall.minecolonies_compatibility.api.common.plant.PlantBlockContext;
-import steve_gall.minecolonies_compatibility.mixin.common.thermal.CropBlockCoFHAccessor;
+import steve_gall.minecolonies_compatibility.mixin.common.minecraft.CropBlockAccessor;
 
 public class MushroomFruit extends CustomizedFruit
 {
@@ -33,7 +33,7 @@ public class MushroomFruit extends CustomizedFruit
 	@Override
 	public @NotNull List<ItemStack> getBlockIcons()
 	{
-		var seed = ((CropBlockCoFHAccessor) this.block).invokeGetBaseSeedId();
+		var seed = ((CropBlockAccessor) this.block).invokeGetBaseSeedId();
 
 		if (this.block.asItem() == Items.AIR || this.block.asItem() == seed)
 		{

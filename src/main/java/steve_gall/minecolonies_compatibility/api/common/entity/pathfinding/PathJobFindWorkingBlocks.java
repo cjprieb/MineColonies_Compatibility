@@ -57,7 +57,7 @@ public class PathJobFindWorkingBlocks<RESULT extends WorkingBlocksPathResult> ex
 	{
 		var y = pos.getY();
 
-		for (var i = 0; i < this.searchHeight - 1; i++)
+		for (var i = 0; i < this.searchHeight; i++)
 		{
 			this.getResult().test(this, pos.setY(y + i));
 		}

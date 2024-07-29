@@ -5,6 +5,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"minecraft.BlockEntityMixin",
+		"minecraft.CropBlockAccessor",
 		"minecraft.SmithingTransformRecipeAccessor",
 		"minecraft.SmithingTrimRecipeAccessor",
 		

@@ -12,9 +12,6 @@ public interface CropBlockCoFHAccessor
 	@Invoker(value = "getCropItem", remap = false)
 	ItemLike invokeGetCropItem();
 
-	@Invoker(value = "getBaseSeedId", remap = false)
-	ItemLike invokeGetBaseSeedId();
-
 	@Invoker(value = "getPostHarvestAge", remap = false)
 	int invokeGetPostHarvestAge();
 }
