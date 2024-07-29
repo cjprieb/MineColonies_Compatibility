@@ -16,6 +16,8 @@ import steve_gall.minecolonies_tweaks.api.common.pathfinding.SimplePathJob;
 
 public class PathJobFindWorkingBlocks<RESULT extends WorkingBlocksPathResult> extends SimplePathJob<RESULT>
 {
+	private int searchHeight = 2;
+
 	public PathJobFindWorkingBlocks(@NotNull Level level, @NotNull BlockPos start, @NotNull BlockPos home, int range, @Nullable Mob entity, @NotNull RESULT result)
 	{
 		super(level, start, home, range, entity, result);
@@ -53,8 +55,24 @@ public class PathJobFindWorkingBlocks<RESULT extends WorkingBlocksPathResult> ex
 	@Override
 	protected boolean testPos(@NotNull MutableBlockPos pos)
 	{
-		this.getResult().test(this, pos);
+		var y = pos.getY();
+
+		for (var i = 0; i < this.searchHeight - 1; i++)
+		{
+			this.getResult().test(this, pos.setY(y + i));
+		}
+
 		return false;
+	}
+
+	public int getSearchHeight()
+	{
+		return this.searchHeight;
+	}
+
+	public void setSearchHeight(int searchHeight)
+	{
+		this.searchHeight = Math.max(searchHeight, 1);
 	}
 
 }

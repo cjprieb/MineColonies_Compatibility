@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import com.lothrazar.cyclic.util.FluidHelpers.FluidAttributes;
 import com.minecolonies.api.colony.ICitizenData;
@@ -32,8 +31,6 @@ import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.registries.ForgeRegistries;
 import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractCraftingModuleWithExternalWorkingBlocks;
 import steve_gall.minecolonies_compatibility.api.common.building.module.ICraftingResultListenerModule;
-import steve_gall.minecolonies_compatibility.api.common.entity.pathfinding.PathJobFindWorkingBlocks;
-import steve_gall.minecolonies_compatibility.api.common.entity.pathfinding.WorkingBlocksPathResult;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingCraftingType;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingRecipeStorage;
 import steve_gall.minecolonies_compatibility.core.common.init.ModCraftingTypes;
@@ -128,19 +125,6 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 		}
 
 		return this.getWorkingBlockNotFoundMessage();
-	}
-
-	@Override
-	public @NotNull WorkingBlocksPathResult createPathResult(@Nullable AbstractEntityCitizen citizen)
-	{
-		return new WorkingBlocksPathResult(this)
-		{
-			@Override
-			public boolean test(@NotNull PathJobFindWorkingBlocks<?> job, @NotNull BlockPos.MutableBlockPos pos)
-			{
-				return super.test(job, pos) || super.test(job, pos.setY(pos.getY() - 1));
-			}
-		};
 	}
 
 	@Override
