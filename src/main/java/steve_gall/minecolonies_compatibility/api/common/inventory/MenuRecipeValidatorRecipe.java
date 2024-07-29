@@ -33,12 +33,21 @@ public abstract class MenuRecipeValidatorRecipe<RECIPE extends Recipe<CONTAINER>
 		{
 			if (recipe.isSpecial() || !this.level.getGameRules().getBoolean(GameRules.RULE_LIMITED_CRAFTING) || player.getRecipeBook().contains(recipe) || player.isCreative())
 			{
-				return recipe;
+				if (this.test(recipe, player, container))
+				{
+					return recipe;
+				}
+
 			}
 
 		}
 
 		return null;
+	}
+
+	protected boolean test(RECIPE recipe, ServerPlayer player, Container container)
+	{
+		return true;
 	}
 
 	@Override
