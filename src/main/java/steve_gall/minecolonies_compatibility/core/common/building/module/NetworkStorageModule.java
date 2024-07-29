@@ -33,8 +33,6 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractModuleWithExternalWorkingBlocks;
 import steve_gall.minecolonies_compatibility.api.common.building.module.INetworkStorageView;
 import steve_gall.minecolonies_compatibility.api.common.building.module.NetworkStorageViewRegistry;
-import steve_gall.minecolonies_compatibility.api.common.entity.pathfinding.PathJobFindWorkingBlocks;
-import steve_gall.minecolonies_compatibility.api.common.entity.pathfinding.WorkingBlocksPathResult;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.util.StreamUtils;
 
@@ -297,19 +295,6 @@ public class NetworkStorageModule extends AbstractModuleWithExternalWorkingBlock
 	public boolean isDestroyed()
 	{
 		return this.isDestroyed;
-	}
-
-	@Override
-	public WorkingBlocksPathResult createPathResult(@Nullable AbstractEntityCitizen citizen)
-	{
-		return new WorkingBlocksPathResult(this)
-		{
-			@Override
-			public boolean test(@NotNull PathJobFindWorkingBlocks<?> job, @NotNull BlockPos.MutableBlockPos pos)
-			{
-				return super.test(job, pos) || super.test(job, pos.setY(pos.getY() + 1));
-			}
-		};
 	}
 
 }

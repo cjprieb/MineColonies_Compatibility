@@ -85,18 +85,4 @@ public class CookingCraftingModule extends AbstractCraftingModuleWithExternalWor
 		return Component.translatable("minecolonies_compatibility.interaction.no_farmers_heated_cooking_pot");
 	}
 
-	@Override
-	public WorkingBlocksPathResult createPathResult(@Nullable AbstractEntityCitizen citizen)
-	{
-		return new WorkingBlocksPathResult(this)
-		{
-			@Override
-			public boolean test(@NotNull PathJobFindWorkingBlocks<?> job, @NotNull BlockPos.MutableBlockPos pos)
-			{
-				return super.test(job, pos) || super.test(job, pos.setY(pos.getY() + 1));
-			}
-
-		};
-	}
-
 }
