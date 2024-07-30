@@ -43,7 +43,7 @@ public class Magazine implements IDeliverableObject
 		return new Magazine(minCount);
 	}
 
-	public static void serialize(@NotNull CompoundTag tag, Magazine request)
+	public static void serialize(Magazine request, @NotNull CompoundTag tag)
 	{
 		tag.putInt("minCount", request.minCount);
 	}

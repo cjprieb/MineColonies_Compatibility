@@ -29,9 +29,9 @@ public class LetsDoBakeryModule extends AbstractModule
 		ModuleCraftingTypes.REGISTER.register(fml_bus);
 		ModuleMenuTypes.REGISTER.register(fml_bus);
 
-		CustomizedRecipeStorageRegistry.INSTANCE.register(StoveRecipeStorage.ID, (tag, storage) -> storage.serialize(tag), StoveRecipeStorage::new);
-		CustomizedRecipeStorageRegistry.INSTANCE.register(BakingRecipeStorage.ID, (tag, storage) -> storage.serialize(tag), BakingRecipeStorage::new);
-		CustomizedRecipeStorageRegistry.INSTANCE.register(CookingRecipeStorage.ID, (tag, storage) -> storage.serialize(tag), CookingRecipeStorage::new);
+		CustomizedRecipeStorageRegistry.INSTANCE.register(StoveRecipeStorage.ID, StoveRecipeStorage::serialize, StoveRecipeStorage::new);
+		CustomizedRecipeStorageRegistry.INSTANCE.register(BakingRecipeStorage.ID, BakingRecipeStorage::serialize, BakingRecipeStorage::new);
+		CustomizedRecipeStorageRegistry.INSTANCE.register(CookingRecipeStorage.ID, CookingRecipeStorage::serialize, CookingRecipeStorage::new);
 	}
 
 	@Override

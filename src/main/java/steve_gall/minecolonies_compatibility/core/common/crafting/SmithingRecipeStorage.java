@@ -27,7 +27,7 @@ public class SmithingRecipeStorage implements ICustomizedRecipeStorage
 	public static final String TAG_ADDITION = "addition";
 	public static final String TAG_RESULT = "result";
 
-	public static void serialize(CompoundTag tag, SmithingRecipeStorage recipe)
+	public static void serialize(SmithingRecipeStorage recipe, CompoundTag tag)
 	{
 		tag.putString(TAG_RECIPE_ID, recipe.recipeId.toString());
 		tag.put(TAG_BASE, StandardFactoryController.getInstance().serialize(recipe.base));

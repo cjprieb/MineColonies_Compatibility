@@ -15,9 +15,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import satisfy.bakery.entity.CookingPotEntity;
 import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractCraftingModuleWithExternalWorkingBlocks;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.init.ModuleCraftingTypes;
-import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 
 public class CookingCraftingModule extends AbstractCraftingModuleWithExternalWorkingBlocks
 {
@@ -35,7 +35,7 @@ public class CookingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	@Override
 	public boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state)
 	{
-		return level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot && cookingPot.isHeated();
+		return level.getBlockEntity(pos) instanceof CookingPotEntity cookingPot && cookingPot.isBeingBurned();
 	}
 
 	@Override

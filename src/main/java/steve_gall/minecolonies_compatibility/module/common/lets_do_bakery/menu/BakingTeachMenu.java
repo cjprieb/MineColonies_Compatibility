@@ -33,8 +33,8 @@ public class BakingTeachMenu extends TeachRecipeMenu<BakerStationRecipe>
 	public static final int INVENTORY_X = 8;
 	public static final int INVENTORY_Y = 84;
 
-	public static final int CRAFTING_SLOTS = 3;
-	public static final int CRAFTING_X = 26;
+	public static final int CRAFTING_SLOTS = 2;
+	public static final int CRAFTING_X = 44;
 	public static final int CRAFTING_Y = 26;
 	public static final int CRAFTING_COLUMNS = 3;
 	public static final int CRAFTING_ROW = 2;

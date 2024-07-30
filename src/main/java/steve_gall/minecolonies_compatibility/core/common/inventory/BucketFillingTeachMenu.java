@@ -67,7 +67,7 @@ public class BucketFillingTeachMenu extends TeachRecipeMenu<BucketFillingRecipeS
 			public @NotNull CompoundTag serialize(@NotNull BucketFillingRecipeStorage recipe)
 			{
 				var tag = new CompoundTag();
-				BucketFillingRecipeStorage.serialize(tag, recipe);
+				BucketFillingRecipeStorage.serialize(recipe, tag);
 				return tag;
 			}
 		};

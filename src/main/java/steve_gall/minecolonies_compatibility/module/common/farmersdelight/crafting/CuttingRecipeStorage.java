@@ -26,7 +26,7 @@ public class CuttingRecipeStorage extends GenericedRecipeStorage<CuttingGenericR
 {
 	public static final ResourceLocation ID = MineColoniesCompatibility.rl("farmerdelight_cutting");
 
-	public static void serialize(CompoundTag tag, CuttingRecipeStorage recipe)
+	public static void serialize(CuttingRecipeStorage recipe, CompoundTag tag)
 	{
 		tag.putString("recipeId", recipe.recipeId.toString());
 		NBTUtils2.serializeCollection(tag, "ingreidnts", recipe.ingreidnts, StandardFactoryController.getInstance()::serialize);
