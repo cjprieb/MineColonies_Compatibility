@@ -6,33 +6,43 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelWriter;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
 import steve_gall.minecolonies_compatibility.api.common.plant.HarvesterContext;
 import steve_gall.minecolonies_compatibility.api.common.plant.PlantBlockContext;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
-public abstract class MushroomColonyFruit extends CustomizedFruit
+public class MushroomColonyFruit extends CustomizedFruit
 {
-	public abstract Block getBlock();
+	private final MushroomColonyBlock block;
 
-	public abstract Item getItem();
+	public MushroomColonyFruit(MushroomColonyBlock block)
+	{
+		this.block = block;
+	}
+
+	@Override
+	public @NotNull ResourceLocation getId()
+	{
+		return ForgeRegistries.BLOCKS.getKey(this.block);
+	}
 
 	@Override
 	public @NotNull List<ItemStack> getBlockIcons()
 	{
-		return Arrays.asList(new ItemStack(this.getBlock()));
+		return Arrays.asList(new ItemStack(this.block));
 	}
 
 	@Override
 	public @NotNull List<ItemStack> getItemIcons()
 	{
-		return Arrays.asList(new ItemStack(this.getItem()));
+		return Arrays.asList(this.block.getCloneItemStack(null, null, null));
 	}
 
 	@Override
@@ -50,8 +60,7 @@ public abstract class MushroomColonyFruit extends CustomizedFruit
 	@Override
 	public boolean isMaxHarvest(@NotNull PlantBlockContext context)
 	{
-		var block = (MushroomColonyBlock) context.getState().getBlock();
-		return context.getState().getValue(MushroomColonyBlock.COLONY_AGE) == block.getMaxAge();
+		return context.getState().getValue(MushroomColonyBlock.COLONY_AGE) == this.block.getMaxAge();
 	}
 
 	@Override
@@ -70,7 +79,12 @@ public abstract class MushroomColonyFruit extends CustomizedFruit
 			level.setBlock(context.getPosition(), state.setValue(MushroomColonyBlock.COLONY_AGE, age - 1), Block.UPDATE_CLIENTS);
 		}
 
-		return Collections.singletonList(new ItemStack(this.getItem()));
+		return Collections.singletonList(this.block.getCloneItemStack(context.getLevel(), context.getPosition(), context.getState()));
+	}
+
+	public MushroomColonyBlock getBlock()
+	{
+		return this.block;
 	}
 
 }
