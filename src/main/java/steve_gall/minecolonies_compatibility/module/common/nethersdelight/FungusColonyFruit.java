@@ -1,4 +1,4 @@
-package steve_gall.minecolonies_compatibility.module.common.farmersdelight;
+package steve_gall.minecolonies_compatibility.module.common.nethersdelight;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,13 +16,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
 import steve_gall.minecolonies_compatibility.api.common.plant.HarvesterContext;
 import steve_gall.minecolonies_compatibility.api.common.plant.PlantBlockContext;
+import umpaz.nethersdelight.common.block.FungusColonyBlock;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
-public class MushroomColonyFruit extends CustomizedFruit
+public class FungusColonyFruit extends CustomizedFruit
 {
-	private final MushroomColonyBlock block;
+	private final FungusColonyBlock block;
 
-	public MushroomColonyFruit(MushroomColonyBlock block)
+	public FungusColonyFruit(FungusColonyBlock block)
 	{
 		this.block = block;
 	}
@@ -54,13 +55,13 @@ public class MushroomColonyFruit extends CustomizedFruit
 	@Override
 	public boolean canHarvest(@NotNull PlantBlockContext context)
 	{
-		return context.getState().getValue(MushroomColonyBlock.COLONY_AGE) > 0;
+		return context.getState().getValue(FungusColonyBlock.COLONY_AGE) > 0;
 	}
 
 	@Override
 	public boolean isMaxHarvest(@NotNull PlantBlockContext context)
 	{
-		return context.getState().getValue(MushroomColonyBlock.COLONY_AGE) == this.block.getMaxAge();
+		return context.getState().getValue(FungusColonyBlock.COLONY_AGE) == this.block.getMaxAge();
 	}
 
 	@Override
@@ -82,7 +83,7 @@ public class MushroomColonyFruit extends CustomizedFruit
 		return Collections.singletonList(this.block.getCloneItemStack(context.getLevel(), context.getPosition(), context.getState()));
 	}
 
-	public MushroomColonyBlock getBlock()
+	public FungusColonyBlock getBlock()
 	{
 		return this.block;
 	}

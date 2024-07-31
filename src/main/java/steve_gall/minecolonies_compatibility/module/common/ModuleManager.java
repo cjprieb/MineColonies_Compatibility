@@ -17,6 +17,7 @@ import steve_gall.minecolonies_compatibility.module.common.ie.IEModule;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.LetsDoBakeryModule;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_vinery.LetsDoVineryModule;
 import steve_gall.minecolonies_compatibility.module.common.minecraft.MinecraftModule;
+import steve_gall.minecolonies_compatibility.module.common.nethersdelight.NethersDelightModule;
 import steve_gall.minecolonies_compatibility.module.common.oreberries.OreberriesModule;
 import steve_gall.minecolonies_compatibility.module.common.pamhc2trees.PamsHarvestCraft2TreesModule;
 import steve_gall.minecolonies_compatibility.module.common.polymorph.PolymorphModule;
@@ -56,6 +57,7 @@ public class ModuleManager
 	public static final OptionalModule<IEModule> IE = register("immersiveengineering", () -> IEModule::new);
 	public static final OptionalModule<LetsDoBakeryModule> LETS_DO_BAKERY = register("bakery", () -> LetsDoBakeryModule::new);
 	public static final OptionalModule<LetsDoVineryModule> LETS_DO_VINERY = register("vinery", () -> LetsDoVineryModule::new);
+	public static final OptionalModule<NethersDelightModule> NETHERS_DELIGHT = register("nethersdelight", () -> NethersDelightModule::new);
 	public static final OptionalModule<OreberriesModule> OREBERRIES = register("oreberriesreplanted", () -> OreberriesModule::new);
 	public static final OptionalModule<PamsHarvestCraft2TreesModule> PHC2TREES = register("pamhc2trees", () -> PamsHarvestCraft2TreesModule::new);
 	public static final OptionalModule<PolymorphModule> POLYMORPH = register("polymorph", () -> PolymorphModule::new);

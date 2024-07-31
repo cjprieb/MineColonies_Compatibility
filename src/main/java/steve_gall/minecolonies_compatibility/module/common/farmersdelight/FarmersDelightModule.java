@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedCrop;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.CookingTeachScreen;
@@ -23,6 +24,7 @@ import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.M
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.ModuleJobs;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.ModuleMenuTypes;
 import steve_gall.minecolonies_tweaks.api.common.crafting.CustomizedRecipeStorageRegistry;
+import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
 public class FarmersDelightModule extends AbstractModule
 {
@@ -47,8 +49,16 @@ public class FarmersDelightModule extends AbstractModule
 		e.enqueueWork(() ->
 		{
 			CustomizedCrop.register(new TomatoCrop());
-			CustomizedFruit.register(new BrownMushroomColonyFruit());
-			CustomizedFruit.register(new RedMushroomColonyFruit());
+
+			for (var block : ForgeRegistries.BLOCKS.getValues())
+			{
+				if (block instanceof MushroomColonyBlock mushroomColony)
+				{
+					CustomizedFruit.register(new MushroomColonyFruit(mushroomColony));
+				}
+
+			}
+
 			CustomizedFruit.register(new RiceFruit());
 
 			ModBuildings.cook.get().getModuleProducers().add(ModuleBuildingModules.COOKASSISTENT_CUTTING);
