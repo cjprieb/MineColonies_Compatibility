@@ -1,6 +1,7 @@
 package steve_gall.minecolonies_compatibility.module.common;
 
 import net.minecraftforge.common.ForgeConfigSpec;
+import steve_gall.minecolonies_compatibility.module.common.ewewukeks_musketmod.ewewukekMusketConfig;
 import steve_gall.minecolonies_compatibility.module.common.ie.IEConfig;
 import steve_gall.minecolonies_compatibility.module.common.refinedstorage.RSConfig;
 import steve_gall.minecolonies_compatibility.module.common.reliquary.ReliquaryConfig;
@@ -10,6 +11,7 @@ public class ModulesConfig
 	public final IEConfig IE;
 	public final ReliquaryConfig reliquary;
 	public final RSConfig RS;
+	public final ewewukekMusketConfig ewewukekMusket;
 
 	public ModulesConfig(ForgeConfigSpec.Builder builder)
 	{
@@ -26,6 +28,11 @@ public class ModulesConfig
 		builder.comment("Refined Storage");
 		builder.push("refinedstorage");
 		this.RS = new RSConfig(builder);
+		builder.pop();
+
+		builder.comment("ewewukek's Musket Mod");
+		builder.push("ewewukeks_musketmod");
+		this.ewewukekMusket = new ewewukekMusketConfig(builder);
 		builder.pop();
 	}
 
