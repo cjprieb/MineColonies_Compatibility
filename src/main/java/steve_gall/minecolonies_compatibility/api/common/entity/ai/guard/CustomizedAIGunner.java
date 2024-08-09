@@ -6,10 +6,14 @@ import org.jetbrains.annotations.Nullable;
 import com.minecolonies.api.colony.guardtype.GuardType;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
+import com.minecolonies.api.util.DamageSourceKeys;
 import com.minecolonies.api.util.InventoryUtils;
+import com.minecolonies.api.util.constant.GuardConstants;
 import com.minecolonies.core.colony.buildings.modules.settings.GuardTaskSetting;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.item.ItemStack;
@@ -171,6 +175,15 @@ public abstract class CustomizedAIGunner extends CustomizedAIGuard
 	{
 		var user = context.getUser();
 
+		if (user.distanceTo(target) <= GuardConstants.MAX_DISTANCE_FOR_ATTACK)
+		{
+			if (this.canMeleeAttack(context, target))
+			{
+				return true;
+			}
+
+		}
+
 		if (!this.checkAmmo(user))
 		{
 			return false;
@@ -187,6 +200,43 @@ public abstract class CustomizedAIGunner extends CustomizedAIGuard
 
 		return true;
 	}
+
+	public boolean canMeleeAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	{
+		return false;
+	}
+
+	@Override
+	public final void doAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	{
+		var user = context.getUser();
+
+		if (user.distanceTo(target) <= GuardConstants.MAX_DISTANCE_FOR_ATTACK && this.canMeleeAttack(context, target))
+		{
+			this.doMeleeAttack(context, target);
+		}
+		else
+		{
+			this.doRangedAttack(context, target);
+		}
+
+	}
+
+	public void doMeleeAttack(CustomizedAIContext context, LivingEntity target)
+	{
+		var user = context.getUser();
+		var damage = this.getMeleeAttackDamage(context, target);
+		var damageType = user.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageSourceKeys.GUARD);
+		var source = new DamageSource(damageType, user);
+		target.hurt(source, damage);
+	}
+
+	public float getMeleeAttackDamage(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	{
+		return 1.0F;
+	}
+
+	public abstract void doRangedAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target);
 
 	@Override
 	public int getAttackDelay(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
@@ -274,10 +324,16 @@ public abstract class CustomizedAIGunner extends CustomizedAIGuard
 
 	public boolean isReloadComplete(@NotNull AbstractEntityCitizen user)
 	{
+		var reloadTime = this.getReloadingTime(user);
+		var reloadDuration = this.getReloadDuration();
+		return reloadTime >= reloadDuration;
+	}
+
+	public int getReloadingTime(@NotNull AbstractEntityCitizen user)
+	{
 		var current = user.level().getGameTime();
 		var started = this.getOrEmptyTag(user).getLong("reloadStarted");
-		var reloadDuration = this.getReloadDuration();
-		return current >= started + reloadDuration;
+		return (int) (current - started);
 	}
 
 	public boolean isReloading(@NotNull AbstractEntityCitizen user)

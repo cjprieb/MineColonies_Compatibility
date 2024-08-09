@@ -6,6 +6,7 @@ import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.AttackDamageConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.AttackDelayConfig;
+import steve_gall.minecolonies_compatibility.core.common.entity.ai.guard.GunnerConfig;
 import steve_gall.minecolonies_compatibility.module.common.AbstractModuleConfig;
 
 public class IEConfig extends AbstractModuleConfig
@@ -54,16 +55,14 @@ public class IEConfig extends AbstractModuleConfig
 				this.occurNoise = builder.define("occurNoise", true);
 
 				builder.push("attackDelay");
-				this.attackDelay = new AttackDelayConfig(builder, new AttackDelayConfig.DefaultValues()//
-						.base(60).decreasePerSkillLevel(1.0D).decreasePerBuildingLevel(0.0D));
+				this.attackDelay = new AttackDelayConfig(builder, GunnerConfig.getDefaultDelay());
 				builder.pop();
 
 				builder.comment("If revolver has 'Precision Scope', search/attack range will be multiply this");
 				this.scopeRangeMultiplier = builder.defineInRange("scopeRangeMultiplier", 1.25D, 1.00D, 2.50D);
 
 				builder.push("defaultBulletDamage");
-				this.defaultBulletDamage = new AttackDamageConfig(builder, new AttackDamageConfig.DefaultValues()//
-						.base(2.0D).increasePerSkillLevel(0.2D).increasePerBuildingLevel(0.0D));
+				this.defaultBulletDamage = new AttackDamageConfig(builder, GunnerConfig.getDefaultDamage());
 				this.defaultBulletHeadshotMultiplier = builder.defineInRange("headshotMultiplier", 1.5D, 1.0D, 3.0D);
 				builder.pop();
 			}

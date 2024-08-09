@@ -4,6 +4,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.AttackDamageConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.AttackDelayConfig;
+import steve_gall.minecolonies_compatibility.core.common.entity.ai.guard.GunnerConfig;
 import steve_gall.minecolonies_compatibility.module.common.AbstractModuleConfig;
 
 public class ReliquaryConfig extends AbstractModuleConfig
@@ -43,13 +44,11 @@ public class ReliquaryConfig extends AbstractModuleConfig
 				this.reloadDuration = builder.defineInRange("reloadDuration", 60, 0, 600);
 
 				builder.push("attackDelay");
-				this.attackDelay = new AttackDelayConfig(builder, new AttackDelayConfig.DefaultValues()//
-						.base(60).decreasePerSkillLevel(1.0D).decreasePerBuildingLevel(0.0D));
+				this.attackDelay = new AttackDelayConfig(builder, GunnerConfig.getDefaultDelay());
 				builder.pop();
 
 				builder.push("defaultBulletDamage");
-				this.defaultBulletDamage = new AttackDamageConfig(builder, new AttackDamageConfig.DefaultValues()//
-						.base(2.0D).increasePerSkillLevel(0.2D).increasePerBuildingLevel(0.0D));
+				this.defaultBulletDamage = new AttackDamageConfig(builder, GunnerConfig.getDefaultDamage());
 				builder.pop();
 			}
 

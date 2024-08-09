@@ -17,10 +17,8 @@ import com.minecolonies.core.entity.ai.combat.AttackMoveAI;
 import com.minecolonies.core.entity.ai.combat.TargetAI;
 import com.minecolonies.core.entity.ai.workers.guard.AbstractEntityAIGuard;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
-import com.minecolonies.core.entity.pathfinding.navigation.MinecoloniesAdvancedPathNavigate;
 import com.minecolonies.core.entity.pathfinding.pathresults.PathResult;
 
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -187,11 +185,8 @@ public abstract class AttackMoveAIMixin<T extends Mob & IThreatTableEntity> exte
 
 			if (parentAI.getSelectedAI() instanceof CustomizedAIAttack attack)
 			{
-				var speed = attack.getCombatMovementSpeed(parentAI.getAIContext());
-				var min = MinecoloniesAdvancedPathNavigate.MIN_SPEED_ALLOWED;
-				var max = MinecoloniesAdvancedPathNavigate.MAX_SPEED_ALLOWED;
-				speed = Mth.clamp(speed, min, max);
-
+				var context = parentAI.getAIContext();
+				var speed = attack.getJobPathSpeed(context);
 				cir.setReturnValue(((ICustomizableAttackMoveAI<?, T>) this).createPathResult(target, this.user, speed));
 			}
 			else

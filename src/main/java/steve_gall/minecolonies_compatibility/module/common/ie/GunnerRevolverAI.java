@@ -3,17 +3,13 @@ package steve_gall.minecolonies_compatibility.module.common.ie;
 import org.jetbrains.annotations.NotNull;
 
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
-import com.minecolonies.api.util.DamageSourceKeys;
-import com.minecolonies.api.util.constant.GuardConstants;
 
 import blusunrize.immersiveengineering.api.tool.BulletHandler.IBullet;
 import blusunrize.immersiveengineering.common.items.BulletItem;
 import blusunrize.immersiveengineering.common.items.RevolverItem;
 import blusunrize.immersiveengineering.common.util.IESounds;
 import blusunrize.immersiveengineering.common.util.Utils;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -63,11 +59,6 @@ public class GunnerRevolverAI extends CustomizedAIGunner
 	{
 		var user = context.getUser();
 
-		if (user.distanceTo(target) <= GuardConstants.MAX_DISTANCE_FOR_ATTACK)
-		{
-			return true;
-		}
-
 		if (!super.canAttack(context, target))
 		{
 			return false;
@@ -82,6 +73,12 @@ public class GunnerRevolverAI extends CustomizedAIGunner
 
 		}
 
+		return true;
+	}
+
+	@Override
+	public boolean canMeleeAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	{
 		return true;
 	}
 
@@ -106,7 +103,22 @@ public class GunnerRevolverAI extends CustomizedAIGunner
 	}
 
 	@Override
-	public void doAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	public float getMeleeAttackDamage(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	{
+		var damage = super.getMeleeAttackDamage(context, target);
+		var weapon = context.getWeapon();
+		var melee = RevolverItem.getUpgradeValue_d(weapon, "melee");
+
+		if (melee != 0.0D)
+		{
+			damage += (float) melee;
+		}
+
+		return damage;
+	}
+
+	@Override
+	public void doRangedAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
 	{
 		var config = this.getWeaponConfig();
 		var bulletMode = this.getJobConfig().bulletMode.get();
@@ -117,64 +129,47 @@ public class GunnerRevolverAI extends CustomizedAIGunner
 		var weapon = context.getWeapon();
 		var level = user.level();
 
-		if (user.distanceTo(target) <= GuardConstants.MAX_DISTANCE_FOR_ATTACK)
+		ItemStack bullet = null;
+		IBullet bulletType = null;
+
+		if (bulletMode.canUse() && bulletSlot > -1)
 		{
-			var melee = RevolverItem.getUpgradeValue_d(weapon, "melee");
-			var damage = 1.0F;
-
-			if (melee != 0.0D)
-			{
-				damage += (float) melee;
-			}
-
-			var source = new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageSourceKeys.GUARD), user);
-			target.hurt(source, damage);
+			bullet = inventory.extractItem(bulletSlot, 1, false);
+			bulletType = ((BulletItem) bullet.getItem()).getType();
 		}
-		else
+		else if (bulletMode.canDefault())
 		{
-			ItemStack bullet = null;
-			IBullet bulletType = null;
+			bullet = ItemStack.EMPTY.copy();
+			bulletType = DefaultBullet.INSTANCE;
+			DefaultBullet.putDamage(bullet, config.defaultBulletDamage.apply(user, this.getPrimarySkillLevel(user)));
+		}
 
-			if (bulletMode.canUse() && bulletSlot > -1)
-			{
-				bullet = inventory.extractItem(bulletSlot, 1, false);
-				bulletType = ((BulletItem) bullet.getItem()).getType();
-			}
-			else if (bulletMode.canDefault())
-			{
-				bullet = ItemStack.EMPTY.copy();
-				bulletType = DefaultBullet.INSTANCE;
-				DefaultBullet.putDamage(bullet, config.defaultBulletDamage.apply(user, this.getPrimarySkillLevel(user)));
-			}
+		if (bulletType != null && bullet != null)
+		{
+			var noise = RevolverItem.fireProjectile(level, user, weapon, bulletType, bullet);
+			this.insertItem(user, inventory, bulletType.getCasing(bullet).copy());
 
-			if (bulletType != null && bullet != null)
+			if (config.occurNoise.get().booleanValue())
 			{
-				var noise = RevolverItem.fireProjectile(level, user, weapon, bulletType, bullet);
-				this.insertItem(user, inventory, bulletType.getCasing(bullet).copy());
+				Utils.attractEnemies(user, 64.0F * noise);
 
-				if (config.occurNoise.get().booleanValue())
+				if (noise > 0.2F)
 				{
-					Utils.attractEnemies(user, 64.0F * noise);
-
-					if (noise > 0.2F)
-					{
-						GameEvent eventTriggered = noise > 0.5F ? GameEvent.EXPLODE : GameEvent.PROJECTILE_SHOOT;
-						level.gameEvent(eventTriggered, user.position(), GameEvent.Context.of(user));
-					}
-
+					GameEvent eventTriggered = noise > 0.5F ? GameEvent.EXPLODE : GameEvent.PROJECTILE_SHOOT;
+					level.gameEvent(eventTriggered, user.position(), GameEvent.Context.of(user));
 				}
 
 			}
-			else
-			{
-				user.playSound(SoundEvents.NOTE_BLOCK_HAT.get(), 1.0F, 1.0F);
-			}
 
-			if (config.needReload.get().booleanValue())
-			{
-				this.setBulletCount(user, this.getBulletCount(user) - 1);
-			}
+		}
+		else
+		{
+			user.playSound(SoundEvents.NOTE_BLOCK_HAT.get(), 1.0F, 1.0F);
+		}
 
+		if (config.needReload.get().booleanValue())
+		{
+			this.setBulletCount(user, this.getBulletCount(user) - 1);
 		}
 
 	}
