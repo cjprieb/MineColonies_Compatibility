@@ -2,6 +2,8 @@ package steve_gall.minecolonies_compatibility.core.common.entity.ai.guard;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
+import steve_gall.minecolonies_compatibility.core.common.entity.ai.AttackDamageConfig;
+import steve_gall.minecolonies_compatibility.core.common.entity.ai.AttackDelayConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.AttackRangeConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.MoveSpeedConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.SearchRangeConfig;
@@ -36,6 +38,18 @@ public class GunnerConfig
 		this.combatMoveSpeed = new MoveSpeedConfig(builder, new MoveSpeedConfig.DefaultValues()//
 				.base(1.0D).increasePerSkillLevel(0.01D).increasePerBuildingLevel(0.02D));
 		builder.pop();
+	}
+
+	public static AttackDelayConfig.DefaultValues getDefaultDelay()
+	{
+		return new AttackDelayConfig.DefaultValues()//
+				.base(60).decreasePerSkillLevel(1.0D).decreasePerBuildingLevel(0.0D);
+	}
+
+	public static AttackDamageConfig.DefaultValues getDefaultDamage()
+	{
+		return new AttackDamageConfig.DefaultValues()//
+				.base(2.0D).increasePerSkillLevel(0.2D).increasePerBuildingLevel(0.0D);
 	}
 
 }

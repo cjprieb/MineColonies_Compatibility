@@ -155,7 +155,7 @@ public class GunnerHandgunAI extends CustomizedAIGunner
 	}
 
 	@Override
-	public void doAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	public void doRangedAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
 	{
 		var user = context.getUser();
 		var weapon = context.getWeapon();

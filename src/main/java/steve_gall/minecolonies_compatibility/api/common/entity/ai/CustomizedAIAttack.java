@@ -2,6 +2,9 @@ package steve_gall.minecolonies_compatibility.api.common.entity.ai;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.minecolonies.core.entity.pathfinding.MinecoloniesAdvancedPathNavigate;
+
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 
 public abstract class CustomizedAIAttack extends CustomizedAI
@@ -48,6 +51,14 @@ public abstract class CustomizedAIAttack extends CustomizedAI
 	public double getCombatMovementSpeed(@NotNull CustomizedAIContext context)
 	{
 		return 1.0D;
+	}
+
+	public double getJobPathSpeed(@NotNull CustomizedAIContext context)
+	{
+		var speed = this.getCombatMovementSpeed(context);
+		var min = MinecoloniesAdvancedPathNavigate.MIN_SPEED_ALLOWED;
+		var max = MinecoloniesAdvancedPathNavigate.MAX_SPEED_ALLOWED;
+		return Mth.clamp(speed, min, max);
 	}
 
 }
