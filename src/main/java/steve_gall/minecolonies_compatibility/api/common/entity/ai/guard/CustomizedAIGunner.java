@@ -171,14 +171,27 @@ public abstract class CustomizedAIGunner extends CustomizedAIGuard
 	}
 
 	@Override
-	public boolean canAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	public final boolean canAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
 	{
-		var user = context.getUser();
-
-		if (user.distanceTo(target) <= GuardConstants.MAX_DISTANCE_FOR_ATTACK && this.canMeleeAttack(context, target))
+		if (context.getUser().distanceTo(target) <= GuardConstants.MAX_DISTANCE_FOR_ATTACK && this.canMeleeAttack(context, target))
 		{
 			return true;
 		}
+		else
+		{
+			return this.canRangedAttack(context, target);
+		}
+
+	}
+
+	public boolean canMeleeAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	{
+		return false;
+	}
+
+	public boolean canRangedAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	{
+		var user = context.getUser();
 
 		if (!this.checkAmmo(user))
 		{
@@ -195,11 +208,6 @@ public abstract class CustomizedAIGunner extends CustomizedAIGuard
 		}
 
 		return true;
-	}
-
-	public boolean canMeleeAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
-	{
-		return false;
 	}
 
 	@Override
