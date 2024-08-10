@@ -55,11 +55,17 @@ public class GunnerRevolverAI extends CustomizedAIGunner
 	}
 
 	@Override
-	public boolean canAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	public boolean canMeleeAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean canRangedAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
 	{
 		var user = context.getUser();
 
-		if (!super.canAttack(context, target))
+		if (!super.canRangedAttack(context, target))
 		{
 			return false;
 		}
@@ -73,12 +79,6 @@ public class GunnerRevolverAI extends CustomizedAIGunner
 
 		}
 
-		return true;
-	}
-
-	@Override
-	public boolean canMeleeAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
-	{
 		return true;
 	}
 

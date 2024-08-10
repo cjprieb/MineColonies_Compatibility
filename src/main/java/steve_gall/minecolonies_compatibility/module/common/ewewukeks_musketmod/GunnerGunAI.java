@@ -102,11 +102,11 @@ public abstract class GunnerGunAI extends CustomizedAIGunner
 	}
 
 	@Override
-	public boolean canAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
+	public boolean canRangedAttack(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
 	{
 		var user = context.getUser();
 
-		if (!super.canAttack(context, target))
+		if (!super.canRangedAttack(context, target))
 		{
 			return false;
 		}
