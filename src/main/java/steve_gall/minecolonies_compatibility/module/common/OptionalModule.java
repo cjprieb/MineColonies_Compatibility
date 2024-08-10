@@ -25,9 +25,14 @@ public class OptionalModule<MODULE extends AbstractModule>
 		return this.modId;
 	}
 
-	protected boolean canLoad()
+	public boolean isInstalled()
 	{
 		return ModList.get().isLoaded(this.getModId());
+	}
+
+	protected boolean canLoad()
+	{
+		return this.isInstalled();
 	}
 
 	public void tryLoad()
