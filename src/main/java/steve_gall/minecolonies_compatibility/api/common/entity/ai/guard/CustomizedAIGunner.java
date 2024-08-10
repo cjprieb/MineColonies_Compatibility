@@ -175,13 +175,9 @@ public abstract class CustomizedAIGunner extends CustomizedAIGuard
 	{
 		var user = context.getUser();
 
-		if (user.distanceTo(target) <= GuardConstants.MAX_DISTANCE_FOR_ATTACK)
+		if (user.distanceTo(target) <= GuardConstants.MAX_DISTANCE_FOR_ATTACK && this.canMeleeAttack(context, target))
 		{
-			if (this.canMeleeAttack(context, target))
-			{
-				return true;
-			}
-
+			return true;
 		}
 
 		if (!this.checkAmmo(user))

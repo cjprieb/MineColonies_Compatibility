@@ -229,12 +229,7 @@ public abstract class GunnerGunAI extends CustomizedAIGunner
 	@Override
 	protected int getReloadDuration()
 	{
-		return getGunReloadDuration();
-	}
-
-	public static int getGunReloadDuration()
-	{
-		return GunItem.RELOAD_DURATION + 10;
+		return this.getWeaponConfig().reloadDuration;
 	}
 
 	@Override

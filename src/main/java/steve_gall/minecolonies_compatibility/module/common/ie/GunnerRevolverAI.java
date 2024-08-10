@@ -105,9 +105,9 @@ public class GunnerRevolverAI extends CustomizedAIGunner
 	@Override
 	public float getMeleeAttackDamage(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
 	{
-		var damage = super.getMeleeAttackDamage(context, target);
 		var weapon = context.getWeapon();
 		var melee = RevolverItem.getUpgradeValue_d(weapon, "melee");
+		var damage = super.getMeleeAttackDamage(context, target);
 
 		if (melee != 0.0D)
 		{
