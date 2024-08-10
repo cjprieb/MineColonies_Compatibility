@@ -38,7 +38,7 @@ public class ewewukekMusketConfig extends AbstractModuleConfig
 		public class GunnerGunConfig
 		{
 			public final int reloadDuration = 30 + 10;
-			
+
 			public final AttackDelayConfig attackDelay;
 			public final AttackDamageConfig defaultBulletDamage;
 
