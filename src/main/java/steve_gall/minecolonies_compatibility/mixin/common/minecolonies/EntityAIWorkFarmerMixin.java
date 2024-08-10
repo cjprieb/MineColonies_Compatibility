@@ -217,13 +217,14 @@ public abstract class EntityAIWorkFarmerMixin extends AbstractEntityAICrafting<J
 			var hoe = this.worker.getInventoryCitizen().getHeldItem(hand);
 			var tilled = BlockUtils.getHoeTilledState(level, pos, hand, hoe, false);
 
-			return tilled != null ? level.setBlockAndUpdate(pos, tilled) : false;
-		}
-		else
-		{
-			return level.setBlockAndUpdate(pos, next);
+			if (tilled != null)
+			{
+				next = tilled;
+			}
+
 		}
 
+		return level.setBlockAndUpdate(pos, next);
 	}
 
 	@Inject(method = "findHoeableSurface", remap = false, at = @At(value = "TAIL"), cancellable = true)
