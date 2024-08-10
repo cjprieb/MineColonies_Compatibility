@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.ldtteam.blockui.Pane;
 import com.ldtteam.blockui.controls.ItemIcon;
 import com.ldtteam.blockui.views.View;
-import com.lothrazar.cyclic.util.FluidHelpers.FluidAttributes;
 import com.minecolonies.api.util.constant.WindowConstants;
 import com.minecolonies.core.client.gui.modules.WindowListRecipes;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraftforge.fluids.FluidType;
 import steve_gall.minecolonies_compatibility.core.client.gui.ItemIconExtension;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.building.module.SmithingTemplateCraftingModuleView;
@@ -69,7 +69,7 @@ public abstract class WindowListRecipes1Mixin
 						view.addChild(fluidIcon);
 					}
 
-					fluidIcon.setFluid(bucketFilling.getFluidStack(FluidAttributes.BUCKET_VOLUME));
+					fluidIcon.setFluid(bucketFilling.getFluidStack(FluidType.BUCKET_VOLUME));
 				}
 
 			}
