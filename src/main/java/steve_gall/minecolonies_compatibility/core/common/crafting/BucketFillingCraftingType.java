@@ -6,7 +6,6 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.lothrazar.cyclic.util.FluidHelpers.FluidAttributes;
 import com.minecolonies.api.crafting.IGenericRecipe;
 import com.minecolonies.api.crafting.registry.CraftingType;
 
@@ -16,6 +15,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
@@ -34,7 +34,7 @@ public class BucketFillingCraftingType extends CraftingType
 
 	public static BucketFillingRecipeStorage parse(ItemStack filledBucket)
 	{
-		var tank = new FluidTank(FluidAttributes.BUCKET_VOLUME);
+		var tank = new FluidTank(FluidType.BUCKET_VOLUME);
 		var emptyResult = FluidUtil.tryEmptyContainer(filledBucket, tank, tank.getCapacity(), null, true);
 		var emptyBucket = emptyResult.getResult();
 
