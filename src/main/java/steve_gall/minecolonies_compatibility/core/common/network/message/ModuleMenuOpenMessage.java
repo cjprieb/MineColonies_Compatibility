@@ -76,7 +76,7 @@ public abstract class ModuleMenuOpenMessage extends BuildingModuleMessage
 
 	protected Component getDisplayName()
 	{
-		return Component.translatable(this.desc);
+		return Component.translatable(this.desc + ".menu");
 	}
 
 	protected abstract AbstractContainerMenu createMenu(int windowId, Inventory inventory, Player player, IBuildingModule module);

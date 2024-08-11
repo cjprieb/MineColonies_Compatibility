@@ -8,7 +8,7 @@ import com.minecolonies.core.colony.buildings.moduleviews.CraftingModuleView;
 
 import net.minecraft.network.FriendlyByteBuf;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
-import steve_gall.minecolonies_compatibility.core.common.network.message.FarmersCuttingOpenTeachMessage;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.network.CuttingOpenTeachMessage;
 
 public class CuttingCraftingModuleView extends CraftingModuleView
 {
@@ -30,7 +30,7 @@ public class CuttingCraftingModuleView extends CraftingModuleView
 	@Override
 	public void openCraftingGUI()
 	{
-		MineColoniesCompatibility.network().sendToServer(new FarmersCuttingOpenTeachMessage(this, this.getToolType()));
+		MineColoniesCompatibility.network().sendToServer(new CuttingOpenTeachMessage(this, this.getToolType()));
 	}
 
 	public IToolType getToolType()

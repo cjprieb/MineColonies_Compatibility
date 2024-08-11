@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.module.client.lets_do_bakery.BakingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.client.lets_do_bakery.BowlTeachScreen;
 import steve_gall.minecolonies_compatibility.module.client.lets_do_bakery.CookingTeachScreen;
@@ -18,6 +19,10 @@ import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.crafti
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.init.ModuleBuildingModules;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.init.ModuleCraftingTypes;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.init.ModuleMenuTypes;
+import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.network.BakingOpenTeachMessage;
+import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.network.BowlOpenTeachMessage;
+import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.network.CookingOpenTeachMessage;
+import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.network.StoveOpenTeachMessage;
 import steve_gall.minecolonies_tweaks.api.common.crafting.CustomizedRecipeStorageRegistry;
 
 public class LetsDoBakeryModule extends AbstractModule
@@ -30,6 +35,12 @@ public class LetsDoBakeryModule extends AbstractModule
 		var fml_bus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModuleCraftingTypes.REGISTER.register(fml_bus);
 		ModuleMenuTypes.REGISTER.register(fml_bus);
+
+		var network = MineColoniesCompatibility.network();
+		network.registerMessage(StoveOpenTeachMessage.class, StoveOpenTeachMessage::new);
+		network.registerMessage(BowlOpenTeachMessage.class, BowlOpenTeachMessage::new);
+		network.registerMessage(BakingOpenTeachMessage.class, BakingOpenTeachMessage::new);
+		network.registerMessage(CookingOpenTeachMessage.class, CookingOpenTeachMessage::new);
 
 		CustomizedRecipeStorageRegistry.INSTANCE.register(StoveRecipeStorage.ID, StoveRecipeStorage::serialize, StoveRecipeStorage::new);
 		CustomizedRecipeStorageRegistry.INSTANCE.register(BowlRecipeStorage.ID, BowlRecipeStorage::serialize, BowlRecipeStorage::new);

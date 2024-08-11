@@ -1,4 +1,4 @@
-package steve_gall.minecolonies_compatibility.core.common.network.message;
+package steve_gall.minecolonies_compatibility.module.common.farmersdelight.network;
 
 import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.colony.buildings.modules.IBuildingModuleView;
@@ -6,24 +6,24 @@ import com.minecolonies.api.util.constant.IToolType;
 import com.minecolonies.api.util.constant.ToolType;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import steve_gall.minecolonies_compatibility.core.common.network.message.ModuleMenuOpenMessage;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.menu.CuttingTeachMenu;
 
-public class FarmersCuttingOpenTeachMessage extends ModuleMenuOpenMessage
+public class CuttingOpenTeachMessage extends ModuleMenuOpenMessage
 {
 	private final IToolType toolType;
 
-	public FarmersCuttingOpenTeachMessage(IBuildingModuleView module, IToolType toolType)
+	public CuttingOpenTeachMessage(IBuildingModuleView module, IToolType toolType)
 	{
 		super(module);
 
 		this.toolType = toolType;
 	}
 
-	public FarmersCuttingOpenTeachMessage(FriendlyByteBuf buffer)
+	public CuttingOpenTeachMessage(FriendlyByteBuf buffer)
 	{
 		super(buffer);
 
@@ -50,12 +50,6 @@ public class FarmersCuttingOpenTeachMessage extends ModuleMenuOpenMessage
 		super.toBuffer(buffer, module);
 
 		buffer.writeUtf(this.getToolType().getName());
-	}
-
-	@Override
-	protected Component getDisplayName()
-	{
-		return Component.translatable(this.desc + ".menu");
 	}
 
 	public IToolType getToolType()

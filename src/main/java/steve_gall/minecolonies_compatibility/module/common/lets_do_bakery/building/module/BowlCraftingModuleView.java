@@ -3,7 +3,7 @@ package steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.build
 import com.minecolonies.core.colony.buildings.moduleviews.CraftingModuleView;
 
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
-import steve_gall.minecolonies_compatibility.core.common.network.message.LetsDoBakeryBowlOpenTeachMessage;
+import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.network.BowlOpenTeachMessage;
 
 public class BowlCraftingModuleView extends CraftingModuleView
 {
@@ -15,7 +15,7 @@ public class BowlCraftingModuleView extends CraftingModuleView
 	@Override
 	public void openCraftingGUI()
 	{
-		MineColoniesCompatibility.network().sendToServer(new LetsDoBakeryBowlOpenTeachMessage(this));
+		MineColoniesCompatibility.network().sendToServer(new BowlOpenTeachMessage(this));
 	}
 
 }
