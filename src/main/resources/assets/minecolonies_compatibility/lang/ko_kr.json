@@ -84,6 +84,10 @@
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_baking.menu": "제빵 스테이션 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_cooking": "[Let's Do] Bakery - 작은 요리 냄비 제작법",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_cooking.menu": "작은 요리 냄비 제작법",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pan": "[Let's Do] Candlelight - Cooking Pan Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pan.menu": "Cooking Pan Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pot": "[Let's Do] Candlelight - Cooking Pot Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pot.menu": "Cooking Pot Recipes",
 	
 	"_comment_module_settings": "모듈 설정",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "폭죽 로켓 요청",
@@ -100,6 +104,8 @@
 	"minecolonies_compatibility.interaction.no_lets_do_bowl": "제 건물에 [Let's Do] Bakery의 제작용 그릇이 없어요! 사용할 수 있도록 설치해주세요!",
 	"minecolonies_compatibility.interaction.no_lets_do_baker_station": "제 건물에 [Let's Do] Bakery의 제빵 스테이션이 없어요! 사용할 수 있도록 설치해주세요!",
 	"minecolonies_compatibility.interaction.no_lets_do_heated_cooking_pot": "제 건물에 달궈진 [Let's Do] Bakery의 작은 요리 냄비가 없어요! 작은 요리 냄비와 그 아래에 열원을 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_lets_do_heated_candlelight_pan": "제 건물에 달궈진 [Let's Do] Candlelight의 Cooking Pan가 없어요! Cooking Pan과 그 아래에 열원을 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_lets_do_heated_candlelight_pot": "제 건물에 달궈진 [Let's Do] Candlelight의 Cooking Pot가 없어요! Cooking Pot과 그 아래에 열원을 설치해주세요!",
 	
 	"_eof": "EOF"
 }
