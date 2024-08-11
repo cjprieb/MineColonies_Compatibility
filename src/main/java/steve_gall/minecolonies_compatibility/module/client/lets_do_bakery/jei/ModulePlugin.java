@@ -29,7 +29,7 @@ public class ModulePlugin implements IModPlugin
 		var cookassistantType = ModPlugin.createRecipeType(ModJobs.cookassistant.get());
 		registration.addRecipeClickArea(StoveTeachScreen.class, 91, 26, 22, 15, bakerType);
 		registration.addRecipeClickArea(BakingTeachScreen.class, 91, 26, 22, 15, bakerType);
-		registration.addRecipeClickArea(CookingTeachScreen.class, 91, 26, 22, 15, cookassistantType);
+		registration.addRecipeClickArea(CookingTeachScreen.class, 87, 26, 22, 15, cookassistantType);
 	}
 
 	@Override

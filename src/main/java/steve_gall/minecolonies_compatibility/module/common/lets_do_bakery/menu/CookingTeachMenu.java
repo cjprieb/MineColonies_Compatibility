@@ -40,7 +40,7 @@ public class CookingTeachMenu extends TeachRecipeMenu<CookingPotRecipe>
 
 	public static final int RESULT_X = 120;
 	public static final int RESULT_Y = 28;
-	public static final int CONTAINER_X = 91;
+	public static final int CONTAINER_X = 92;
 	public static final int CONTAINER_Y = 55;
 
 	public CookingTeachMenu(int windowId, Inventory inventory, IBuildingModule module)
