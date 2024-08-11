@@ -30,7 +30,7 @@ public class ModulePlugin implements IModPlugin
 		registration.addRecipeClickArea(StoveTeachScreen.class, 91, 26, 22, 15, StoveCategory.STOVE);
 		registration.addRecipeClickArea(BowlTeachScreen.class, 91, 35, 22, 15, CraftingBowlCategory.DOUGHING);
 		registration.addRecipeClickArea(BakingTeachScreen.class, 91, 26, 22, 15, BakerStationCategory.CAKING);
-		registration.addRecipeClickArea(CookingTeachScreen.class, 91, 26, 22, 15, CookingPotCategory.COOKING_POT);
+		registration.addRecipeClickArea(CookingTeachScreen.class, 87, 26, 22, 15, CookingPotCategory.COOKING_POT);
 	}
 
 	@Override
