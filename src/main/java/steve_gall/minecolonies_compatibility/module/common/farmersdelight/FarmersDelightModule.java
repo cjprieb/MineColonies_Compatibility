@@ -14,6 +14,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedCrop;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
+import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.CookingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.CuttingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.common.AbstractModule;
@@ -23,6 +24,8 @@ import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.M
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.ModuleCraftingTypes;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.ModuleJobs;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.ModuleMenuTypes;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.network.CookingOpenTeachMessage;
+import steve_gall.minecolonies_compatibility.module.common.farmersdelight.network.CuttingOpenTeachMessage;
 import steve_gall.minecolonies_tweaks.api.common.crafting.CustomizedRecipeStorageRegistry;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
@@ -37,6 +40,10 @@ public class FarmersDelightModule extends AbstractModule
 		ModuleCraftingTypes.REGISTER.register(fml_bus);
 		ModuleMenuTypes.REGISTER.register(fml_bus);
 		ModuleJobs.REGISTER.register(fml_bus);
+
+		var network = MineColoniesCompatibility.network();
+		network.registerMessage(CuttingOpenTeachMessage.class, CuttingOpenTeachMessage::new);
+		network.registerMessage(CookingOpenTeachMessage.class, CookingOpenTeachMessage::new);
 
 		CustomizedRecipeStorageRegistry.INSTANCE.register(CuttingRecipeStorage.ID, CuttingRecipeStorage::serialize, CuttingRecipeStorage::deserialize);
 		CustomizedRecipeStorageRegistry.INSTANCE.register(CookingRecipeStorage.ID, CookingRecipeStorage::serialize, CookingRecipeStorage::deserialize);

@@ -11,14 +11,9 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.network.message.BucketFillingOpenTeachMessage;
-import steve_gall.minecolonies_compatibility.core.common.network.message.FarmersCookingOpenTeachMessage;
-import steve_gall.minecolonies_compatibility.core.common.network.message.FarmersCuttingOpenTeachMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhostAcceptFluidMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.JEIGhostAcceptItemMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.JEIRecipeTransferMessage;
-import steve_gall.minecolonies_compatibility.core.common.network.message.LetsDoBakeryBakingOpenTeachMessage;
-import steve_gall.minecolonies_compatibility.core.common.network.message.LetsDoBakeryCookingOpenTeachMessage;
-import steve_gall.minecolonies_compatibility.core.common.network.message.LetsDoBakeryStoveOpenTeachMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.NetworkStorageRefreshMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.PolymorphTeachResultItemMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.RestrictGiveToolMessage;
@@ -49,11 +44,6 @@ public class NetworkChannel
 		this.registerMessage(RestrictGiveToolMessage.class, RestrictGiveToolMessage::new);
 		this.registerMessage(BucketFillingOpenTeachMessage.class, BucketFillingOpenTeachMessage::new);
 		this.registerMessage(SmithingOpenTeachMessage.class, SmithingOpenTeachMessage::new);
-		this.registerMessage(FarmersCuttingOpenTeachMessage.class, FarmersCuttingOpenTeachMessage::new);
-		this.registerMessage(FarmersCookingOpenTeachMessage.class, FarmersCookingOpenTeachMessage::new);
-		this.registerMessage(LetsDoBakeryStoveOpenTeachMessage.class, LetsDoBakeryStoveOpenTeachMessage::new);
-		this.registerMessage(LetsDoBakeryBakingOpenTeachMessage.class, LetsDoBakeryBakingOpenTeachMessage::new);
-		this.registerMessage(LetsDoBakeryCookingOpenTeachMessage.class, LetsDoBakeryCookingOpenTeachMessage::new);
 	}
 
 	public void sendToServer(AbstractMessage message)
@@ -66,7 +56,7 @@ public class NetworkChannel
 		this.rawChannel.sendTo(message, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
 	}
 
-	private <MSG extends AbstractMessage> void registerMessage(Class<MSG> messageType, Function<FriendlyByteBuf, MSG> decoder)
+	public <MSG extends AbstractMessage> void registerMessage(Class<MSG> messageType, Function<FriendlyByteBuf, MSG> decoder)
 	{
 		this.rawChannel.registerMessage(this.idx.incrementAndGet(), messageType, MSG::encode, decoder, (msg, supplier) ->
 		{

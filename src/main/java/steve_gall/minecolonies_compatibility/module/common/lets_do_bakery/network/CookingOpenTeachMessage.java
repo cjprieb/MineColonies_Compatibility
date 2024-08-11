@@ -1,23 +1,23 @@
-package steve_gall.minecolonies_compatibility.core.common.network.message;
+package steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.network;
 
 import com.minecolonies.api.colony.buildings.modules.IBuildingModule;
 import com.minecolonies.api.colony.buildings.modules.IBuildingModuleView;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import steve_gall.minecolonies_compatibility.core.common.network.message.ModuleMenuOpenMessage;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.menu.CookingTeachMenu;
 
-public class LetsDoBakeryCookingOpenTeachMessage extends ModuleMenuOpenMessage
+public class CookingOpenTeachMessage extends ModuleMenuOpenMessage
 {
-	public LetsDoBakeryCookingOpenTeachMessage(IBuildingModuleView module)
+	public CookingOpenTeachMessage(IBuildingModuleView module)
 	{
 		super(module);
 	}
 
-	public LetsDoBakeryCookingOpenTeachMessage(FriendlyByteBuf buffer)
+	public CookingOpenTeachMessage(FriendlyByteBuf buffer)
 	{
 		super(buffer);
 	}
@@ -38,12 +38,6 @@ public class LetsDoBakeryCookingOpenTeachMessage extends ModuleMenuOpenMessage
 	protected void toBuffer(FriendlyByteBuf buffer, IBuildingModule module)
 	{
 		super.toBuffer(buffer, module);
-	}
-
-	@Override
-	protected Component getDisplayName()
-	{
-		return Component.translatable(this.desc + ".menu");
 	}
 
 }
