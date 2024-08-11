@@ -82,6 +82,10 @@
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_baking.menu": "Baking Station Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_cooking": "[Let's Do] Bakery - Cooking Pot Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_bakery_cooking.menu": "Cooking Pot Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pan": "[Let's Do] Candlelight - Cooking Pan Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pan.menu": "Cooking Pan Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pot": "[Let's Do] Candlelight - Cooking Pot Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pot.menu": "Cooking Pot Recipes",
 	
 	"_comment_module_settings": "Module Settings",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "Request Firework Rocket",
@@ -97,6 +101,8 @@
 	"minecolonies_compatibility.interaction.no_lets_do_stove": "My work hut doesn't have any [Let's Do] Bakery's Stove or Oven or Stove! Please place it so I have some I can use!",
 	"minecolonies_compatibility.interaction.no_lets_do_baker_station": "My work hut doesn't have any [Let's Do] Bakery's Baking Station! Please place it so I have some I can use!",
 	"minecolonies_compatibility.interaction.no_lets_do_heated_cooking_pot": "My work hut doesn't have any heated [Let's Do] Bakery's Small Cooking Pot! Please place Cooking Pot and place heat source under it!",
+	"minecolonies_compatibility.interaction.no_lets_do_heated_candlelight_pan": "My work hut doesn't have any heated [Let's Do] Candlelight's Cooking Pan! Please place Cooking Pan and place heat source under it!",
+	"minecolonies_compatibility.interaction.no_lets_do_heated_candlelight_pot": "My work hut doesn't have any heated [Let's Do] Candlelight's Cooking Pot! Please place Cooking Pot and place heat source under it!",
 	
 	"_eof": "EOF"
 }
