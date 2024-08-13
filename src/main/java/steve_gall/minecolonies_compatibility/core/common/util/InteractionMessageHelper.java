@@ -18,7 +18,7 @@ public class InteractionMessageHelper
 	{
 		var key = ForgeRegistries.BLOCKS.getKey(block);
 		var modDisplayName = ModList.get().getModContainerById(key.getNamespace()).map(c -> c.getModInfo().getDisplayName()).orElse(key.getNamespace());
-		return Component.translatable("minecolonies_compatibility.interaction.no_working_block2", modDisplayName, Component.translatable(block.getDescriptionId()));
+		return Component.translatable("minecolonies_compatibility.interaction.no_working_block_2", modDisplayName, Component.translatable(block.getDescriptionId()));
 	}
 
 	public static Component getWorkingBlockAndUnderHeatSourceNotFound(Block block)

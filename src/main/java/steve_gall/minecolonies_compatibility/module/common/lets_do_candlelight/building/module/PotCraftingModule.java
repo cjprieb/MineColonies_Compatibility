@@ -40,15 +40,9 @@ public class PotCraftingModule extends AbstractCraftingModuleWithExternalWorking
 	}
 
 	@Override
-	public @NotNull BlockPos getWalkingPosition(@NotNull BlockPos pos)
-	{
-		return pos;
-	}
-
-	@Override
 	public @NotNull BlockPos getParticlePosition(@NotNull BlockPos pos)
 	{
-		return pos.below();
+		return super.getParticlePosition(pos).below();
 	}
 
 	@Override

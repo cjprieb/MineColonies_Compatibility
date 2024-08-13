@@ -40,15 +40,9 @@ public class CookingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	}
 
 	@Override
-	public @NotNull BlockPos getWalkingPosition(@NotNull BlockPos pos)
-	{
-		return pos.below();
-	}
-
-	@Override
 	public @NotNull BlockPos getParticlePosition(@NotNull BlockPos pos)
 	{
-		return pos.below().below();
+		return super.getParticlePosition(pos).below();
 	}
 
 	@Override

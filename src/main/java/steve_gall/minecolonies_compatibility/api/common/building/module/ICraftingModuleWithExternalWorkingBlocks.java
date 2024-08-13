@@ -22,17 +22,11 @@ public interface ICraftingModuleWithExternalWorkingBlocks extends ICraftingBuild
 	}
 
 	@NotNull
-	default Component getWorkingBlockNotFoundMessage()
-	{
-		return InteractionMessageHelper.getWorkingBlockNotFound();
-	}
-
-	@NotNull
 	default Component getWorkingBlockNotFoundMessage(@NotNull IRecipeStorage recipeStorage)
 	{
 		if (recipeStorage.getIntermediate() == Blocks.AIR)
 		{
-			return this.getWorkingBlockNotFoundMessage();
+			return InteractionMessageHelper.getWorkingBlockNotFound();
 		}
 
 		return InteractionMessageHelper.getWorkingBlockNotFound(recipeStorage.getIntermediate());
@@ -47,7 +41,7 @@ public interface ICraftingModuleWithExternalWorkingBlocks extends ICraftingBuild
 	@NotNull
 	default BlockPos getParticlePosition(@NotNull BlockPos pos)
 	{
-		return this.getHitPosition(pos).above();
+		return this.getHitPosition(pos);
 	}
 
 	@NotNull

@@ -14,9 +14,11 @@ import com.minecolonies.api.util.constant.IToolType;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractCraftingModuleWithExternalWorkingBlocks;
+import steve_gall.minecolonies_compatibility.core.common.util.InteractionMessageHelper;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.ModuleCraftingTypes;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
@@ -52,15 +54,9 @@ public class CuttingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	}
 
 	@Override
-	public @NotNull BlockPos getWalkingPosition(@NotNull BlockPos pos)
-	{
-		return pos.below();
-	}
-
-	@Override
 	public @NotNull BlockPos getParticlePosition(@NotNull BlockPos pos)
 	{
-		return pos.below().below();
+		return super.getParticlePosition(pos).below();
 	}
 
 	@Override
@@ -79,6 +75,12 @@ public class CuttingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	public boolean isRecipeCompatible(@NotNull IGenericRecipe recipe)
 	{
 		return recipe.getRequiredTool() == this.getToolType();
+	}
+
+	@Override
+	public @NotNull Component getWorkingBlockNotFoundMessage(@NotNull IRecipeStorage recipeStorage)
+	{
+		return InteractionMessageHelper.getWorkingBlockNotFound(ModBlocks.CUTTING_BOARD.get());
 	}
 
 	public IToolType getToolType()

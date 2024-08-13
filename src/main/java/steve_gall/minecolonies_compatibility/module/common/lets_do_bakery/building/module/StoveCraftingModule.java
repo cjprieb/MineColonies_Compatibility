@@ -39,18 +39,6 @@ public class StoveCraftingModule extends AbstractCraftingModuleWithExternalWorki
 	}
 
 	@Override
-	public @NotNull BlockPos getWalkingPosition(@NotNull BlockPos pos)
-	{
-		return pos;
-	}
-
-	@Override
-	public @NotNull BlockPos getParticlePosition(@NotNull BlockPos pos)
-	{
-		return pos.below();
-	}
-
-	@Override
 	public @NotNull String getId()
 	{
 		return "lets_do_bakery_stove";

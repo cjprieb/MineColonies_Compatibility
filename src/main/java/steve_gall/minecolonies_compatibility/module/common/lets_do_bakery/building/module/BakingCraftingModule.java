@@ -12,10 +12,13 @@ import com.minecolonies.api.crafting.IRecipeStorage;
 import com.minecolonies.api.crafting.registry.CraftingType;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.bakery.block.BakerStationBlock;
+import net.satisfy.bakery.registry.ObjectRegistry;
 import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractCraftingModuleWithExternalWorkingBlocks;
+import steve_gall.minecolonies_compatibility.core.common.util.InteractionMessageHelper;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.init.ModuleCraftingTypes;
 
 public class BakingCraftingModule extends AbstractCraftingModuleWithExternalWorkingBlocks
@@ -38,18 +41,6 @@ public class BakingCraftingModule extends AbstractCraftingModuleWithExternalWork
 	}
 
 	@Override
-	public @NotNull BlockPos getWalkingPosition(@NotNull BlockPos pos)
-	{
-		return pos;
-	}
-
-	@Override
-	public @NotNull BlockPos getParticlePosition(@NotNull BlockPos pos)
-	{
-		return pos.below();
-	}
-
-	@Override
 	public @NotNull String getId()
 	{
 		return "lets_do_bakery_baking";
@@ -65,6 +56,12 @@ public class BakingCraftingModule extends AbstractCraftingModuleWithExternalWork
 	public boolean isRecipeCompatible(@NotNull IGenericRecipe recipe)
 	{
 		return true;
+	}
+
+	@Override
+	public @NotNull Component getWorkingBlockNotFoundMessage(@NotNull IRecipeStorage recipeStorage)
+	{
+		return InteractionMessageHelper.getWorkingBlockNotFound(ObjectRegistry.BAKER_STATION.get());
 	}
 
 }

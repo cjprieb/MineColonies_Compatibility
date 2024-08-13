@@ -86,12 +86,6 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 	}
 
 	@Override
-	public @NotNull BlockPos getParticlePosition(@NotNull BlockPos pos)
-	{
-		return pos;
-	}
-
-	@Override
 	public @NotNull String getId()
 	{
 		return ModCraftingTypes.BUCKET_FILLING.getId().getPath();
