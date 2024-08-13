@@ -109,12 +109,6 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 	}
 
 	@Override
-	public @NotNull Component getWorkingBlockNotFoundMessage()
-	{
-		return Component.translatable("minecolonies_compatibility.interaction.no_working_block");
-	}
-
-	@Override
 	public @NotNull Component getWorkingBlockNotFoundMessage(@NotNull IRecipeStorage recipeStorage)
 	{
 		var recipe = toRecipe(recipeStorage);
@@ -124,7 +118,7 @@ public class BucketFillingCraftingModule extends AbstractCraftingModuleWithExter
 			return Component.translatable("minecolonies_compatibility.interaction.no_fluid_source", recipe.getFluidStack(FluidType.BUCKET_VOLUME).getDisplayName());
 		}
 
-		return this.getWorkingBlockNotFoundMessage();
+		return super.getWorkingBlockNotFoundMessage(recipeStorage);
 	}
 
 	@Override

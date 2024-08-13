@@ -39,12 +39,6 @@ public class StoveCraftingModule extends AbstractCraftingModuleWithExternalWorki
 	}
 
 	@Override
-	public boolean needWorkingBlock(@NotNull IRecipeStorage recipeStorage)
-	{
-		return true;
-	}
-
-	@Override
 	public @NotNull BlockPos getWalkingPosition(@NotNull BlockPos pos)
 	{
 		return pos;
@@ -75,10 +69,9 @@ public class StoveCraftingModule extends AbstractCraftingModuleWithExternalWorki
 	}
 
 	@Override
-	@NotNull
-	public Component getWorkingBlockNotFoundMessage()
+	public @NotNull Component getWorkingBlockNotFoundMessage(@NotNull IRecipeStorage recipeStorage)
 	{
-		return Component.translatable("minecolonies_compatibility.interaction.no_lets_do_stove");
+		return Component.translatable("minecolonies_compatibility.interaction.no_lets_do_bakery_stove");
 	}
 
 }
