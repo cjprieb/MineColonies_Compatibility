@@ -97,15 +97,10 @@
 	
 	"_comment_interaction": "상호작용 메시지",
 	"minecolonies_compatibility.interaction.no_working_block": "제 건물에 작업에 필요한 블록이 없어요! 사용할 수 있도록 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_working_block_2": "제 건물에 %1$s의 %2$s이(가) 없어요! 사용할 수 있도록 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_working_block_and_under_heat_source": "제 건물에 달궈진 %1$s의 %2$s이(가) 없어요! %2$s과(와) 그 아래에 열원을 설치해주세요!",
 	"minecolonies_compatibility.interaction.no_fluid_source": "제 건물에 %1$s이(가) 담긴 유체 탱크 혹은 액체 %1$s이(가) 없어요! 사용할 수 있도록 설치해주세요!",
-	"minecolonies_compatibility.interaction.no_farmers_cutting_board": "제 건물에 Farmer's Delight의 도마가 없어요! 사용할 수 있도록 설치해주세요!",
-	"minecolonies_compatibility.interaction.no_farmers_heated_cooking_pot": "제 건물에 달궈진 Farmer's Delight의 조리용 냄비가 없어요! 조리용 냄비와 그 아래에 열원을 설치해주세요!",
-	"minecolonies_compatibility.interaction.no_lets_do_stove": "제 건물에 [Let's Do] Bakery의 오븐 혹은 스토브가 없어요! 사용할 수 있도록 설치해주세요!",
-	"minecolonies_compatibility.interaction.no_lets_do_bowl": "제 건물에 [Let's Do] Bakery의 제작용 그릇이 없어요! 사용할 수 있도록 설치해주세요!",
-	"minecolonies_compatibility.interaction.no_lets_do_baker_station": "제 건물에 [Let's Do] Bakery의 제빵 스테이션이 없어요! 사용할 수 있도록 설치해주세요!",
-	"minecolonies_compatibility.interaction.no_lets_do_heated_cooking_pot": "제 건물에 달궈진 [Let's Do] Bakery의 작은 요리 냄비가 없어요! 작은 요리 냄비와 그 아래에 열원을 설치해주세요!",
-	"minecolonies_compatibility.interaction.no_lets_do_heated_candlelight_pan": "제 건물에 달궈진 [Let's Do] Candlelight의 Cooking Pan가 없어요! Cooking Pan과 그 아래에 열원을 설치해주세요!",
-	"minecolonies_compatibility.interaction.no_lets_do_heated_candlelight_pot": "제 건물에 달궈진 [Let's Do] Candlelight의 Cooking Pot가 없어요! Cooking Pot과 그 아래에 열원을 설치해주세요!",
+	"minecolonies_compatibility.interaction.no_lets_do_bakery_stove": "제 건물에 [Let's Do] Bakery의 오븐 혹은 스토브가 없어요! 사용할 수 있도록 설치해주세요!",
 	
 	"_eof": "EOF"
 }

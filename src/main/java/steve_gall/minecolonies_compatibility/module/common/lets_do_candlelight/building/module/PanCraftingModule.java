@@ -17,6 +17,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.candlelight.block.entity.CookingPanBlockEntity;
 import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractCraftingModuleWithExternalWorkingBlocks;
+import steve_gall.minecolonies_compatibility.core.common.util.InteractionMessageHelper;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_candlelight.init.ModuleCraftingTypes;
 
 public class PanCraftingModule extends AbstractCraftingModuleWithExternalWorkingBlocks
@@ -36,12 +37,6 @@ public class PanCraftingModule extends AbstractCraftingModuleWithExternalWorking
 	public boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state)
 	{
 		return level.getBlockEntity(pos) instanceof CookingPanBlockEntity cookingPan && cookingPan.isBeingBurned();
-	}
-
-	@Override
-	public boolean needWorkingBlock(@NotNull IRecipeStorage recipeStorage)
-	{
-		return true;
 	}
 
 	@Override
@@ -75,10 +70,9 @@ public class PanCraftingModule extends AbstractCraftingModuleWithExternalWorking
 	}
 
 	@Override
-	@NotNull
-	public Component getWorkingBlockNotFoundMessage()
+	public @NotNull Component getWorkingBlockNotFoundMessage(@NotNull IRecipeStorage recipeStorage)
 	{
-		return Component.translatable("minecolonies_compatibility.interaction.no_lets_do_heated_candlelight_pan");
+		return InteractionMessageHelper.getWorkingBlockAndUnderHeatSourceNotFound(recipeStorage.getIntermediate());
 	}
 
 }

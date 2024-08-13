@@ -97,15 +97,10 @@
 	
 	"_comment_interaction": "Interaction Messages",
 	"minecolonies_compatibility.interaction.no_working_block": "My work hut doesn't have any Working Block! Please place it so I have some I can use!",
+	"minecolonies_compatibility.interaction.no_working_block_2": "My work hut doesn't have any %1$s's %2$s! Please place it so I have some I can use!",
+	"minecolonies_compatibility.interaction.no_working_block_and_under_heat_source": "My work hut doesn't have any heated %1$s's %2$s! Please place %2$s and place heat source under it!",
 	"minecolonies_compatibility.interaction.no_fluid_source": "My work hut doesn't have any Fluid Tank with %1$s or Liquid %1$s! Please place it so I have some I can use!",
-	"minecolonies_compatibility.interaction.no_farmers_cutting_board": "My work hut doesn't have any Farmer's Delight's Cutting Board! Please place it so I have some I can use!",
-	"minecolonies_compatibility.interaction.no_farmers_heated_cooking_pot": "My work hut doesn't have any heated Farmer's Delight's Cooking Pot! Please place Cooking Pot and place heat source under it!",
-	"minecolonies_compatibility.interaction.no_lets_do_stove": "My work hut doesn't have any [Let's Do] Bakery's Stove and Oven or Stove! Please place it so I have some I can use!",
-	"minecolonies_compatibility.interaction.no_lets_do_bowl": "My work hut doesn't have any [Let's Do] Bakery's Crafting Bowl! Please place it so I have some I can use!",
-	"minecolonies_compatibility.interaction.no_lets_do_baker_station": "My work hut doesn't have any [Let's Do] Bakery's Caking Station! Please place it so I have some I can use!",
-	"minecolonies_compatibility.interaction.no_lets_do_heated_cooking_pot": "My work hut doesn't have any heated [Let's Do] Bakery's Small Cooking Pot! Please place Cooking Pot and place heat source under it!",
-	"minecolonies_compatibility.interaction.no_lets_do_heated_candlelight_pan": "My work hut doesn't have any heated [Let's Do] Candlelight's Cooking Pan! Please place Cooking Pan and place heat source under it!",
-	"minecolonies_compatibility.interaction.no_lets_do_heated_candlelight_pot": "My work hut doesn't have any heated [Let's Do] Candlelight's Cooking Pot! Please place Cooking Pot and place heat source under it!",
+	"minecolonies_compatibility.interaction.no_lets_do_bakery_stove": "My work hut doesn't have any [Let's Do] Bakery's Stove or Oven or Stove! Please place it so I have some I can use!",
 	
 	"_eof": "EOF"
 }

@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import steve_gall.minecolonies_compatibility.api.common.building.module.AbstractCraftingModuleWithExternalWorkingBlocks;
+import steve_gall.minecolonies_compatibility.core.common.util.InteractionMessageHelper;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.init.ModuleCraftingTypes;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 
@@ -36,12 +37,6 @@ public class CookingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	public boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state)
 	{
 		return level.getBlockEntity(pos) instanceof CookingPotBlockEntity cookingPot && cookingPot.isHeated();
-	}
-
-	@Override
-	public boolean needWorkingBlock(@NotNull IRecipeStorage recipeStorage)
-	{
-		return true;
 	}
 
 	@Override
@@ -75,10 +70,9 @@ public class CookingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	}
 
 	@Override
-	@NotNull
-	public Component getWorkingBlockNotFoundMessage()
+	public @NotNull Component getWorkingBlockNotFoundMessage(@NotNull IRecipeStorage recipeStorage)
 	{
-		return Component.translatable("minecolonies_compatibility.interaction.no_farmers_heated_cooking_pot");
+		return InteractionMessageHelper.getWorkingBlockAndUnderHeatSourceNotFound(recipeStorage.getIntermediate());
 	}
 
 }

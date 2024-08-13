@@ -12,7 +12,6 @@ import com.minecolonies.api.crafting.IRecipeStorage;
 import com.minecolonies.api.crafting.registry.CraftingType;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.bakery.block.entity.CraftingBowlBlockEntity;
@@ -36,12 +35,6 @@ public class BowlCraftingModule extends AbstractCraftingModuleWithExternalWorkin
 	public boolean isWorkingBlock(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state)
 	{
 		return level.getBlockEntity(pos) instanceof CraftingBowlBlockEntity;
-	}
-
-	@Override
-	public boolean needWorkingBlock(@NotNull IRecipeStorage recipeStorage)
-	{
-		return true;
 	}
 
 	@Override
@@ -72,13 +65,6 @@ public class BowlCraftingModule extends AbstractCraftingModuleWithExternalWorkin
 	public boolean isRecipeCompatible(@NotNull IGenericRecipe recipe)
 	{
 		return true;
-	}
-
-	@Override
-	@NotNull
-	public Component getWorkingBlockNotFoundMessage()
-	{
-		return Component.translatable("minecolonies_compatibility.interaction.no_lets_do_bowl");
 	}
 
 }
