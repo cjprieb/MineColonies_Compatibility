@@ -17,6 +17,7 @@ import steve_gall.minecolonies_compatibility.module.common.farmersdelight.Farmer
 import steve_gall.minecolonies_compatibility.module.common.ie.IEModule;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.LetsDoBakeryModule;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_candlelight.LetsDoCandlelightModule;
+import steve_gall.minecolonies_compatibility.module.common.lets_do_meadow.LetsDoMeadowModule;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_vinery.LetsDoVineryModule;
 import steve_gall.minecolonies_compatibility.module.common.minecraft.MinecraftModule;
 import steve_gall.minecolonies_compatibility.module.common.nethersdelight.NethersDelightModule;
@@ -60,6 +61,7 @@ public class ModuleManager
 	public static final OptionalModule<IEModule> IE = register("immersiveengineering", () -> IEModule::new);
 	public static final OptionalModule<LetsDoBakeryModule> LETS_DO_BAKERY = register("bakery", () -> LetsDoBakeryModule::new);
 	public static final OptionalModule<LetsDoCandlelightModule> LETS_DO_CANDLELIGHT = register("candlelight", () -> LetsDoCandlelightModule::new);
+	public static final OptionalModule<LetsDoMeadowModule> LETS_DO_MEADOW = register("meadow", () -> LetsDoMeadowModule::new);
 	public static final OptionalModule<LetsDoVineryModule> LETS_DO_VINERY = register("vinery", () -> LetsDoVineryModule::new);
 	public static final OptionalModule<NethersDelightModule> NETHERS_DELIGHT = register("nethersdelight", () -> NethersDelightModule::new);
 	public static final OptionalModule<OreberriesModule> OREBERRIES = register("oreberriesreplanted", () -> OreberriesModule::new);

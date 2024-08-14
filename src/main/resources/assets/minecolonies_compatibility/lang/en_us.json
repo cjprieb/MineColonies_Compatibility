@@ -86,6 +86,12 @@
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pan.menu": "Cooking Pan Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pot": "[Let's Do] Candlelight - Cooking Pot Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_candlelight_pot.menu": "Cooking Pot Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_cheese": "[Let's Do] Meadow - Cheese Press Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_cheese.menu": "Cheese Press Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_cooking": "[Let's Do] Meadow - Cooking Cauldron Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_cooking.menu": "Cooking Pan Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_woodcutting": "[Let's Do] Meadow - Woodcutter Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_woodcutting.menu": "Woodcutter Recipes",
 	
 	"_comment_module_settings": "Module Settings",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "Request Firework Rocket",
