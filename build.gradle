@@ -148,6 +148,7 @@ dependencies {
     implementation fg.deobf("curse.maven:lets-do-vinery-704465:${lets_do_vinery_file}")
     implementation fg.deobf("curse.maven:lets-do-bakery-886559:${lets_do_bakery_file}")
     implementation fg.deobf("curse.maven:lets-do-candlelight-846962:${lets_do_candlelight_file}")
+    implementation fg.deobf("curse.maven:lets-do-meadow-821483:${lets_do_meadow_file}")
     implementation fg.deobf("curse.maven:do-api-864599:${lets_do_api_file}")
     implementation fg.deobf("curse.maven:the-undergarden-379849:${the_undergarden_file}")
     implementation fg.deobf("curse.maven:oreberries-replanted-454062:${oreberries_file}")
