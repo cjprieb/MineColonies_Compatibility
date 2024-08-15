@@ -3,6 +3,7 @@ package steve_gall.minecolonies_compatibility.core.client.gui;
 import java.util.List;
 
 import com.minecolonies.api.crafting.ItemStorage;
+import com.minecolonies.api.util.constant.Constants;
 import com.minecolonies.api.util.constant.TranslationConstants;
 import com.minecolonies.api.util.constant.translation.BaseGameTranslationConstants;
 import com.minecolonies.core.Network;
@@ -11,13 +12,18 @@ import com.minecolonies.core.network.messages.server.colony.building.worker.AddR
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachRecipeMenu;
 import steve_gall.minecolonies_compatibility.core.common.item.ItemHandlerHelper2;
+import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRecipeMenuSwitchingMessage;
+import steve_gall.minecolonies_compatibility.module.common.ModuleManager;
 import steve_gall.minecolonies_tweaks.api.common.crafting.ICustomizedRecipeStorage;
 import steve_gall.minecolonies_tweaks.core.client.gui.CloseableWindowExtension;
 import steve_gall.minecolonies_tweaks.core.common.config.MineColoniesTweaksConfigClient;
@@ -27,10 +33,17 @@ public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RE
 	private static final Component TEXT_WARNING_MAXIMUM_NUMBER_RECIPES = Component.translatable(TranslationConstants.WARNING_MAXIMUM_NUMBER_RECIPES);
 	private static final Component TEXT_DONE = Component.translatable(BaseGameTranslationConstants.BASE_GUI_DONE);
 
+	private static final ResourceLocation SWITCH_TEXTURE = new ResourceLocation(Constants.MOD_ID, "textures/gui/craftingswitch.png");
+	private static final int SWITCH_WIDTH = 20;
+	private static final int SWITCH_HEIGHT = 18;
+	private static final int SWITCH_X_OFFSET = 148;
+	private static final int SWITCH_Y_OFFSET = 43 - (SWITCH_HEIGHT / 2);
+
 	protected final CraftingModuleView module;
 
 	private Button doneButton;
 	private Button closeButton;
+	private ImageButton switchButton;
 	private Screen parent;
 
 	private Component lastError;
@@ -57,6 +70,22 @@ public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RE
 			this.addRenderableWidget(this.closeButton);
 		}
 
+		this.switchButton = new ImageButton(this.leftPos + this.getSwitchButtonX(), this.topPos + this.getSwitchButtonY(), SWITCH_WIDTH, SWITCH_HEIGHT, 0, 0, SWITCH_HEIGHT + 1, SWITCH_TEXTURE, btn ->
+		{
+			MineColoniesCompatibility.network().sendToServer(new TeachRecipeMenuSwitchingMessage());
+		});
+		this.switchButton.visible = false;
+		this.addRenderableWidget(this.switchButton);
+	}
+
+	public int getSwitchButtonX()
+	{
+		return SWITCH_X_OFFSET;
+	}
+
+	public int getSwitchButtonY()
+	{
+		return SWITCH_Y_OFFSET;
 	}
 
 	@Override
@@ -73,6 +102,7 @@ public abstract class TeachRecipeScreen<MENU extends TeachRecipeMenu<RECIPE>, RE
 			graphics.drawString(this.minecraft.font, this.lastError, x, y, 0xFFFF0000, true);
 		}
 
+		this.switchButton.visible = !ModuleManager.POLYMORPH.isLoaded() && this.menu.getRecipes().size() >= 2;
 	}
 
 	@Override

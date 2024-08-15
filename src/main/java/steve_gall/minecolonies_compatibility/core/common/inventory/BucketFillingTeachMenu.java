@@ -1,5 +1,8 @@
 package steve_gall.minecolonies_compatibility.core.common.inventory;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,9 +56,10 @@ public class BucketFillingTeachMenu extends TeachRecipeMenu<BucketFillingRecipeS
 		return new IMenuRecipeValidator<>()
 		{
 			@Override
-			public @Nullable BucketFillingRecipeStorage find(ServerPlayer player, Container container)
+			public @Nullable List<BucketFillingRecipeStorage> findAll(ServerPlayer player, Container container)
 			{
-				return BucketFillingCraftingType.parse(container.getItem(0));
+				var recipe = BucketFillingCraftingType.parse(container.getItem(0));
+				return recipe != null ? Collections.singletonList(recipe) : Collections.emptyList();
 			}
 
 			@Override

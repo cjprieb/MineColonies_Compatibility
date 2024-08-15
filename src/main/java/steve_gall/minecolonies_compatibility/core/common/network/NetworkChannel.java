@@ -21,7 +21,9 @@ import steve_gall.minecolonies_compatibility.core.common.network.message.Restric
 import steve_gall.minecolonies_compatibility.core.common.network.message.RestrictSetEnabledMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.SmithingOpenTeachMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.SmithingTemplateOpenInventoryMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRecipeMenuNewRecipesMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRecipeMenuNewResultMessage;
+import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRecipeMenuSwitchingMessage;
 
 public class NetworkChannel
 {
@@ -34,7 +36,9 @@ public class NetworkChannel
 		this.rawChannel = NetworkRegistry.newSimpleChannel(MineColoniesCompatibility.rl(channelName), () -> modVersion, str -> str.equals(modVersion), str -> str.equals(modVersion));
 		this.idx = new AtomicInteger();
 
+		this.registerMessage(TeachRecipeMenuNewRecipesMessage.class, TeachRecipeMenuNewRecipesMessage::new);
 		this.registerMessage(TeachRecipeMenuNewResultMessage.class, TeachRecipeMenuNewResultMessage::new);
+		this.registerMessage(TeachRecipeMenuSwitchingMessage.class, TeachRecipeMenuSwitchingMessage::new);
 		this.registerMessage(PolymorphTeachResultItemMessage.class, PolymorphTeachResultItemMessage::new);
 		this.registerMessage(JEIGhostAcceptItemMessage.class, JEIGhostAcceptItemMessage::new);
 		this.registerMessage(JEIGhostAcceptFluidMessage.class, JEIGhostAcceptFluidMessage::new);

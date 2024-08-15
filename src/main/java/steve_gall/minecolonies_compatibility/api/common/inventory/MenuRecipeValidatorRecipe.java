@@ -1,5 +1,7 @@
 package steve_gall.minecolonies_compatibility.api.common.inventory;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.nbt.CompoundTag;
@@ -24,25 +26,22 @@ public abstract class MenuRecipeValidatorRecipe<RECIPE extends Recipe<CONTAINER>
 	}
 
 	@Override
-	public RECIPE find(ServerPlayer player, Container container)
+	public List<RECIPE> findAll(ServerPlayer player, Container container)
 	{
 		var recipeContainer = this.createRecipeContainer(container);
-		var recipe = this.level.getRecipeManager().getRecipeFor(this.getRecipeType(), recipeContainer, this.level).orElse(null);
-
-		if (recipe != null)
+		return this.level.getRecipeManager().getAllRecipesFor(this.getRecipeType()).stream().filter(recipe ->
 		{
-			if (recipe.isSpecial() || !this.level.getGameRules().getBoolean(GameRules.RULE_LIMITED_CRAFTING) || player.getRecipeBook().contains(recipe) || player.isCreative())
+			if (recipe.matches(recipeContainer, this.level))
 			{
-				if (this.test(recipe, player, container))
+				if (recipe.isSpecial() || !this.level.getGameRules().getBoolean(GameRules.RULE_LIMITED_CRAFTING) || player.getRecipeBook().contains(recipe) || player.isCreative())
 				{
-					return recipe;
+					return this.test(recipe, player, container);
 				}
 
 			}
 
-		}
-
-		return null;
+			return false;
+		}).toList();
 	}
 
 	protected boolean test(RECIPE recipe, ServerPlayer player, Container container)

@@ -78,4 +78,16 @@ public class CuttingTeachScreen extends TeachRecipeScreen<CuttingTeachMenu, Cutt
 
 	}
 
+	@Override
+	public int getSwitchButtonX()
+	{
+		return 44;
+	}
+
+	@Override
+	public int getSwitchButtonY()
+	{
+		return 16;
+	}
+
 }

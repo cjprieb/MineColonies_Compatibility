@@ -21,11 +21,15 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import steve_gall.minecolonies_compatibility.api.common.inventory.IItemGhostMenu;
 import steve_gall.minecolonies_compatibility.api.common.inventory.IMenuRecipeValidator;
 import steve_gall.minecolonies_compatibility.api.common.inventory.IRecipeTransferableMenu;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRecipeMenuNewRecipesMessage;
 import steve_gall.minecolonies_compatibility.core.common.network.message.TeachRecipeMenuNewResultMessage;
+import steve_gall.minecolonies_compatibility.module.common.ModuleManager;
+import steve_gall.minecolonies_compatibility.module.common.polymorph.PolymorphModule;
 
 public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IItemGhostMenu, IRecipeTransferableMenu<RECIPE>
 {
@@ -38,6 +42,8 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	protected List<Slot> resultSlots;
 
 	private IMenuRecipeValidator<RECIPE> recipeValidator;
+	private List<RECIPE> recipes;
+	private int recipeIndex = -1;
 	protected RECIPE recipe;
 
 	public TeachRecipeMenu(MenuType<?> menuType, int windowId, Inventory inventory, IBuildingModule module)
@@ -61,6 +67,8 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		this.resultContainer = null;
 
 		this.recipeValidator = null;
+		this.recipes = Collections.emptyList();
+		this.recipeIndex = -1;
 		this.recipe = null;
 	}
 
@@ -82,11 +90,11 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	}
 
 	@Override
-	public final void onRecipeTransfer(@NotNull RECIPE recipe, @NotNull CompoundTag payload)
+	public final void onRecipeTransfer(@NotNull ServerPlayer player, @NotNull RECIPE recipe, @NotNull CompoundTag payload)
 	{
 		this.setContainerByTransfer(recipe, payload);
-
-		this.setRecipe(recipe);
+		this.refreshRecipes(player, this.inputContainer);
+		this.setRecipeIndex(this.recipes.indexOf(recipe));
 	}
 
 	protected void setContainerByTransfer(@NotNull RECIPE recipe, @NotNull CompoundTag payload)
@@ -112,13 +120,33 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		{
 			if (container == this.inputContainer)
 			{
-				var recipe = this.getRecipeValidator().find(player, container);
-				this.setRecipe(recipe);
+				this.refreshRecipes(player, container);
+				this.setRecipeIndex(0);
+
 			}
 
 		}
 
 		super.slotsChanged(container);
+	}
+
+	protected void refreshRecipes(ServerPlayer player, Container container)
+	{
+		this.recipes = new ArrayList<>(this.getRecipeValidator().findAll(player, container));
+		var tags = this.recipes.stream().map(this.recipeValidator::serialize).toList();
+		MineColoniesCompatibility.network().sendToPlayer(new TeachRecipeMenuNewRecipesMessage(tags), player);
+
+		if (ModuleManager.POLYMORPH.isLoaded())
+		{
+			PolymorphModule.sendRecipesList(player, this);
+		}
+
+	}
+
+	public void setRecipes(List<RECIPE> recipes, int index)
+	{
+		this.recipes = new ArrayList<>(recipes);
+		this.setRecipeIndex(index);
 	}
 
 	public void setRecipe(RECIPE recipe)
@@ -130,6 +158,12 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		{
 			var tag = recipe != null ? this.getRecipeValidator().serialize(recipe) : null;
 			MineColoniesCompatibility.network().sendToPlayer(new TeachRecipeMenuNewResultMessage(tag), player);
+
+			if (ModuleManager.POLYMORPH.isLoaded() && recipe instanceof Recipe<?>)
+			{
+				PolymorphModule.sendHighlightRecipe(player, ((Recipe<?>) recipe).getId());
+			}
+
 		}
 
 	}
@@ -238,6 +272,31 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	public RECIPE getRecipe()
 	{
 		return this.recipe;
+	}
+
+	public int getRecipeIndex()
+	{
+		return this.recipeIndex;
+	}
+
+	public void setRecipeIndex(int index)
+	{
+		if (0 <= index && index < this.getRecipes().size())
+		{
+			this.setRecipe(this.recipes.get(index));
+			this.recipeIndex = index;
+		}
+		else
+		{
+			this.setRecipe(null);
+			this.recipeIndex = -1;
+		}
+
+	}
+
+	public List<RECIPE> getRecipes()
+	{
+		return this.recipes;
 	}
 
 }
