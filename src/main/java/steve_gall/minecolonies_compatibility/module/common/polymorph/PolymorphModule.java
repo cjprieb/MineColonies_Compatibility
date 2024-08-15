@@ -23,8 +23,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import steve_gall.minecolonies_compatibility.api.common.inventory.MenuRecipeValidatorRecipe;
+import steve_gall.minecolonies_compatibility.core.client.gui.TeachRecipeScreen;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.core.common.inventory.TeachRecipeMenu;
 import steve_gall.minecolonies_compatibility.core.common.item.ItemStackHelper;
 import steve_gall.minecolonies_compatibility.module.common.AbstractModule;
 
@@ -44,6 +48,15 @@ public class PolymorphModule extends AbstractModule
 				tag.putBoolean("polymorph", true);
 				tag.putString("player", crafting.getPlayer().getStringUUID());
 				tag.put("building", NbtUtils.writeBlockPos(crafting.getPos()));
+				return stack;
+			}
+			else if (menu instanceof TeachRecipeMenu<?> teach)
+			{
+				var stack = new ItemStack(ModBlocks.blockHutTownHall);
+				var tag = stack.getOrCreateTagElement(MineColoniesCompatibility.MOD_ID);
+				tag.putBoolean("polymorph", true);
+				tag.putString("player", teach.getInventory().player.getStringUUID());
+				tag.put("building", NbtUtils.writeBlockPos(teach.getModulePos().getBuildingId()));
 				return stack;
 			}
 			return null;
@@ -90,6 +103,41 @@ public class PolymorphModule extends AbstractModule
 
 						};
 					}
+					else if (screen instanceof TeachRecipeScreen)
+					{
+						return new AbstractRecipesWidget(screen)
+						{
+							@Override
+							public Slot getOutputSlot()
+							{
+								@SuppressWarnings("rawtypes")
+								TeachRecipeMenu menu = (TeachRecipeMenu) this.containerScreen.getMenu();
+								@SuppressWarnings("unchecked")
+								List<Slot> slots = menu.getResultSlots();
+								return slots.get(0);
+							}
+
+							@Override
+							public void selectRecipe(ResourceLocation id)
+							{
+								PolymorphApi.common().getPacketDistributor().sendStackRecipeSelectionC2S(id);
+							}
+
+							@Override
+							@SuppressWarnings("rawtypes")
+							public int getXPos()
+							{
+								return ((TeachRecipeScreen) this.containerScreen).getSwitchButtonX();
+							}
+
+							@Override
+							@SuppressWarnings("rawtypes")
+							public int getYPos()
+							{
+								return ((TeachRecipeScreen) this.containerScreen).getSwitchButtonY();
+							}
+						};
+					}
 
 					return null;
 				}
@@ -118,6 +166,33 @@ public class PolymorphModule extends AbstractModule
 		}
 
 		PolymorphApi.common().getPacketDistributor().sendRecipesListS2C(player, pairs, selected);
+	}
+
+	public static <RECIPE> void sendRecipesList(ServerPlayer player, TeachRecipeMenu<RECIPE> menu)
+	{
+		var recipeValidator = menu.getRecipeValidator();
+
+		if (recipeValidator instanceof MenuRecipeValidatorRecipe)
+		{
+			var pairs = new TreeSet<IRecipePair>();
+			ResourceLocation selected = null;
+			var recipes = menu.getRecipes();
+
+			for (var i = 0; i < recipes.size(); i++)
+			{
+				var recipe = (Recipe<?>) recipes.get(i);
+				pairs.add(new RecipePair(recipe.getId(), recipe.getResultItem()));
+
+				if (menu.getRecipeIndex() == i)
+				{
+					selected = recipe.getId();
+				}
+
+			}
+
+			PolymorphApi.common().getPacketDistributor().sendRecipesListS2C(player, pairs, selected);
+		}
+
 	}
 
 	public static void sendHighlightRecipe(ServerPlayer player, ResourceLocation recipeId)

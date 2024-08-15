@@ -57,7 +57,7 @@ public class JEIRecipeTransferMessage<RECIPE> extends AbstractMessage
 		{
 			var recipe = menu.getRecipeValidator().deserialize(this.tag.getCompound(RECIPE_TRANSFER_TAG_RECIPE));
 			var payload = this.tag.getCompound(RECIPE_TRANSFER_TAG_PAYLOAD);
-			menu.onRecipeTransfer(recipe, payload);
+			menu.onRecipeTransfer(player, recipe, payload);
 		}
 
 	}

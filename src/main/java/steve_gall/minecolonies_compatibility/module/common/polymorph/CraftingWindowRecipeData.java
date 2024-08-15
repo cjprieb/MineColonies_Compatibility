@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.core.common.inventory.TeachRecipeMenu;
 
 public class CraftingWindowRecipeData extends StackRecipeData
 {
@@ -32,16 +33,24 @@ public class CraftingWindowRecipeData extends StackRecipeData
 			return;
 		}
 
-		var craftingRecipe = (CraftingRecipe) recipe;
-		var id = recipe.getId();
 		var uuid = UUID.fromString(tag.getString("player"));
 		var server = PolymorphApi.common().getServer().orElse(null);
+		var id = recipe.getId();
 
 		for (ServerLevel level : server.getAllLevels())
 		{
-			if (level.getPlayerByUUID(uuid) instanceof ServerPlayer player && player.containerMenu instanceof ContainerCrafting crafting)
+			if (level.getPlayerByUUID(uuid) instanceof ServerPlayer player)
 			{
-				crafting.craftResult.setItem(0, craftingRecipe.assemble(crafting.craftMatrix));
+				if (player.containerMenu instanceof ContainerCrafting crafting)
+				{
+					var craftingRecipe = (CraftingRecipe) recipe;
+					crafting.craftResult.setItem(0, craftingRecipe.assemble(crafting.craftMatrix));
+				}
+				else if (player.containerMenu instanceof TeachRecipeMenu<?> teach)
+				{
+					teach.setRecipeIndex(teach.getRecipes().indexOf(recipe));
+				}
+
 				PolymorphApi.common().getPacketDistributor().sendHighlightRecipeS2C(player, id);
 			}
 
