@@ -176,7 +176,7 @@ public abstract class EntityAIWorkFarmerMixin extends AbstractEntityAICrafting<J
 				{
 					return false;
 				}
-				else if (this.hasNotDelayed(this.getBlockMiningDelay(state, position)))
+				else if (this.hasNotDelayed(this.getBlockMiningTime(state, position)))
 				{
 					return false;
 				}
