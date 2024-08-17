@@ -14,8 +14,8 @@ import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 public class ModuleCraftingTypes
 {
 	public static final DeferredRegister<CraftingType> REGISTER = DeferredRegisterHelper.craftingTypes(MineColoniesCompatibility.MOD_ID);
-	public static final RegistryObject<CraftingType> CUTTING = DeferredRegisterHelper.registerCraftingType(REGISTER, "farmers_cutting", id -> new SimpleCraftingType<>(id, ModRecipeTypes.COOKING, CookingGenericRecipe::new));
-	public static final RegistryObject<CraftingType> COOKING = DeferredRegisterHelper.registerCraftingType(REGISTER, "farmers_cooking", CuttingCraftingType::new);
+	public static final RegistryObject<CraftingType> CUTTING = DeferredRegisterHelper.registerCraftingType(REGISTER, "farmers_cutting", CuttingCraftingType::new);
+	public static final RegistryObject<CraftingType> COOKING = DeferredRegisterHelper.registerCraftingType(REGISTER, "farmers_cooking", id -> new SimpleCraftingType<>(id, ModRecipeTypes.COOKING, CookingGenericRecipe::new));
 
 	private ModuleCraftingTypes()
 	{
