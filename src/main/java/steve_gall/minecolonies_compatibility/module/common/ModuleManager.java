@@ -3,6 +3,7 @@ package steve_gall.minecolonies_compatibility.module.common;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 import steve_gall.minecolonies_compatibility.module.common.ae2.AppliedEnergistics2Module;
@@ -59,8 +60,8 @@ public class ModuleManager
 	public static final OptionalModule<FarmersDelightModule> FARMERSDELIGHT = register("farmersdelight", () -> FarmersDelightModule::new);
 	public static final OptionalModule<ewewukekMusketModule> EWEWUKEK_MUSKET = register("musketmod", () -> ewewukekMusketModule::new);
 	public static final OptionalModule<IEModule> IE = register("immersiveengineering", () -> IEModule::new);
-	public static final OptionalModule<LetsDoBakeryModule> LETS_DO_BAKERY = register("bakery", () -> LetsDoBakeryModule::new);
-	public static final OptionalModule<LetsDoCandlelightModule> LETS_DO_CANDLELIGHT = register("candlelight", () -> LetsDoCandlelightModule::new);
+	public static final OptionalModule<LetsDoBakeryModule> LETS_DO_BAKERY = register("bakery", LetsDoLegacyModule::new, () -> LetsDoBakeryModule::new);
+	public static final OptionalModule<LetsDoCandlelightModule> LETS_DO_CANDLELIGHT = register("candlelight", LetsDoLegacyModule::new, () -> LetsDoCandlelightModule::new);
 	public static final OptionalModule<LetsDoMeadowModule> LETS_DO_MEADOW = register("meadow", () -> LetsDoMeadowModule::new);
 	public static final OptionalModule<LetsDoVineryModule> LETS_DO_VINERY = register("vinery", () -> LetsDoVineryModule::new);
 	public static final OptionalModule<OreberriesModule> OREBERRIES = register("oreberriesreplanted", () -> OreberriesModule::new);
@@ -77,7 +78,12 @@ public class ModuleManager
 
 	private static <MODULE extends AbstractModule> OptionalModule<MODULE> register(String modid, Supplier<Supplier<MODULE>> initializer)
 	{
-		var module = new OptionalModule<>(modid, initializer);
+		return register(modid, OptionalModule::new, initializer);
+	}
+
+	private static <WRAPPER extends OptionalModule<MODULE>, MODULE extends AbstractModule> WRAPPER register(String modid, BiFunction<String, Supplier<Supplier<MODULE>>, WRAPPER> wrapper, Supplier<Supplier<MODULE>> initializer)
+	{
+		var module = wrapper.apply(modid, initializer);
 		_MODULES.add(module);
 		return module;
 	}
