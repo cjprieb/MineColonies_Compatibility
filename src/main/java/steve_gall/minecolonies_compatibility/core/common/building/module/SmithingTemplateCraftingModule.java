@@ -112,9 +112,9 @@ public class SmithingTemplateCraftingModule extends AbstractCraftingBuildingModu
 	}
 
 	@Override
-	public void serializeToView(@NotNull FriendlyByteBuf buf)
+	public void serializeToView(@NotNull FriendlyByteBuf buf, boolean fullSync)
 	{
-		super.serializeToView(buf);
+		super.serializeToView(buf, fullSync);
 
 		this.counter.serializeBuffer(buf);
 	}
