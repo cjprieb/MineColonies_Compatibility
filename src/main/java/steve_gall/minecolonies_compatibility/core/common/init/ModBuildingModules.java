@@ -46,6 +46,12 @@ public class ModBuildingModules
 				return CustomizedAI.getValues().stream().filter(e -> e.getJobEntry() == jobEntry).findAny().isPresent() ? 1 : 0;
 			}), //
 			() -> CombinedHiringLimitModuleView::new);
+	public static final BuildingEntry.ModuleProducer<GuardBuildingModule, CombinedHiringLimitModuleView> GUNNER_BARRACKS_WORK = new BuildingEntry.ModuleProducer<>("gunner_barracks_work", //
+			() -> new GuardBuildingModule(ModGuardTypes.GUNNER.get(), true, b ->
+			{
+				var jobEntry = ModJobs.GUNNER.get();
+				return CustomizedAI.getValues().stream().filter(e -> e.getJobEntry() == jobEntry).findAny().isPresent() ? b.getBuildingLevel() : 0;
+			}), () -> CombinedHiringLimitModuleView::new);
 
 	public static final BuildingEntry.ModuleProducer<WorkerBuildingModule, WorkerBuildingModuleView> ORCHARDIST_WORK = new BuildingEntry.ModuleProducer<>("orchardist_work", //
 			() -> new WorkerBuildingModule(ModJobs.ORCHARDIST.get(), Skill.Stamina, Skill.Focus, false, b -> 1), //
