@@ -18,6 +18,7 @@ import steve_gall.minecolonies_compatibility.module.common.ewewukeks_musketmod.e
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.FarmersDelightModule;
 import steve_gall.minecolonies_compatibility.module.common.ie.IEModule;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.LetsDoBakeryModule;
+import steve_gall.minecolonies_compatibility.module.common.lets_do_brewery.LetsDoBreweryModule;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_candlelight.LetsDoCandlelightModule;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_meadow.LetsDoMeadowModule;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_vinery.LetsDoVineryModule;
@@ -61,6 +62,7 @@ public class ModuleManager
 	public static final OptionalModule<ewewukekMusketModule> EWEWUKEK_MUSKET = register("musketmod", () -> ewewukekMusketModule::new);
 	public static final OptionalModule<IEModule> IE = register("immersiveengineering", () -> IEModule::new);
 	public static final OptionalModule<LetsDoBakeryModule> LETS_DO_BAKERY = register("bakery", LetsDoLegacyModule::new, () -> LetsDoBakeryModule::new);
+	public static final OptionalModule<LetsDoBreweryModule> LETS_DO_BREWERY = register("brewery", LetsDoLegacyModule::new, () -> LetsDoBreweryModule::new);
 	public static final OptionalModule<LetsDoCandlelightModule> LETS_DO_CANDLELIGHT = register("candlelight", LetsDoLegacyModule::new, () -> LetsDoCandlelightModule::new);
 	public static final OptionalModule<LetsDoMeadowModule> LETS_DO_MEADOW = register("meadow", () -> LetsDoMeadowModule::new);
 	public static final OptionalModule<LetsDoVineryModule> LETS_DO_VINERY = register("vinery", () -> LetsDoVineryModule::new);
