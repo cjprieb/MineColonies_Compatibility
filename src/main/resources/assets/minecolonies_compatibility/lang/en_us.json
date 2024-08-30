@@ -96,6 +96,8 @@
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_woodcutting.menu": "Woodcutter Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_brewery_silo": "[Let's Do] Brewery - Silo Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_brewery_silo.menu": "Silo Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_vinery_apple_press": "[Let's Do] Vinery - Apple Press Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_vinery_apple_press.menu": "Apple Press Recipes",
 	
 	"_comment_module_settings": "Module Settings",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "Request Firework Rocket",
