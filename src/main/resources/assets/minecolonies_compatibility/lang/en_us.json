@@ -92,6 +92,8 @@
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_cooking.menu": "Cooking Cauldron Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_woodcutting": "[Let's Do] Meadow - Woodcutter Recipes",
 	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_meadow_woodcutting.menu": "Woodcutter Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_vinery_apple_press": "[Let's Do] Vinery - Apple Press Recipes",
+	"com.minecolonies.coremod.gui.workerhuts.recipe.lets_do_vinery_apple_press.menu": "Apple Press Recipes",
 	
 	"_comment_module_settings": "Module Settings",
 	"com.minecolonies.coremod.setting.minecolonies_compatibility:request_firework_rocket": "Request Firework Rocket",
