@@ -93,7 +93,7 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 	public final void onRecipeTransfer(@NotNull ServerPlayer player, @NotNull RECIPE recipe, @NotNull CompoundTag payload)
 	{
 		this.setContainerByTransfer(recipe, payload);
-		this.refreshRecipes(player, this.inputContainer);
+		this.refreshRecipes(this.inputContainer, player);
 		this.setRecipeIndex(this.recipes.indexOf(recipe));
 	}
 
@@ -120,7 +120,7 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		{
 			if (container == this.inputContainer)
 			{
-				this.refreshRecipes(player, container);
+				this.refreshRecipes(container, player);
 				this.setRecipeIndex(0);
 
 			}
@@ -130,9 +130,9 @@ public abstract class TeachRecipeMenu<RECIPE> extends ModuleMenu implements IIte
 		super.slotsChanged(container);
 	}
 
-	protected void refreshRecipes(ServerPlayer player, Container container)
+	protected void refreshRecipes(Container container, ServerPlayer player)
 	{
-		this.recipes = new ArrayList<>(this.getRecipeValidator().findAll(player, container));
+		this.recipes = new ArrayList<>(this.getRecipeValidator().findAll(container, player));
 		var tags = this.recipes.stream().map(this.recipeValidator::serialize).toList();
 		MineColoniesCompatibility.network().sendToPlayer(new TeachRecipeMenuNewRecipesMessage(tags), player);
 

@@ -12,13 +12,15 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import steve_gall.minecolonies_compatibility.core.common.inventory.ContainerHelper;
+import steve_gall.minecolonies_compatibility.core.common.item.ItemStackHelper;
 
 public abstract class MenuRecipeValidatorRecipe<RECIPE extends Recipe<CONTAINER>, CONTAINER extends Container> implements IMenuRecipeValidator<RECIPE>
 {
 	public static final String TAG_ID = "id";
 
 	@NotNull
-	private final Level level;
+	protected final Level level;
 
 	public MenuRecipeValidatorRecipe(@NotNull Level level)
 	{
@@ -26,27 +28,31 @@ public abstract class MenuRecipeValidatorRecipe<RECIPE extends Recipe<CONTAINER>
 	}
 
 	@Override
-	public List<RECIPE> findAll(ServerPlayer player, Container container)
+	public List<RECIPE> findAll(Container container, ServerPlayer player)
 	{
-		var recipeContainer = this.createRecipeContainer(container);
 		return this.level.getRecipeManager().getAllRecipesFor(this.getRecipeType()).stream().filter(recipe ->
 		{
-			if (recipe.matches(recipeContainer, this.level))
+			if (this.test(recipe, container, player))
 			{
-				if (recipe.isSpecial() || !this.level.getGameRules().getBoolean(GameRules.RULE_LIMITED_CRAFTING) || player.getRecipeBook().contains(recipe) || player.isCreative())
-				{
-					return this.test(recipe, player, container);
-				}
-
+				return recipe.isSpecial() || !this.level.getGameRules().getBoolean(GameRules.RULE_LIMITED_CRAFTING) || player.getRecipeBook().contains(recipe) || player.isCreative();
 			}
 
 			return false;
 		}).toList();
 	}
 
-	protected boolean test(RECIPE recipe, ServerPlayer player, Container container)
+	protected abstract boolean test(RECIPE recipe, Container container, ServerPlayer player);
+
+	protected boolean matchesWithIngredientsCount(RECIPE recipe, CONTAINER container)
 	{
-		return true;
+		if (!recipe.matches(container, this.level))
+		{
+			return false;
+		}
+
+		var ingredientsSize = recipe.getIngredients().size();
+		var inputsSize = ItemStackHelper.filterNotEmpty(ContainerHelper.getItemStacks(container)).size();
+		return ingredientsSize == inputsSize;
 	}
 
 	@Override
@@ -66,6 +72,4 @@ public abstract class MenuRecipeValidatorRecipe<RECIPE extends Recipe<CONTAINER>
 	}
 
 	public abstract RecipeType<RECIPE> getRecipeType();
-
-	public abstract CONTAINER createRecipeContainer(Container container);
 }

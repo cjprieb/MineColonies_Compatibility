@@ -56,7 +56,7 @@ public class BucketFillingTeachMenu extends TeachRecipeMenu<BucketFillingRecipeS
 		return new IMenuRecipeValidator<>()
 		{
 			@Override
-			public @Nullable List<BucketFillingRecipeStorage> findAll(ServerPlayer player, Container container)
+			public @Nullable List<BucketFillingRecipeStorage> findAll(Container container, ServerPlayer player)
 			{
 				var recipe = BucketFillingCraftingType.parse(container.getItem(0));
 				return recipe != null ? Collections.singletonList(recipe) : Collections.emptyList();

@@ -16,12 +16,10 @@ import net.satisfy.bakery.recipe.CraftingBowlRecipe;
 import net.satisfy.bakery.registry.RecipeTypeRegistry;
 import steve_gall.minecolonies_compatibility.api.common.inventory.IMenuRecipeValidator;
 import steve_gall.minecolonies_compatibility.api.common.inventory.MenuRecipeValidatorRecipe;
-import steve_gall.minecolonies_compatibility.core.common.inventory.ContainerHelper;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachContainer;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachInputSlot;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachRecipeMenu;
 import steve_gall.minecolonies_compatibility.core.common.inventory.TeachResultSlot;
-import steve_gall.minecolonies_compatibility.core.common.item.ItemStackHelper;
 import steve_gall.minecolonies_compatibility.core.common.util.NBTUtils2;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.init.ModuleCraftingTypes;
 import steve_gall.minecolonies_compatibility.module.common.lets_do_bakery.init.ModuleMenuTypes;
@@ -82,15 +80,9 @@ public class BowlTeachMenu extends TeachRecipeMenu<CraftingBowlRecipe>
 			}
 
 			@Override
-			public Container createRecipeContainer(Container container)
+			protected boolean test(CraftingBowlRecipe recipe, Container container, ServerPlayer player)
 			{
-				return container;
-			}
-
-			@Override
-			protected boolean test(CraftingBowlRecipe recipe, ServerPlayer player, Container container)
-			{
-				return recipe.getIngredients().size() == ItemStackHelper.filterNotEmpty(ContainerHelper.getItemStacks(container)).size();
+				return this.matchesWithIngredientsCount(recipe, container);
 			}
 
 		};
