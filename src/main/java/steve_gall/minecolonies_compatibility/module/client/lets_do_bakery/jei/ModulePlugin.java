@@ -1,28 +1,27 @@
 package steve_gall.minecolonies_compatibility.module.client.lets_do_bakery.jei;
 
-import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
-import net.minecraft.resources.ResourceLocation;
 import net.satisfy.bakery.compat.jei.category.BakerStationCategory;
 import net.satisfy.bakery.compat.jei.category.CookingPotCategory;
 import net.satisfy.bakery.compat.jei.category.CraftingBowlCategory;
 import net.satisfy.bakery.compat.jei.category.StoveCategory;
-import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.module.client.jei.AbstractModulePlugin;
 import steve_gall.minecolonies_compatibility.module.client.lets_do_bakery.BakingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.client.lets_do_bakery.BowlTeachScreen;
 import steve_gall.minecolonies_compatibility.module.client.lets_do_bakery.CookingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.client.lets_do_bakery.StoveTeachScreen;
 import steve_gall.minecolonies_compatibility.module.common.ModuleManager;
+import steve_gall.minecolonies_compatibility.module.common.OptionalModule;
 
 @JeiPlugin
-public class ModulePlugin implements IModPlugin
+public class ModulePlugin extends AbstractModulePlugin
 {
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration)
 	{
-		if (!ModuleManager.LETS_DO_BAKERY.isLoaded())
+		if (!this.isLoaded())
 		{
 			return;
 		}
@@ -36,7 +35,7 @@ public class ModulePlugin implements IModPlugin
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration)
 	{
-		if (!ModuleManager.LETS_DO_BAKERY.isLoaded())
+		if (!this.isLoaded())
 		{
 			return;
 		}
@@ -49,9 +48,9 @@ public class ModulePlugin implements IModPlugin
 	}
 
 	@Override
-	public ResourceLocation getPluginUid()
+	public OptionalModule<?> getModule()
 	{
-		return MineColoniesCompatibility.rl(ModuleManager.LETS_DO_BAKERY.getModId());
+		return ModuleManager.LETS_DO_BAKERY;
 	}
 
 }
