@@ -2,23 +2,22 @@ package steve_gall.minecolonies_compatibility.module.client.lets_do_vinery.jei;
 
 import com.minecolonies.api.colony.jobs.ModJobs;
 
-import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
-import net.minecraft.resources.ResourceLocation;
-import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.module.client.jei.AbstractModulePlugin;
 import steve_gall.minecolonies_compatibility.module.client.jei.ModPlugin;
 import steve_gall.minecolonies_compatibility.module.client.lets_do_vinery.ApplePressTeachScreen;
 import steve_gall.minecolonies_compatibility.module.common.ModuleManager;
+import steve_gall.minecolonies_compatibility.module.common.OptionalModule;
 
 @JeiPlugin
-public class ModulePlugin implements IModPlugin
+public class ModulePlugin extends AbstractModulePlugin
 {
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration)
 	{
-		if (!ModuleManager.LETS_DO_VINERY.isLoaded())
+		if (!this.isLoaded())
 		{
 			return;
 		}
@@ -30,7 +29,7 @@ public class ModulePlugin implements IModPlugin
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration)
 	{
-		if (!ModuleManager.LETS_DO_VINERY.isLoaded())
+		if (!this.isLoaded())
 		{
 			return;
 		}
@@ -41,9 +40,9 @@ public class ModulePlugin implements IModPlugin
 	}
 
 	@Override
-	public ResourceLocation getPluginUid()
+	public OptionalModule<?> getModule()
 	{
-		return MineColoniesCompatibility.rl(ModuleManager.LETS_DO_VINERY.getModId());
+		return ModuleManager.LETS_DO_VINERY;
 	}
 
 }

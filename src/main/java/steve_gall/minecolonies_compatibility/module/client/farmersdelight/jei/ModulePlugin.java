@@ -1,23 +1,22 @@
 package steve_gall.minecolonies_compatibility.module.client.farmersdelight.jei;
 
-import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
-import net.minecraft.resources.ResourceLocation;
-import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.CookingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.CuttingTeachScreen;
+import steve_gall.minecolonies_compatibility.module.client.jei.AbstractModulePlugin;
 import steve_gall.minecolonies_compatibility.module.common.ModuleManager;
+import steve_gall.minecolonies_compatibility.module.common.OptionalModule;
 import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 
 @JeiPlugin
-public class ModulePlugin implements IModPlugin
+public class ModulePlugin extends AbstractModulePlugin
 {
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration)
 	{
-		if (!ModuleManager.FARMERSDELIGHT.isLoaded())
+		if (!this.isLoaded())
 		{
 			return;
 		}
@@ -29,7 +28,7 @@ public class ModulePlugin implements IModPlugin
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration)
 	{
-		if (!ModuleManager.FARMERSDELIGHT.isLoaded())
+		if (!this.isLoaded())
 		{
 			return;
 		}
@@ -40,9 +39,9 @@ public class ModulePlugin implements IModPlugin
 	}
 
 	@Override
-	public ResourceLocation getPluginUid()
+	public OptionalModule<?> getModule()
 	{
-		return MineColoniesCompatibility.rl(ModuleManager.FARMERSDELIGHT.getModId());
+		return ModuleManager.FARMERSDELIGHT;
 	}
 
 }
