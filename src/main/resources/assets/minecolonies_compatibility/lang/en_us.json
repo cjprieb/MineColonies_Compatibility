@@ -106,7 +106,7 @@
 	"minecolonies_compatibility.interaction.no_working_block_2": "My work hut doesn't have any %1$s's %2$s! Please place it so I have some I can use!",
 	"minecolonies_compatibility.interaction.no_working_block_and_under_heat_source": "My work hut doesn't have any heated %1$s's %2$s! Please place %2$s and place heat source under it!",
 	"minecolonies_compatibility.interaction.no_fluid_source": "My work hut doesn't have any Fluid Tank with %1$s or Liquid %1$s! Please place it so I have some I can use!",
-	"minecolonies_compatibility.interaction.no_lets_do_bakery_stove": "My work hut doesn't have any [Let's Do] Bakery's Stove or Oven or Stove! Please place it so I have some I can use!",
+	"minecolonies_compatibility.interaction.no_lets_do_bakery_stove": "My work hut doesn't have any [Let's Do] Bakery's Stove or Oven! Please place it so I have some I can use!",
 	
 	"_eof": "EOF"
 }
