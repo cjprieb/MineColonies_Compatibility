@@ -12,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -79,9 +80,9 @@ public class SmithingTeachMenu extends TeachRecipeMenu<UpgradeRecipe>
 			}
 
 			@Override
-			public Container createRecipeContainer(Container container)
+			protected boolean test(UpgradeRecipe recipe, Container container, ServerPlayer player)
 			{
-				return container;
+				return recipe.matches(container, this.level);
 			}
 		};
 	}

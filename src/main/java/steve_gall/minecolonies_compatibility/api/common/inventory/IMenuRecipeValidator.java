@@ -11,7 +11,7 @@ import net.minecraft.world.Container;
 public interface IMenuRecipeValidator<RECIPE>
 {
 	@NotNull
-	List<RECIPE> findAll(@NotNull ServerPlayer player, @NotNull Container container);
+	List<RECIPE> findAll(@NotNull Container container, @NotNull ServerPlayer player);
 
 	@NotNull
 	CompoundTag serialize(@NotNull RECIPE recipe);

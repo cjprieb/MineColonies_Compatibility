@@ -7,6 +7,7 @@ import com.minecolonies.api.crafting.registry.CraftingType;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -78,9 +79,9 @@ public class CheeseTeachMenu extends TeachRecipeMenu<CheeseFormRecipe>
 			}
 
 			@Override
-			public Container createRecipeContainer(Container container)
+			protected boolean test(CheeseFormRecipe recipe, Container container, ServerPlayer player)
 			{
-				return new CompoundContainer(new SimpleContainer(1), container);
+				return this.matchesWithIngredientsCount(recipe, new CompoundContainer(new SimpleContainer(1), container));
 			}
 
 		};

@@ -15,6 +15,7 @@ import com.minecolonies.api.util.constant.ToolType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -97,9 +98,9 @@ public class CuttingTeachMenu extends TeachRecipeMenu<CuttingBoardRecipe>
 			}
 
 			@Override
-			public RecipeWrapper createRecipeContainer(Container container)
+			protected boolean test(CuttingBoardRecipe recipe, Container container, ServerPlayer player)
 			{
-				return new RecipeWrapper(new InvWrapper(container));
+				return recipe.matches(new RecipeWrapper(new InvWrapper(container)), this.level);
 			}
 		};
 	}
