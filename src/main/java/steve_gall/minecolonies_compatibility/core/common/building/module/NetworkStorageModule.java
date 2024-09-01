@@ -95,7 +95,7 @@ public class NetworkStorageModule extends AbstractModuleWithExternalWorkingBlock
 		return view != null && view.isActive() && view.canInsert();
 	}
 
-	public boolean hasMatchingItemStack(ItemStack itemStack, int count, boolean ignoreNBT, boolean ignoreDamage, int leftOver)
+	public int getMatchingItemStackCount(ItemStack itemStack, int count, boolean ignoreNBT, boolean ignoreDamage, int leftOver)
 	{
 		var totalCountFound = 0 - leftOver;
 		Predicate<ItemStack> predicate = stack -> ItemStackUtils.compareItemStacksIgnoreStackSize(itemStack, stack, !ignoreDamage, !ignoreNBT);
@@ -106,12 +106,17 @@ public class NetworkStorageModule extends AbstractModuleWithExternalWorkingBlock
 
 			if (totalCountFound >= count)
 			{
-				return true;
+				return totalCountFound;
 			}
 
 		}
 
-		return false;
+		return totalCountFound;
+	}
+
+	public boolean hasMatchingItemStack(ItemStack itemStack, int count, boolean ignoreNBT, boolean ignoreDamage, int leftOver)
+	{
+		return this.getMatchingItemStackCount(itemStack, count, ignoreNBT, ignoreDamage, leftOver) >= count;
 	}
 
 	public Stream<Tuple<ItemStack, BlockPos>> getMatchingItemStacks(Predicate<ItemStack> predicate)
