@@ -37,7 +37,11 @@ public class ewewukekMusketConfig extends AbstractModuleConfig
 
 		public class GunnerGunConfig
 		{
-			public final int reloadDuration = 30 + 10;
+			public static final int RELOAD_DURATION = 30 + 10;
+			public static final int STAGE_DURATION_1 = 5;
+			public static final int STAGE_DURATION_2 = 10;
+			public static final int STAGE_DURATION_3 = 20;
+			public static final int STAGE_DURATION_4 = STAGE_DURATION_3 + 10;
 
 			public final AttackDelayConfig attackDelay;
 			public final AttackDamageConfig defaultBulletDamage;
@@ -45,7 +49,7 @@ public class ewewukekMusketConfig extends AbstractModuleConfig
 			public GunnerGunConfig(ForgeConfigSpec.Builder builder)
 			{
 				builder.push("attackDelay");
-				builder.comment("will reload before every shot and reload duration is '" + this.reloadDuration + "' ticks");
+				builder.comment("will reload before every shot and reload duration is '" + GunnerGunConfig.RELOAD_DURATION + "' ticks");
 				this.attackDelay = new AttackDelayConfig(builder, GunnerConfig.getDefaultDelay().base(28));
 				builder.pop();
 

@@ -4,16 +4,16 @@ import org.jetbrains.annotations.NotNull;
 
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
 
+import ewewukek.musketmod.Config;
 import ewewukek.musketmod.GunItem;
 import ewewukek.musketmod.Items;
 import ewewukek.musketmod.MusketItem;
 import ewewukek.musketmod.PistolItem;
 import ewewukek.musketmod.Sounds;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec3;
 import steve_gall.minecolonies_compatibility.api.common.entity.ai.CustomizedAIContext;
 import steve_gall.minecolonies_compatibility.api.common.entity.ai.guard.CustomizedAIGunner;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
@@ -42,7 +42,7 @@ public abstract class GunnerGunAI extends CustomizedAIGunner
 		public float getMeleeAttackDamage(@NotNull CustomizedAIContext context, @NotNull LivingEntity target)
 		{
 			var damage = super.getMeleeAttackDamage(context, target);
-			damage += MusketItem.bayonetDamage;
+			damage += Config.bayonetDamage;
 			return damage;
 		}
 
@@ -136,22 +136,22 @@ public abstract class GunnerGunAI extends CustomizedAIGunner
 		var time = this.getReloadingTime(user);
 		var phase = this.getLoadingPhase(user);
 
-		if (phase == 0 && time >= GunItem.LOADING_STAGE_1)
+		if (phase == 0 && time >= GunnerGunConfig.STAGE_DURATION_1)
 		{
 			user.playSound(Sounds.MUSKET_LOAD_0, 0.8F, 1.0F);
 			this.setLoadingPhase(user, 1);
 		}
-		else if (phase == 1 && time >= GunItem.LOADING_STAGE_2)
+		else if (phase == 1 && time >= GunnerGunConfig.STAGE_DURATION_2)
 		{
 			user.playSound(Sounds.MUSKET_LOAD_1, 0.8F, 1.0F);
 			this.setLoadingPhase(user, 2);
 		}
-		else if (phase == 2 && time >= GunItem.LOADING_STAGE_3)
+		else if (phase == 2 && time >= GunnerGunConfig.STAGE_DURATION_3)
 		{
 			user.playSound(Sounds.MUSKET_LOAD_2, 0.8F, 1.0F);
 			this.setLoadingPhase(user, 3);
 		}
-		else if (phase == 3 && time >= GunItem.LOADING_STAGE_3 + 10)
+		else if (phase == 3 && time >= GunnerGunConfig.STAGE_DURATION_4)
 		{
 			user.playSound(Sounds.MUSKET_READY, 0.8F, 1.0F);
 			this.setLoadingPhase(user, 4);
@@ -193,24 +193,19 @@ public abstract class GunnerGunAI extends CustomizedAIGunner
 		else if (bulletMode.canDefault())
 		{
 			var damage = config.defaultBulletDamage.apply(user, this.getPrimarySkillLevel(user));
-			var maxEnergy = MusketItem.bulletSpeed * MusketItem.bulletSpeed;
 			var dummyGun = ModuleItems.DUMMY_GUN.get();
 			dummyGun.setParent((GunItem) weapon.getItem());
-			dummyGun.setDamageMultiplier((float) (damage / maxEnergy));
+			dummyGun.setDamage((float) damage);
 			gun = dummyGun;
 			bullet = ItemStack.EMPTY.copy();
 		}
 
 		if (bullet != null)
 		{
-			var front = Vec3.directionFromRotation(user.getXRot(), user.getYRot());
-			var arm = HumanoidArm.RIGHT;
-			var isRightHand = arm == HumanoidArm.RIGHT;
-			var side = Vec3.directionFromRotation(0.0F, user.getYRot() + (isRightHand ? 90.0F : -90.0F));
-			var down = Vec3.directionFromRotation(user.getXRot() + 90, user.getYRot());
-			gun.fire(user, front, side.add(down).scale(0.15D));
-
-			user.playSound(gun.fireSound(), 3.5F, 1.0F);
+			var hand = InteractionHand.MAIN_HAND;
+			var direction = gun.aimAt(user, target);
+			gun.fire(user, weapon, direction, gun.smokeOffsetFor(user, hand));
+			user.playSound(gun.fireSound(weapon), 3.5F, 1.0F);
 		}
 		else
 		{
@@ -229,7 +224,7 @@ public abstract class GunnerGunAI extends CustomizedAIGunner
 	@Override
 	protected int getReloadDuration()
 	{
-		return this.getWeaponConfig().reloadDuration;
+		return GunnerGunConfig.RELOAD_DURATION;
 	}
 
 	@Override

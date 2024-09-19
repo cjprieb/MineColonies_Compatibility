@@ -3,11 +3,12 @@ package steve_gall.minecolonies_compatibility.module.common.ewewukeks_musketmod;
 import ewewukek.musketmod.GunItem;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class DummyGun extends GunItem
 {
 	private GunItem parent;
-	private float damageMultiplier;
+	private float damage;
 
 	public DummyGun()
 	{
@@ -24,14 +25,10 @@ public class DummyGun extends GunItem
 		this.parent = parent;
 	}
 
-	public float getDamageMultiplier()
+	@Override
+	public float bulletStdDev()
 	{
-		return this.damageMultiplier;
-	}
-
-	public void setDamageMultiplier(float damageMultiplier)
-	{
-		this.damageMultiplier = damageMultiplier;
+		return this.parent.bulletStdDev();
 	}
 
 	@Override
@@ -41,39 +38,44 @@ public class DummyGun extends GunItem
 	}
 
 	@Override
-	public float bulletStdDev()
+	public float damage()
 	{
-		return this.parent.bulletStdDev();
+		return this.damage;
+	}
+
+	public void setDamage(float damage)
+	{
+		this.damage = damage;
 	}
 
 	@Override
-	public float damageMultiplierMax()
+	public SoundEvent fireSound(ItemStack item)
 	{
-		return this.damageMultiplier;
+		return this.parent.fireSound(item);
 	}
 
 	@Override
-	public float damageMultiplierMin()
+	public int pelletCount()
 	{
-		return this.damageMultiplier;
-	}
-
-	@Override
-	public SoundEvent fireSound()
-	{
-		return this.parent.fireSound();
-	}
-
-	@Override
-	public boolean ignoreInvulnerableTime()
-	{
-		return this.parent.ignoreInvulnerableTime();
+		return this.parent.pelletCount();
 	}
 
 	@Override
 	public boolean twoHanded()
 	{
 		return this.parent.twoHanded();
+	}
+
+	@Override
+	public float bulletDropReduction()
+	{
+		return this.parent.bulletDropReduction();
+	}
+
+	@Override
+	public int hitDurabilityDamage()
+	{
+		return this.parent.hitDurabilityDamage();
 	}
 
 }
