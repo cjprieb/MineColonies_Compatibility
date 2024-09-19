@@ -136,22 +136,22 @@ public abstract class GunnerGunAI extends CustomizedAIGunner
 		var time = this.getReloadingTime(user);
 		var phase = this.getLoadingPhase(user);
 
-		if (phase == 0 && time >= GunItem.LOADING_STAGE_1)
+		if (phase == 0 && time >= GunnerGunConfig.STAGE_DURATION_1)
 		{
 			user.playSound(Sounds.MUSKET_LOAD_0, 0.8F, 1.0F);
 			this.setLoadingPhase(user, 1);
 		}
-		else if (phase == 1 && time >= GunItem.LOADING_STAGE_2)
+		else if (phase == 1 && time >= GunnerGunConfig.STAGE_DURATION_2)
 		{
 			user.playSound(Sounds.MUSKET_LOAD_1, 0.8F, 1.0F);
 			this.setLoadingPhase(user, 2);
 		}
-		else if (phase == 2 && time >= GunItem.LOADING_STAGE_3)
+		else if (phase == 2 && time >= GunnerGunConfig.STAGE_DURATION_3)
 		{
 			user.playSound(Sounds.MUSKET_LOAD_2, 0.8F, 1.0F);
 			this.setLoadingPhase(user, 3);
 		}
-		else if (phase == 3 && time >= GunItem.LOADING_STAGE_3 + 10)
+		else if (phase == 3 && time >= GunnerGunConfig.STAGE_DURATION_4)
 		{
 			user.playSound(Sounds.MUSKET_READY, 0.8F, 1.0F);
 			this.setLoadingPhase(user, 4);
@@ -229,7 +229,7 @@ public abstract class GunnerGunAI extends CustomizedAIGunner
 	@Override
 	protected int getReloadDuration()
 	{
-		return this.getWeaponConfig().reloadDuration;
+		return GunnerGunConfig.RELOAD_DURATION;
 	}
 
 	@Override

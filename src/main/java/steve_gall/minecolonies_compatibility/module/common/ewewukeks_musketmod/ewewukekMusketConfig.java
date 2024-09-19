@@ -1,5 +1,6 @@
 package steve_gall.minecolonies_compatibility.module.common.ewewukeks_musketmod;
 
+import ewewukek.musketmod.GunItem;
 import net.minecraftforge.common.ForgeConfigSpec;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.AttackDamageConfig;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.AttackDelayConfig;
@@ -37,7 +38,11 @@ public class ewewukekMusketConfig extends AbstractModuleConfig
 
 		public class GunnerGunConfig
 		{
-			public final int reloadDuration = 30 + 10;
+			public static final int RELOAD_DURATION = 30 + 10;
+			public static final int STAGE_DURATION_1 = GunItem.LOADING_STAGE_1;
+			public static final int STAGE_DURATION_2 = GunItem.LOADING_STAGE_2;
+			public static final int STAGE_DURATION_3 = GunItem.LOADING_STAGE_3;
+			public static final int STAGE_DURATION_4 = STAGE_DURATION_3 + 10;
 
 			public final AttackDelayConfig attackDelay;
 			public final AttackDamageConfig defaultBulletDamage;
@@ -45,7 +50,7 @@ public class ewewukekMusketConfig extends AbstractModuleConfig
 			public GunnerGunConfig(ForgeConfigSpec.Builder builder)
 			{
 				builder.push("attackDelay");
-				builder.comment("will reload before every shot and reload duration is '" + this.reloadDuration + "' ticks");
+				builder.comment("will reload before every shot and reload duration is '" + GunnerGunConfig.RELOAD_DURATION + "' ticks");
 				this.attackDelay = new AttackDelayConfig(builder, GunnerConfig.getDefaultDelay().base(28));
 				builder.pop();
 
