@@ -55,9 +55,9 @@ public class MineColoniesCompatibility
 		ModMenuTypes.REGISTER.register(fml_bus);
 		fml_bus.addListener(this::onFMLCommonSetup);
 		fml_bus.addListener(this::onFMLClientSetup);
+		fml_bus.addListener(this::onCustomToolTypeRegister);
 
 		var forge_bus = MinecraftForge.EVENT_BUS;
-		forge_bus.addListener(this::onCustomToolTypeRegister);
 
 		NETWORK = new NetworkChannel("main");
 		ModuleManager.initialize();

@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.minecolonies.api.crafting.ItemStorage;
 import com.minecolonies.api.inventory.InventoryCitizen;
 import com.minecolonies.api.tileentities.AbstractTileEntityWareHouse;
 import com.minecolonies.api.util.Tuple;
@@ -38,26 +37,6 @@ public abstract class TileEntityWareHouseMixin extends AbstractTileEntityWareHou
 		if (module != null && module.hasMatchingItemStack(itemStack, count, ignoreNBT, ignoreDamage, leftOver))
 		{
 			cir.setReturnValue(true);
-		}
-
-	}
-
-	@Inject(method = "getCountInWarehouse", remap = false, at = @At("TAIL"), cancellable = true)
-	public void getCountInWarehouse(ItemStorage storage, int count, CallbackInfoReturnable<Integer> cir)
-	{
-		if (cir.getReturnValueI() >= count)
-		{
-			return;
-		}
-
-		var module = this.getBuilding().getModule(ModBuildingModules.NETWORK_STORAGE);
-
-		if (module != null)
-		{
-			var stack = storage.getItemStack();
-			var totalCount = cir.getReturnValueI();
-			totalCount = module.getMatchingItemStackCount(stack, count, !storage.ignoreDamageValue(), !storage.ignoreNBT(), -totalCount);
-			cir.setReturnValue(totalCount);
 		}
 
 	}

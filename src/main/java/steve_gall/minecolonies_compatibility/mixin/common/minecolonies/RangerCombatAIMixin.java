@@ -1,7 +1,6 @@
 package steve_gall.minecolonies_compatibility.mixin.common.minecolonies;
 
 import org.joml.Quaternionf;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,13 +13,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
 import com.minecolonies.api.entity.citizen.Skill;
+import com.minecolonies.api.equipment.ModEquipmentTypes;
+import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
 import com.minecolonies.api.research.effects.IResearchEffectManager;
 import com.minecolonies.api.research.util.ResearchConstants;
 import com.minecolonies.api.util.InventoryUtils;
-import com.minecolonies.api.util.ItemStackUtils;
 import com.minecolonies.api.util.SoundUtils;
 import com.minecolonies.api.util.constant.GuardConstants;
-import com.minecolonies.api.util.constant.ToolType;
 import com.minecolonies.core.entity.ai.combat.AttackMoveAI;
 import com.minecolonies.core.entity.ai.combat.CombatUtils;
 import com.minecolonies.core.entity.ai.workers.guard.RangerCombatAI;
@@ -37,6 +36,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraftforge.items.IItemHandler;
 import steve_gall.minecolonies_compatibility.core.common.config.MineColoniesCompatibilityConfigServer;
 import steve_gall.minecolonies_compatibility.core.common.entity.ai.CombatUtils2;
 import steve_gall.minecolonies_compatibility.core.common.init.ModToolTypes;
@@ -49,10 +49,15 @@ public abstract class RangerCombatAIMixin extends AttackMoveAI<EntityCitizen>
 		super(owner, stateMachine);
 	}
 
-	@Redirect(method = "canAttack", remap = false, at = @At(value = "FIELD", target = "com/minecolonies/api/util/constant/ToolType.BOW", opcode = Opcodes.GETSTATIC))
-	private ToolType canAttack_ToolType()
+	@Redirect(method = "canAttack", remap = false, at = @At(value = "INVOKE", target = "com/minecolonies/api/util/InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment"))
+	private int canAttack_getFirstSlotOfItemHandlerContainingEquipment(IItemHandler itemHandler, EquipmentTypeEntry equipmentType, int minimalLevel, int maximumLevel)
 	{
-		return ModToolTypes.RANGER_WEAPON.getToolType();
+		if (equipmentType == ModEquipmentTypes.bow.get())
+		{
+			equipmentType = ModToolTypes.RANGER_WEAPON.getToolType();
+		}
+
+		return InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(itemHandler, equipmentType, minimalLevel, maximumLevel);
 	}
 
 	@ModifyConstant(method = "doAttack", remap = false, constant = @Constant(intValue = 1, ordinal = 0))
@@ -60,7 +65,7 @@ public abstract class RangerCombatAIMixin extends AttackMoveAI<EntityCitizen>
 	{
 		var weapon = this.user.getItemInHand(InteractionHand.MAIN_HAND);
 
-		if (ItemStackUtils.isTool(weapon, ModToolTypes.CROSSBOW.getToolType()))
+		if (ModToolTypes.CROSSBOW.getToolType().checkIsEquipment(weapon))
 		{
 			return 0;
 		}
@@ -76,7 +81,7 @@ public abstract class RangerCombatAIMixin extends AttackMoveAI<EntityCitizen>
 	{
 		var weapon = this.user.getItemInHand(InteractionHand.MAIN_HAND);
 
-		if (ItemStackUtils.isTool(weapon, ModToolTypes.CROSSBOW.getToolType()))
+		if (ModToolTypes.CROSSBOW.getToolType().checkIsEquipment(weapon))
 		{
 			if (id.equals(ResearchConstants.DOUBLE_ARROWS))
 			{
@@ -93,7 +98,7 @@ public abstract class RangerCombatAIMixin extends AttackMoveAI<EntityCitizen>
 	{
 		var weapon = this.user.getItemInHand(InteractionHand.MAIN_HAND);
 
-		if (ItemStackUtils.isTool(weapon, ModToolTypes.CROSSBOW.getToolType()))
+		if (ModToolTypes.CROSSBOW.getToolType().checkIsEquipment(weapon))
 		{
 			var amountOfProjectiles = weapon.getEnchantmentLevel(Enchantments.MULTISHOT) == 0 ? 1 : 3;
 			var researchEffects = this.user.getCitizenColonyHandler().getColony().getResearchManager().getResearchEffects();
@@ -194,7 +199,7 @@ public abstract class RangerCombatAIMixin extends AttackMoveAI<EntityCitizen>
 	{
 		var weapon = this.user.getItemInHand(InteractionHand.MAIN_HAND);
 
-		if (!ItemStackUtils.isTool(weapon, ModToolTypes.CROSSBOW.getToolType()))
+		if (!ModToolTypes.CROSSBOW.getToolType().checkIsEquipment(weapon))
 		{
 			return;
 		}

@@ -1,6 +1,5 @@
 package steve_gall.minecolonies_compatibility.mixin.common.minecolonies;
 
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -9,8 +8,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import com.minecolonies.api.compatibility.tinkers.TinkersToolHelper;
 import com.minecolonies.api.entity.ai.statemachine.tickratestatemachine.ITickRateStateMachine;
+import com.minecolonies.api.equipment.ModEquipmentTypes;
+import com.minecolonies.api.equipment.registry.EquipmentTypeEntry;
+import com.minecolonies.api.util.InventoryUtils;
 import com.minecolonies.api.util.constant.GuardConstants;
-import com.minecolonies.api.util.constant.ToolType;
 import com.minecolonies.core.entity.ai.combat.AttackMoveAI;
 import com.minecolonies.core.entity.ai.workers.guard.KnightCombatAI;
 import com.minecolonies.core.entity.citizen.EntityCitizen;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 import steve_gall.minecolonies_compatibility.core.common.init.ModToolTypes;
 
 @Mixin(value = KnightCombatAI.class, remap = false)
@@ -31,10 +33,15 @@ public abstract class KnightCombatAIMixin extends AttackMoveAI<EntityCitizen>
 		super(owner, stateMachine);
 	}
 
-	@Redirect(method = "canAttack", remap = false, at = @At(value = "FIELD", target = "com/minecolonies/api/util/constant/ToolType.SWORD", opcode = Opcodes.GETSTATIC))
-	private ToolType canAttack_ToolType()
+	@Redirect(method = "canAttack", remap = false, at = @At(value = "INVOKE", target = "com/minecolonies/api/util/InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment"))
+	private int canAttack_getFirstSlotOfItemHandlerContainingEquipment(IItemHandler itemHandler, EquipmentTypeEntry equipmentType, int minimalLevel, int maximumLevel)
 	{
-		return ModToolTypes.KNIGHT_WEAPON.getToolType();
+		if (equipmentType == ModEquipmentTypes.sword.get())
+		{
+			equipmentType = ModToolTypes.KNIGHT_WEAPON.getToolType();
+		}
+
+		return InventoryUtils.getFirstSlotOfItemHandlerContainingEquipment(itemHandler, equipmentType, minimalLevel, maximumLevel);
 	}
 
 	@Redirect(method = "getAttackDamage", remap = false, at = @At(value = "INVOKE", target = "com/minecolonies/api/compatibility/tinkers/TinkersToolHelper.getDamage"))
