@@ -16,12 +16,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
-import steve_gall.minecolonies_compatibility.module.common.storagenetwork.init.ModuleBlockEntities;
 
 public class CitizenInventoryBlock extends EntityBlockFlib
 {
@@ -68,12 +65,6 @@ public class CitizenInventoryBlock extends EntityBlockFlib
 		}
 
 		return InteractionResult.SUCCESS;
-	}
-
-	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type)
-	{
-		return createTickerHelper(type, ModuleBlockEntities.CITIZEN_INVENTORY.get(), CitizenInventoryBlockEntity::tick);
 	}
 
 }
