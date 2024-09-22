@@ -2,6 +2,7 @@ package steve_gall.minecolonies_compatibility.module.common.farmersdelight.init;
 
 import com.minecolonies.api.colony.buildings.registry.BuildingEntry;
 import com.minecolonies.api.colony.jobs.ModJobs;
+import com.minecolonies.api.util.constant.ToolType;
 
 import steve_gall.minecolonies_compatibility.core.common.init.ModToolTypes;
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.building.module.CookingCraftingModule;
@@ -18,6 +19,14 @@ public class ModuleBuildingModules
 	public static final BuildingEntry.ModuleProducer<CookingCraftingModule, CookingCraftingModuleView> COOKASSISTENT_COOKING = new BuildingEntry.ModuleProducer<>("cookassistent_farmers_cooking", //
 			() -> new CookingCraftingModule(ModJobs.cookassistant.get()), //
 			() -> CookingCraftingModuleView::new);//
+
+	public static final BuildingEntry.ModuleProducer<CuttingCraftingModule, CuttingCraftingModuleView> LUMBERJACK_CUTTING = new BuildingEntry.ModuleProducer<>("lumberjack_farmers_cutting", //
+			() -> new CuttingCraftingModule(ModJobs.lumberjack.get(), ToolType.AXE), //
+			() -> CuttingCraftingModuleView::new);//
+
+	public static final BuildingEntry.ModuleProducer<CuttingCraftingModule, CuttingCraftingModuleView> STONEMASON_CUTTING = new BuildingEntry.ModuleProducer<>("stonemason_farmers_pickaxe", //
+			() -> new CuttingCraftingModule(ModJobs.stoneMason.get(), ToolType.PICKAXE), //
+			() -> CuttingCraftingModuleView::new);//
 
 	private ModuleBuildingModules()
 	{

@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.google.common.collect.ImmutableSet;
 import com.minecolonies.api.colony.ICitizenData;
+import com.minecolonies.api.colony.jobs.ModJobs;
 import com.minecolonies.api.colony.jobs.registry.JobEntry;
 import com.minecolonies.api.crafting.IGenericRecipe;
 import com.minecolonies.api.crafting.IRecipeStorage;
@@ -69,7 +70,16 @@ public class CuttingCraftingModule extends AbstractCraftingModuleWithExternalWor
 	@Override
 	public Set<CraftingType> getSupportedCraftingTypes()
 	{
-		return (this.building == null || this.building.getBuildingLevel() >= 3) ? Collections.singleton(ModuleCraftingTypes.CUTTING.get()) : ImmutableSet.of();
+		if (this.jobEntry == ModJobs.cookassistant.get())
+		{
+			if (this.building != null && this.building.getBuildingLevel() < 3)
+			{
+				return ImmutableSet.of();
+			}
+
+		}
+
+		return Collections.singleton(ModuleCraftingTypes.CUTTING.get());
 	}
 
 	@Override
