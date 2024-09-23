@@ -30,7 +30,7 @@ public class CitizenInventoryScreen extends AbstractContainerScreen<CitizenInven
 		this.renderBackground(guiGraphics);
 
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
-		
+
 		this.renderTooltip(guiGraphics, mouseX, mouseY);
 	}
 

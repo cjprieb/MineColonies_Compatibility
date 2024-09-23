@@ -57,7 +57,7 @@ public class CitizenGridBlock extends NetworkNodeBlock
 	public void appendHoverText(ItemStack item, @Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag)
 	{
 		super.appendHoverText(item, level, tooltip, flag);
-		
+
 		tooltip.add(REMOVED_TOOLTIP);
 	}
 

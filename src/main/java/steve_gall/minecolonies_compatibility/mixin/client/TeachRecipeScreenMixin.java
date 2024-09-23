@@ -28,6 +28,7 @@ public abstract class TeachRecipeScreenMixin extends AbstractContainerScreenMixi
 		super(p_96550_);
 	}
 
+	@Override
 	@Inject(method = "init", remap = true, at = @At(value = "TAIL"))
 	protected void init(CallbackInfo ci)
 	{
