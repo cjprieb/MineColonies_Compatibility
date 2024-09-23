@@ -70,6 +70,8 @@ public class FarmersDelightModule extends AbstractModule
 
 			ModBuildings.kitchen.get().getModuleProducers().add(ModuleBuildingModules.CHEF_CUTTING);
 			ModBuildings.kitchen.get().getModuleProducers().add(ModuleBuildingModules.CHEF_COOKING);
+			ModBuildings.lumberjack.get().getModuleProducers().add(ModuleBuildingModules.LUMBERJACK_CUTTING);
+			ModBuildings.stoneMason.get().getModuleProducers().add(ModuleBuildingModules.STONEMASON_CUTTING);
 		});
 	}
 
