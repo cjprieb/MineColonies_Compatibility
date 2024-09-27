@@ -10,6 +10,7 @@ import steve_gall.minecolonies_compatibility.core.common.tool.KnifeToolType;
 import steve_gall.minecolonies_compatibility.core.common.tool.KnightWeaponToolType;
 import steve_gall.minecolonies_compatibility.core.common.tool.RangerWeaponToolType;
 import steve_gall.minecolonies_tweaks.api.common.tool.CustomToolType;
+import steve_gall.minecolonies_tweaks.api.common.tool.OrToolType;
 import steve_gall.minecolonies_tweaks.core.common.MineColoniesTweaks;
 
 public class ModToolTypes
@@ -20,4 +21,5 @@ public class ModToolTypes
 
 	public static final RangerWeaponToolType RANGER_WEAPON = new RangerWeaponToolType(MineColoniesTweaks.rl("ranger_weapon"), Arrays.asList(ModEquipmentTypes.bow::get));
 	public static final KnightWeaponToolType KNIGHT_WEAPON = new KnightWeaponToolType(MineColoniesTweaks.rl("knight_weapon"), Arrays.asList(ModEquipmentTypes.sword::get));
+	public static final OrToolType BUTCHER_TOOL = new OrToolType(MineColoniesTweaks.rl("butcher_tool"), Arrays.asList(ModEquipmentTypes.axe::get));
 }

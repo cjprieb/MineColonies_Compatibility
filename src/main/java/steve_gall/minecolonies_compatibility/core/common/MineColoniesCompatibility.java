@@ -100,6 +100,7 @@ public class MineColoniesCompatibility
 
 		e.register(ModToolTypes.RANGER_WEAPON);
 		e.register(ModToolTypes.KNIGHT_WEAPON);
+		e.register(ModToolTypes.BUTCHER_TOOL);
 	}
 
 	public static NetworkChannel network()

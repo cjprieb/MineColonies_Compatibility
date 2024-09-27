@@ -4,17 +4,24 @@ import java.util.Collections;
 import java.util.List;
 
 import com.minecolonies.api.colony.buildings.ModBuildings;
+import com.minecolonies.core.colony.crafting.LootTableAnalyzer;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
+import steve_gall.minecolonies_compatibility.api.common.event.AnimalHerdingLootEvent;
+import steve_gall.minecolonies_compatibility.api.common.event.AnimalHerdingToolEvent;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedCrop;
 import steve_gall.minecolonies_compatibility.api.common.plant.CustomizedFruit;
 import steve_gall.minecolonies_compatibility.core.common.MineColoniesCompatibility;
+import steve_gall.minecolonies_compatibility.core.common.init.ModToolTypes;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.CookingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.client.farmersdelight.CuttingTeachScreen;
 import steve_gall.minecolonies_compatibility.module.common.AbstractModule;
@@ -28,6 +35,7 @@ import steve_gall.minecolonies_compatibility.module.common.farmersdelight.networ
 import steve_gall.minecolonies_compatibility.module.common.farmersdelight.network.CuttingOpenTeachMessage;
 import steve_gall.minecolonies_tweaks.api.common.crafting.CustomizedRecipeStorageRegistry;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class FarmersDelightModule extends AbstractModule
 {
@@ -40,6 +48,10 @@ public class FarmersDelightModule extends AbstractModule
 		ModuleCraftingTypes.REGISTER.register(fml_bus);
 		ModuleMenuTypes.REGISTER.register(fml_bus);
 		ModuleJobs.REGISTER.register(fml_bus);
+
+		var forge_bus = MinecraftForge.EVENT_BUS;
+		forge_bus.addListener(this::onAnimalHerdingTool);
+		forge_bus.addListener(this::onAnimalHerdingLoot);
 
 		var network = MineColoniesCompatibility.network();
 		network.registerMessage(CuttingOpenTeachMessage.class, CuttingOpenTeachMessage::new);
@@ -82,6 +94,32 @@ public class FarmersDelightModule extends AbstractModule
 
 		MenuScreens.register(ModuleMenuTypes.CUTTING_TEACH.get(), CuttingTeachScreen::new);
 		MenuScreens.register(ModuleMenuTypes.COOKING_TEACH.get(), CookingTeachScreen::new);
+	}
+
+	private void onAnimalHerdingTool(AnimalHerdingToolEvent e)
+	{
+		var type = e.getAnimal().getType();
+
+		if (type == EntityType.PIG || type == EntityType.HOGLIN)
+		{
+			e.register(ModToolTypes.KNIFE.getToolType());
+		}
+
+	}
+
+	private void onAnimalHerdingLoot(AnimalHerdingLootEvent e)
+	{
+		var type = e.getRecipe().getRequiredEntity().getType();
+
+		if (type == EntityType.PIG || type == EntityType.HOGLIN)
+		{
+			if (e.getRecipe().getRequiredTool() == ModToolTypes.KNIFE.getToolType())
+			{
+				e.register(new LootTableAnalyzer.LootDrop(Collections.singletonList(new ItemStack(ModItems.HAM.get())), 0.5F, 1, false));
+			}
+
+		}
+
 	}
 
 	public static List<Component> getChanceTooltip(float chance)

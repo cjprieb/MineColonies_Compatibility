@@ -1,5 +1,8 @@
 package steve_gall.minecolonies_compatibility.mixin.common.minecolonies;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -11,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.minecolonies.api.colony.jobs.IJob;
 import com.minecolonies.api.crafting.IGenericRecipe;
+import com.minecolonies.core.colony.crafting.LootTableAnalyzer;
 import com.minecolonies.core.compatibility.jei.GenericRecipeCategory;
 import com.minecolonies.core.compatibility.jei.JobBasedRecipeCategory;
 
@@ -21,10 +25,14 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidType;
 import steve_gall.minecolonies_compatibility.api.common.crafting.IRecipeSlotModifiableGenericRecipe;
 import steve_gall.minecolonies_compatibility.api.common.crafting.RecipeSlotRole;
+import steve_gall.minecolonies_compatibility.api.common.event.AnimalHerdingLootEvent;
+import steve_gall.minecolonies_compatibility.core.common.crafting.AnimalHerdingLootGenericRecipe;
 import steve_gall.minecolonies_compatibility.core.common.crafting.BucketFillingGenericRecipe;
 
 @Mixin(value = GenericRecipeCategory.class, remap = false)
@@ -48,11 +56,48 @@ public abstract class GenericRecipeCategoryMixin extends JobBasedRecipeCategory<
 	private int minecolonies_compatibility$catalystIndex = 0;
 	@Unique
 	private IRecipeSlotModifiableGenericRecipe minecolonies_compatibility$recipe = null;
+	@Unique
+	private AnimalHerdingLootGenericRecipe minecolonies_compatibility$animalHerdingLoot = null;
 
 	@Shadow(remap = false)
 	private int outputSlotX;
 	@Shadow(remap = false)
 	private int outputSlotY;
+
+	@Shadow(remap = false)
+	private static List<LootTableAnalyzer.LootDrop> getLootDrops(@NotNull ResourceLocation lootTableId)
+	{
+		throw new AssertionError();
+	}
+
+	@Inject(method = "setLootBasedRecipe", remap = false, at = @At(value = "HEAD"), cancellable = true)
+	private void setLootBasedRecipe_Head(@NotNull IRecipeLayoutBuilder builder, @NotNull IGenericRecipe recipe, @NotNull IFocusGroup focuses, CallbackInfo ci)
+	{
+		this.minecolonies_compatibility$animalHerdingLoot = recipe instanceof AnimalHerdingLootGenericRecipe animalHerdingLoot ? animalHerdingLoot : null;
+	}
+
+	@Redirect(method = "setLootBasedRecipe", remap = false, at = @At(value = "INVOKE", target = "getLootDrops"))
+	private List<LootTableAnalyzer.LootDrop> setLootBasedRecipe_getLootDrops(@NotNull ResourceLocation lootTableId)
+	{
+		var list = getLootDrops(lootTableId);
+
+		if (this.minecolonies_compatibility$animalHerdingLoot != null)
+		{
+			var drops = new ArrayList<LootTableAnalyzer.LootDrop>();
+			var event = new AnimalHerdingLootEvent(minecolonies_compatibility$animalHerdingLoot, drops::add);
+			MinecraftForge.EVENT_BUS.post(event);
+
+			if (drops.size() > 0)
+			{
+				var newList = new ArrayList<>(list);
+				newList.addAll(drops);
+				return newList;
+			}
+
+		}
+
+		return list;
+	}
 
 	@Inject(method = "setNormalRecipe", remap = false, at = @At(value = "HEAD"), cancellable = true)
 	private void setNormalRecipe_Head(@NotNull IRecipeLayoutBuilder builder, @NotNull IGenericRecipe recipe, @NotNull IFocusGroup focuses, CallbackInfo ci)
@@ -64,6 +109,7 @@ public abstract class GenericRecipeCategoryMixin extends JobBasedRecipeCategory<
 		this.minecolonies_compatibility$outputIndex = 0;
 		this.minecolonies_compatibility$catalystIndex = 0;
 		this.minecolonies_compatibility$recipe = recipe instanceof IRecipeSlotModifiableGenericRecipe genericRecipe ? genericRecipe : null;
+		this.minecolonies_compatibility$animalHerdingLoot = null;
 
 		if (recipe instanceof BucketFillingGenericRecipe fillingRecipe)
 		{
