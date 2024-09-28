@@ -38,11 +38,12 @@ public abstract class AnimalHerdingModuleMixin extends AbstractBuildingModule
 
 		if (toolTypes.size() > 0)
 		{
+			var breedingItems = Collections.singletonList(this.getBreedingItems());
 			var newList = new ArrayList<>(cir.getReturnValue());
 
 			for (var toolType : toolTypes)
 			{
-				newList.add(new AnimalHerdingLootGenericRecipe(animal, Collections.singletonList(this.getBreedingItems()), toolType));
+				newList.add(new AnimalHerdingLootGenericRecipe(animal, breedingItems, toolType));
 			}
 
 			cir.setReturnValue(newList);
