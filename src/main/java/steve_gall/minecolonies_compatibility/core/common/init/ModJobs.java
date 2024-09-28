@@ -25,15 +25,14 @@ public class ModJobs
 		builder.setJobProducer(JobOrchardist::new);
 		builder.setJobViewProducer(() -> DefaultJobView::new);
 	});
-	public static final RegistryObject<JobEntry> FLUID_MANAGER = REGISTER.register("fluid_manager", builder ->
-	{
-		builder.setJobProducer(JobFluidManager::new);
-		builder.setJobViewProducer(() -> CrafterJobView::new);
-	});
+	// public static final RegistryObject<JobEntry> FLUID_MANAGER = REGISTER.register("fluid_manager", builder ->
+	// {
+	// 	builder.setJobProducer(JobFluidManager::new);
+	// 	builder.setJobViewProducer(() -> CrafterJobView::new);
+	// });
 
 	private ModJobs()
 	{
 
 	}
-
 }

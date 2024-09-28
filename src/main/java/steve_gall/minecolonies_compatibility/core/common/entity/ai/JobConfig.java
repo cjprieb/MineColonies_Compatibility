@@ -13,7 +13,7 @@ public class JobConfig
 	public final KnightConfig knight;
 	public final GunnerConfig gunner;
 	public final OrchardistConfig orchardist;
-	public final FluidManagerConfig fluidManager;
+	// public final FluidManagerConfig fluidManager;
 
 	public JobConfig(ForgeConfigSpec.Builder builder)
 	{
@@ -33,9 +33,9 @@ public class JobConfig
 		this.orchardist = new OrchardistConfig(builder);
 		builder.pop();
 
-		builder.push("fluidManager");
-		this.fluidManager = new FluidManagerConfig(builder);
-		builder.pop();
+		// builder.push("fluidManager");
+		// this.fluidManager = new FluidManagerConfig(builder);
+		// builder.pop();
 	}
 
 }
