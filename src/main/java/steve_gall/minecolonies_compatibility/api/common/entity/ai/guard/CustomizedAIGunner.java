@@ -15,6 +15,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import steve_gall.minecolonies_compatibility.api.common.entity.ai.CustomizedAIContext;
@@ -226,8 +227,10 @@ public abstract class CustomizedAIGunner extends CustomizedAIGuard
 
 	public void doMeleeAttack(CustomizedAIContext context, LivingEntity target)
 	{
-		var user = context.getUser();
 		var damage = this.getMeleeAttackDamage(context, target);
+		damage += EnchantmentHelper.getDamageBonus(context.getWeapon(), target.getMobType()) / 2.5D;
+
+		var user = context.getUser();
 		var source = new NamedDamageSource(user.getName().getString(), user);
 		target.hurt(source, damage);
 	}
