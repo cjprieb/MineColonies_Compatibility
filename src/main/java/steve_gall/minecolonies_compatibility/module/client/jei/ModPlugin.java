@@ -65,10 +65,10 @@ public class ModPlugin implements IModPlugin
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration)
 	{
-		var transferHelper = registration.getTransferHelper();
-		var recipeType = createRecipeType(ModJobs.FLUID_MANAGER.get());
-		registration.addRecipeTransferHandler(new BucketFillingTeachRecipeTransferHandler(transferHelper, recipeType), recipeType);
-		registration.addRecipeTransferHandler(new SmithingTeachRecipeTransferHandler(transferHelper), RecipeTypes.SMITHING);
+		// var transferHelper = registration.getTransferHelper();
+		// var recipeType = createRecipeType(ModJobs.FLUID_MANAGER.get());
+		// registration.addRecipeTransferHandler(new BucketFillingTeachRecipeTransferHandler(transferHelper, recipeType), recipeType);
+		// registration.addRecipeTransferHandler(new SmithingTeachRecipeTransferHandler(transferHelper), RecipeTypes.SMITHING);
 	}
 
 	public Stream<IGlobalResearch> getGlobalResearches()

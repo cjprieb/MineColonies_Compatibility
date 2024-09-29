@@ -66,31 +66,31 @@ public class ModBuildingModules
 			() -> new FruitListModule(ModBuildingModules.FRUITLIST_BLACKLIST.key), //
 			() -> () -> new FruitListModuleView("fruitlist_blacklist", "com.minecolonies.coremod.gui.workerhuts.fruitlist_blacklist", true, fruit -> true));
 
-	public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule, WorkerBuildingModuleView> FLUID_MANAGER_WORK = new BuildingEntry.ModuleProducer<>("fluid_manager_work", //
-			() -> new CraftingWorkerBuildingModule(ModJobs.FLUID_MANAGER.get(), Skill.Focus, Skill.Athletics, false, b -> 1), //
-			() -> WorkerBuildingModuleView::new);
+	// public static final BuildingEntry.ModuleProducer<CraftingWorkerBuildingModule, WorkerBuildingModuleView> FLUID_MANAGER_WORK = new BuildingEntry.ModuleProducer<>("fluid_manager_work", //
+	// 		() -> new CraftingWorkerBuildingModule(ModJobs.FLUID_MANAGER.get(), Skill.Focus, Skill.Athletics, false, b -> 1), //
+	// 		() -> WorkerBuildingModuleView::new);
 
-	public static final BuildingEntry.ModuleProducer<BucketFillingCraftingModule, BucketFillingCraftingModuleView> FLUID_MANAGER_BUCKET_FILLING = new BuildingEntry.ModuleProducer<>("fluid_manager_bucket_filling", //
-			() -> new BucketFillingCraftingModule("fluid_manager_bucket_filling", ModJobs.FLUID_MANAGER.get()), //
-			() -> BucketFillingCraftingModuleView::new);
+	// public static final BuildingEntry.ModuleProducer<BucketFillingCraftingModule, BucketFillingCraftingModuleView> FLUID_MANAGER_BUCKET_FILLING = new BuildingEntry.ModuleProducer<>("fluid_manager_bucket_filling", //
+	// 		() -> new BucketFillingCraftingModule("fluid_manager_bucket_filling", ModJobs.FLUID_MANAGER.get()), //
+	// 		() -> BucketFillingCraftingModuleView::new);
 
-	public static final BuildingEntry.ModuleProducer<LavaCauldronModule, RestrictableModuleView> FLUID_MANAGER_LAVA_CAULDRON = new BuildingEntry.ModuleProducer<>("fluid_manager_lava_cauldron", //
-			() -> new LavaCauldronModule()
-			{
-				@Override
-				public int getSearchRange()
-				{
-					return MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager.searchRange.get().intValue();
-				}
-			}, //
-			() -> () -> new RestrictableModuleView()
-			{
-				@Override
-				public String getIcon()
-				{
-					return "fluid_manager_lava_cauldron";
-				};
-			});
+	// public static final BuildingEntry.ModuleProducer<LavaCauldronModule, RestrictableModuleView> FLUID_MANAGER_LAVA_CAULDRON = new BuildingEntry.ModuleProducer<>("fluid_manager_lava_cauldron", //
+	// 		() -> new LavaCauldronModule()
+	// 		{
+	// 			@Override
+	// 			public int getSearchRange()
+	// 			{
+	// 				return MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager.searchRange.get().intValue();
+	// 			}
+	// 		}, //
+	// 		() -> () -> new RestrictableModuleView()
+	// 		{
+	// 			@Override
+	// 			public String getIcon()
+	// 			{
+	// 				return "fluid_manager_lava_cauldron";
+	// 			};
+	// 		});
 
 	public static final BuildingEntry.ModuleProducer<SmithingCraftingModule, SmithingCraftingModuleView> BLACKSMITH_SMITHING = new BuildingEntry.ModuleProducer<>("blacksmith_smithing", //
 			() -> new SmithingCraftingModule(com.minecolonies.api.colony.jobs.ModJobs.blacksmith.get()), //

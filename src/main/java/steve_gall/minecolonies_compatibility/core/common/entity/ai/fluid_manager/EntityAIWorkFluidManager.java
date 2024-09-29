@@ -49,10 +49,10 @@ public class EntityAIWorkFluidManager extends AbstractEntityAICrafting<JobFluidM
 	public EntityAIWorkFluidManager(@NotNull JobFluidManager job)
 	{
 		super(job);
-		this.registerTargets(//
-				new AITarget(FluidManagerAIState.SEARCH, this::search, STANDARD_DELAY), //
-				new AITarget(FluidManagerAIState.PICKUP, this::pickUp, STANDARD_DELAY) //
-		);
+		// this.registerTargets(//
+		// 		new AITarget(FluidManagerAIState.SEARCH, this::search, STANDARD_DELAY), //
+		// 		new AITarget(FluidManagerAIState.PICKUP, this::pickUp, STANDARD_DELAY) //
+		// );
 	}
 
 	@Override
@@ -93,133 +93,133 @@ public class EntityAIWorkFluidManager extends AbstractEntityAICrafting<JobFluidM
 		return this.decideSearch(AIWorkerState.START_WORKING);
 	}
 
-	protected IAIState decideSearch(IAIState fallback)
-	{
-		if (InventoryUtils.getItemCountInItemHandler(this.worker.getInventoryCitizen(), item -> item.is(Items.BUCKET)) < 1)
-		{
-			this.checkIfRequestForItemExistOrCreateAsync(new ItemStack(Items.BUCKET), 16, 1);
-			return fallback;
-		}
-		else
-		{
-			return FluidManagerAIState.SEARCH;
-		}
+	// protected IAIState decideSearch(IAIState fallback)
+	// {
+	// 	if (InventoryUtils.getItemCountInItemHandler(this.worker.getInventoryCitizen(), item -> item.is(Items.BUCKET)) < 1)
+	// 	{
+	// 		this.checkIfRequestForItemExistOrCreateAsync(new ItemStack(Items.BUCKET), 16, 1);
+	// 		return fallback;
+	// 	}
+	// 	else
+	// 	{
+	// 		return FluidManagerAIState.SEARCH;
+	// 	}
 
-	}
+	// }
 
-	protected IAIState search()
-	{
-		if (this.pathResult == null)
-		{
-			this.cauldronPos = null;
-			this.pickupProgress = 0;
-			this.worker.getCitizenData().setVisibleStatus(SEARCH);
-			this.pathResult = this.creatNewPath();
-			return this.getState();
-		}
-		else if (this.pathResult.isDone())
-		{
-			return this.onPathDone();
-		}
-		else
-		{
-			return this.getState();
-		}
+	// protected IAIState search()
+	// {
+	// 	if (this.pathResult == null)
+	// 	{
+	// 		this.cauldronPos = null;
+	// 		this.pickupProgress = 0;
+	// 		this.worker.getCitizenData().setVisibleStatus(SEARCH);
+	// 		this.pathResult = this.creatNewPath();
+	// 		return this.getState();
+	// 	}
+	// 	else if (this.pathResult.isDone())
+	// 	{
+	// 		return this.onPathDone();
+	// 	}
+	// 	else
+	// 	{
+	// 		return this.getState();
+	// 	}
 
-	}
+	// }
 
-	protected MatchBlocksPathResult creatNewPath()
-	{
-		var level = this.world;
-		var worker = this.worker;
-		var building = this.building;
+	// protected MatchBlocksPathResult creatNewPath()
+	// {
+	// 	var level = this.world;
+	// 	var worker = this.worker;
+	// 	var building = this.building;
 
-		var start = PathfindingUtils.prepareStart(worker);
-		var buildingPos = building.getPosition();
-		var config = MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager;
-		PathJobFindLavaCauldron job = null;
+	// 	var start = PathfindingUtils.prepareStart(worker);
+	// 	var buildingPos = building.getPosition();
+	// 	var config = MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager;
+	// 	PathJobFindLavaCauldron job = null;
 
-		var restrictModule = building.getModule(ModBuildingModules.FLUID_MANAGER_LAVA_CAULDRON);
+	// 	var restrictModule = building.getModule(ModBuildingModules.FLUID_MANAGER_LAVA_CAULDRON);
 
-		if (restrictModule.isRestrictEnabled())
-		{
-			var restrictionBox = BoundingBox.fromCorners(restrictModule.getRestrictAreaPos1(), restrictModule.getRestrictAreaPos2());
-			job = new PathJobFindLavaCauldron(level, start, restrictionBox, worker);
-		}
-		else
-		{
-			var range = config.searchRange.get().intValue();
-			job = new PathJobFindLavaCauldron(level, start, buildingPos, range, worker);
-		}
+	// 	if (restrictModule.isRestrictEnabled())
+	// 	{
+	// 		var restrictionBox = BoundingBox.fromCorners(restrictModule.getRestrictAreaPos1(), restrictModule.getRestrictAreaPos2());
+	// 		job = new PathJobFindLavaCauldron(level, start, restrictionBox, worker);
+	// 	}
+	// 	else
+	// 	{
+	// 		var range = config.searchRange.get().intValue();
+	// 		job = new PathJobFindLavaCauldron(level, start, buildingPos, range, worker);
+	// 	}
 
-		return (MatchBlocksPathResult) ((MinecoloniesAdvancedPathNavigate) worker.getNavigation()).setPathJob(job, null, 1.0D, true);
-	}
+	// 	return (MatchBlocksPathResult) ((MinecoloniesAdvancedPathNavigate) worker.getNavigation()).setPathJob(job, null, 1.0D, true);
+	// }
 
-	protected IAIState onPathDone()
-	{
-		var positions = this.pathResult.positions;
-		this.pathResult = null;
+	// protected IAIState onPathDone()
+	// {
+	// 	var positions = this.pathResult.positions;
+	// 	this.pathResult = null;
 
-		if (positions.size() == 0)
-		{
-			var config = MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager;
-			this.nextSearchDelay = config.searchDelayAfterNotFound.get().intValue();
-			return AIWorkerState.INVENTORY_FULL;
-		}
-		else
-		{
-			this.cauldronPos = positions.get(0);
-			return FluidManagerAIState.PICKUP;
-		}
+	// 	if (positions.size() == 0)
+	// 	{
+	// 		var config = MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager;
+	// 		this.nextSearchDelay = config.searchDelayAfterNotFound.get().intValue();
+	// 		return AIWorkerState.INVENTORY_FULL;
+	// 	}
+	// 	else
+	// 	{
+	// 		this.cauldronPos = positions.get(0);
+	// 		return FluidManagerAIState.PICKUP;
+	// 	}
 
-	}
+	// }
 
-	protected IAIState pickUp()
-	{
-		if (this.cauldronPos == null || this.world.getBlockState(this.cauldronPos).getBlock() != Blocks.LAVA_CAULDRON)
-		{
-			return AIWorkerState.START_WORKING;
-		}
+	// protected IAIState pickUp()
+	// {
+	// 	if (this.cauldronPos == null || this.world.getBlockState(this.cauldronPos).getBlock() != Blocks.LAVA_CAULDRON)
+	// 	{
+	// 		return AIWorkerState.START_WORKING;
+	// 	}
 
-		var inventory = this.getInventory();
-		var slot = InventoryUtils.findFirstSlotInItemHandlerWith(inventory, stack -> stack.is(Items.BUCKET));
+	// 	var inventory = this.getInventory();
+	// 	var slot = InventoryUtils.findFirstSlotInItemHandlerWith(inventory, stack -> stack.is(Items.BUCKET));
 
-		if (slot == -1)
-		{
-			return AIWorkerState.START_WORKING;
-		}
+	// 	if (slot == -1)
+	// 	{
+	// 		return AIWorkerState.START_WORKING;
+	// 	}
 
-		this.worker.getCitizenItemHandler().setHeldItem(InteractionHand.MAIN_HAND, slot);
+	// 	this.worker.getCitizenItemHandler().setHeldItem(InteractionHand.MAIN_HAND, slot);
 
-		if (this.walkToBlock(this.cauldronPos))
-		{
-			return this.getState();
-		}
+	// 	if (this.walkToBlock(this.cauldronPos))
+	// 	{
+	// 		return this.getState();
+	// 	}
 
-		var config = MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager;
-		var delay = config.pickupDelay.get().intValue() - (int) (this.getSecondarySkillLevel() * config.pickupDelayReducePerSkillLevel.get().doubleValue());
+	// 	var config = MineColoniesCompatibilityConfigServer.INSTANCE.jobs.fluidManager;
+	// 	var delay = config.pickupDelay.get().intValue() - (int) (this.getSecondarySkillLevel() * config.pickupDelayReducePerSkillLevel.get().doubleValue());
 
-		this.hitBlockWithToolInHand(this.cauldronPos);
-		Network.getNetwork().sendToTrackingEntity(new LocalizedParticleEffectMessage(new ItemStack(Items.LAVA_BUCKET), this.cauldronPos), this.worker);
+	// 	this.hitBlockWithToolInHand(this.cauldronPos);
+	// 	Network.getNetwork().sendToTrackingEntity(new LocalizedParticleEffectMessage(new ItemStack(Items.LAVA_BUCKET), this.cauldronPos), this.worker);
 
-		if (this.pickupProgress < delay)
-		{
-			this.pickupProgress += STANDARD_DELAY;
-			return this.getState();
-		}
+	// 	if (this.pickupProgress < delay)
+	// 	{
+	// 		this.pickupProgress += STANDARD_DELAY;
+	// 		return this.getState();
+	// 	}
 
-		this.world.setBlock(this.cauldronPos, Blocks.CAULDRON.defaultBlockState(), Block.UPDATE_ALL);
-		this.world.playSound(null, this.cauldronPos, SoundEvents.BUCKET_EMPTY_LAVA, SoundSource.BLOCKS, 1.0F, 1.0F);
+	// 	this.world.setBlock(this.cauldronPos, Blocks.CAULDRON.defaultBlockState(), Block.UPDATE_ALL);
+	// 	this.world.playSound(null, this.cauldronPos, SoundEvents.BUCKET_EMPTY_LAVA, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-		inventory.getStackInSlot(slot).shrink(1);
-		InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(new ItemStack(Items.LAVA_BUCKET), inventory);
-		this.worker.getCitizenItemHandler().setHeldItem(InteractionHand.MAIN_HAND, slot);
+	// 	inventory.getStackInSlot(slot).shrink(1);
+	// 	InventoryUtils.transferItemStackIntoNextBestSlotInItemHandler(new ItemStack(Items.LAVA_BUCKET), inventory);
+	// 	this.worker.getCitizenItemHandler().setHeldItem(InteractionHand.MAIN_HAND, slot);
 
-		this.worker.getCitizenExperienceHandler().addExperience(XP_PER_HARVEST);
-		this.incrementActionsDone();
-		this.worker.decreaseSaturationForContinuousAction();
+	// 	this.worker.getCitizenExperienceHandler().addExperience(XP_PER_HARVEST);
+	// 	this.incrementActionsDone();
+	// 	this.worker.decreaseSaturationForContinuousAction();
 
-		return this.decideSearch(AIWorkerState.INVENTORY_FULL);
-	}
+	// 	return this.decideSearch(AIWorkerState.INVENTORY_FULL);
+	// }
 
 }
