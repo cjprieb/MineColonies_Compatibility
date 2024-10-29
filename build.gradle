@@ -153,6 +153,7 @@ dependencies {
     implementation fg.deobf("curse.maven:do-api-864599:${lets_do_api_file}")
     implementation fg.deobf("curse.maven:the-undergarden-379849:${the_undergarden_file}")
     implementation fg.deobf("curse.maven:oreberries-replanted-454062:${oreberries_file}")
+    implementation fg.deobf("curse.maven:fruitfulfun-355467:${fruitfulfun_file}")
     implementation fg.deobf("curse.maven:reliquary-reincarnations-241319:${reliquary_file}")
     implementation fg.deobf("curse.maven:refined-storage-243076:${refined_storage_file}")
     implementation fg.deobf("appeng:appliedenergistics2-forge:${appliedenergistics2_version}")
