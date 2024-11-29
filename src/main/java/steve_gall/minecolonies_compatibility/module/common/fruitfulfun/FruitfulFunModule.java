@@ -27,13 +27,13 @@ public class FruitfulFunModule extends AbstractModule
 		super.onFMLCommonSetup(e);
 		e.enqueueWork(() ->
 		{
-			LOGGER.debug("cjp-fruitfulfun");
+			// LOGGER.debug("cjp-fruitfulfun");
 			for (var block : ForgeRegistries.BLOCKS.getValues())
 			{
 				if (block instanceof FruitLeavesBlock fruitBlock)
 				// if (id.getNamespace().equals(MOD_ID) && id.getPath().startsWith(FRUIT_PREFIX))
 				{
-					LOGGER.debug("\tfound matching fruit: " + fruitBlock);
+					// LOGGER.debug("\tfound matching fruit: " + fruitBlock);
 					// var block = ForgeRegistries.BLOCKS.getValue(id);
 					// var name = fruitBlock.getPath().substring(FRUIT_PREFIX.length());
 					var fruit = fruitBlock.type.get().fruit.get();
